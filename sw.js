@@ -4,7 +4,7 @@ const ASSETS = [
   './',
   './index.html',
   './manifest.json',
-  './TCI_8436_TOGAF_企業資訊架構_HowardLiao.pdf',
+  './TCI_8436_Howard_企業資訊架構_HowardLiao.pdf',
   './TCI_8436_右至左架構演進_HowardLiao.pdf',
   './TCI_8436_四大立竿見影場景與合規手冊_HowardLiao.pdf'
 ];

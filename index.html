@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>大江生醫 (8436.TW) 企業資訊策略與 TOGAF 10 資訊架構 | Howard Liao Ph.D.</title>
+  <title>大江生醫 (8436.TW) 企業資訊策略與 Howard 企業架構 資訊架構 | Howard Liao Ph.D.</title>
   
   <!-- SEO & OpenGraph Meta Tags -->
-  <meta name="description" content="大江生醫 (8436.TW) TOGAF 10 企業級資訊架構藍圖：整合 HowardAGent 應用中樞、HowardRoute 模型網關、HowardPro 工業大腦、雙環 Data Bus、APISIX 與 Noname Security，全面對齊金管會與上市櫃資通安全管控指引。">
+  <meta name="description" content="大江生醫 (8436.TW) Howard 企業架構 企業級資訊架構藍圖：整合 HowardAGent 應用中樞、HowardRoute 模型網關、HowardPro 工業大腦、雙環 Data Bus、APISIX 與 Noname Security，全面對齊金管會與上市櫃資通安全管控指引。">
   <meta name="author" content="Howard Liao Ph.D.">
-  <meta name="keywords" content="大江生醫, 8436, TOGAF 10, HowardAGent, HowardRoute, HowardPro, 金管會, 上市櫃資安, Noname Security, Apache APISIX, Kafka, DataHub">
-  <meta property="og:title" content="大江生醫 (8436.TW) 企業資訊策略與 TOGAF 10 資訊架構">
-  <meta property="og:description" content="符合金管會與上市櫃資安指引的 TOGAF 10 企業資訊架構藍圖，規劃人：Howard Liao Ph.D.">
+  <meta name="keywords" content="大江生醫, 8436, Howard 企業架構, HowardAGent, HowardRoute, HowardPro, 金管會, 上市櫃資安, Noname Security, Apache APISIX, Kafka, DataHub">
+  <meta property="og:title" content="大江生醫 (8436.TW) 企業資訊策略與 Howard 企業架構 資訊架構">
+  <meta property="og:description" content="符合金管會與上市櫃資安指引的 Howard 企業資訊架構藍圖，規劃人：Howard Liao Ph.D.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://howardliao.github.io/8436/">
   <meta name="theme-color" content="#D97706">
@@ -313,7 +313,7 @@
     }
 
     /* -------------------------------------------------------------
-       6. TOGAF 10 MULTI-VIEW EXPLORER (INTERACTIVE TABS)
+       6. Howard 企業架構 MULTI-VIEW EXPLORER (INTERACTIVE TABS)
        ------------------------------------------------------------- */
     .section-title-wrap {
       margin-bottom: 24px;
@@ -333,7 +333,7 @@
       margin-top: 4px;
     }
 
-    .togaf-nav {
+    .ea-nav {
       display: flex;
       gap: 8px;
       background: var(--bg-subtle);
@@ -343,7 +343,7 @@
       margin-bottom: 24px;
       border: 1px solid var(--border-color);
     }
-    .togaf-btn {
+    .ea-btn {
       background: transparent;
       border: none;
       padding: 10px 18px;
@@ -355,14 +355,14 @@
       transition: var(--transition);
       white-space: nowrap;
     }
-    .togaf-btn.active {
+    .ea-btn.active {
       background: var(--text-main);
       color: var(--bg-surface);
       box-shadow: 0 2px 4px rgba(0,0,0,0.12);
     }
 
-    .togaf-view { display: none; }
-    .togaf-view.active { display: block; animation: fadeIn 0.3s ease; }
+    .ea-view { display: none; }
+    .ea-view.active { display: block; animation: fadeIn 0.3s ease; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
     .tier-panel {
@@ -726,7 +726,7 @@
       .hero-title { font-size: 1.65rem; }
       .bento-grid { grid-template-columns: 1fr; }
       .grid-4, .grid-6, .chk-list { grid-template-columns: 1fr; }
-      .togaf-btn { padding: 8px 12px; font-size: 0.78rem; }
+      .ea-btn { padding: 8px 12px; font-size: 0.78rem; }
     }
 
     /* -------------------------------------------------------------
@@ -734,8 +734,8 @@
        ------------------------------------------------------------- */
     @media print {
       body { background: #FFFFFF !important; color: #000000 !important; padding: 0 !important; }
-      .top-nav, .mobile-dock, .fab-contact, .theme-select, .togaf-nav, .btn-action, .download-grid { display: none !important; }
-      .togaf-view { display: block !important; page-break-after: always; }
+      .top-nav, .mobile-dock, .fab-contact, .theme-select, .ea-nav, .btn-action, .download-grid { display: none !important; }
+      .ea-view { display: block !important; page-break-after: always; }
       .tier-panel, .bento-card, .playbook-card { border: 1px solid #000000 !important; box-shadow: none !important; }
       .hero-section { padding: 20px 0 !important; }
       .hero-title { font-size: 1.8rem !important; }
@@ -864,7 +864,7 @@
       </div>
       <ul class="nav-links">
         <li><a href="#bento" class="nav-link">C-Level 指標</a></li>
-        <li><a href="#togaf" class="nav-link">TOGAF 10 視圖</a></li>
+        <li><a href="#howard-ea" class="nav-link">Howard 企業架構 視圖</a></li>
         <li><a href="#rtl-flow" class="nav-link">向左演進</a></li>
         <li><a href="#playbooks" class="nav-link">四大立竿見影</a></li>
         <li><a href="#compliance" class="nav-link">金管會合規</a></li>
@@ -887,7 +887,7 @@
   <section class="hero-section">
     <div class="container">
       <div class="hero-pretitle">
-        <span>🏛️ TOGAF 10 企業架構標準</span> ｜ <span>⚖️ 金管會與上市櫃資安指引 100% 遵從</span>
+        <span>🏛️ Howard 企業架構標準</span> ｜ <span>⚖️ 金管會與上市櫃資安指引 100% 遵從</span>
       </div>
       <h1 class="hero-title">大江生醫 (8436.TW) 企業資訊策略與 AI 架構藍圖</h1>
       <p class="hero-subtitle">
@@ -955,7 +955,7 @@
           <div>
             <span style="font-weight:900; color:var(--text-main); font-size:0.95rem;">大江生醫股份有限公司 (8436.TW)</span>
             <span style="margin:0 8px; color:var(--border-color);">|</span>
-            <span style="color:var(--accent-primary); font-weight:700;">TOGAF 10 BDAT 企業資訊架構標準</span>
+            <span style="color:var(--accent-primary); font-weight:700;">Howard 企業架構 BDAT 企業資訊架構標準</span>
           </div>
           <div style="color:var(--text-muted); font-size:0.78rem;">
             規劃主持：<b style="color:var(--text-main);">Howard Liao Ph.D. (廖倫豪 博士)</b> ｜ 資安長 (CISO) 視角
@@ -1194,28 +1194,28 @@
     </div>
   </section>
 
-  <!-- TOGAF 10 Multi-View Explorer -->
-  <section id="togaf" class="bento-section">
+  <!-- Howard 企業架構 Multi-View Explorer -->
+  <section id="howard-ea" class="bento-section">
     <div class="container">
       <div class="section-title-wrap">
         <div>
-          <h2 class="section-title">TOGAF 10 企業資訊架構 6 大視圖</h2>
+          <h2 class="section-title">Howard 企業資訊架構 6 大視圖</h2>
           <p class="section-desc">符合國際 The Open Group 架構標準，涵蓋業務、數據、應用、技術與上市櫃合規維度</p>
         </div>
       </div>
 
       <!-- Tab Navigation -->
-      <div class="togaf-nav">
-        <button class="togaf-btn active" onclick="setTogafView('tv1', this)">1. 總體架構藍圖 (Overview)</button>
-        <button class="togaf-btn" onclick="setTogafView('tv2', this)">2. 業務架構 (Business)</button>
-        <button class="togaf-btn" onclick="setTogafView('tv3', this)">3. 數據架構與 Data Bus</button>
-        <button class="togaf-btn" onclick="setTogafView('tv4', this)">4. 應用與 AI 解決方案</button>
-        <button class="togaf-btn" onclick="setTogafView('tv5', this)">5. 技術、API 平台與 Noname</button>
-        <button class="togaf-btn" onclick="setTogafView('tv6', this)">6. 上市櫃資安與金管會合規</button>
+      <div class="ea-nav">
+        <button class="ea-btn active" onclick="setEaView('tv1', this)">1. 總體架構藍圖 (Overview)</button>
+        <button class="ea-btn" onclick="setEaView('tv2', this)">2. 業務架構 (Business)</button>
+        <button class="ea-btn" onclick="setEaView('tv3', this)">3. 數據架構與 Data Bus</button>
+        <button class="ea-btn" onclick="setEaView('tv4', this)">4. 應用與 AI 解決方案</button>
+        <button class="ea-btn" onclick="setEaView('tv5', this)">5. 技術、API 平台與 Noname</button>
+        <button class="ea-btn" onclick="setEaView('tv6', this)">6. 上市櫃資安與金管會合規</button>
       </div>
 
       <!-- View 1: 總體藍圖 -->
-      <div id="tv1" class="togaf-view active">
+      <div id="tv1" class="ea-view active">
         <div class="tier-panel" style="border-left:5px solid var(--blue-main);">
           <div class="tier-header"><span class="badge-layer">BDAT Layer 1</span> 業務架構層 (Business Architecture)</div>
           <div class="grid-3">
@@ -1340,7 +1340,7 @@
       </div>
 
       <!-- View 2: 業務價值鏈 -->
-      <div id="tv2" class="togaf-view">
+      <div id="tv2" class="ea-view">
         <div class="tier-panel">
           <div class="tier-header"><span class="badge-layer">Value Stream</span> 大江生醫 6 大業務價值鏈與 AI 賦能落地</div>
           <div class="grid-6">
@@ -1403,7 +1403,7 @@
       </div>
 
       <!-- View 3: 數據架構與 Data Bus -->
-      <div id="tv3" class="togaf-view">
+      <div id="tv3" class="ea-view">
         <div class="tier-panel">
           <div class="tier-header"><span class="badge-layer">Data Bus</span> 雙環 Data Bus 解耦與全生命週期數據流</div>
           <div class="grid-4">
@@ -1448,7 +1448,7 @@
       </div>
 
       <!-- View 4: 應用架構職責分工 -->
-      <div id="tv4" class="togaf-view">
+      <div id="tv4" class="ea-view">
         <div class="tier-panel">
           <div class="tier-header"><span class="badge-layer">Application Boundary</span> 三方核心責任邊界：拒絕平台疊平台</div>
           <div class="grid-3">
@@ -1487,7 +1487,7 @@
       </div>
 
       <!-- View 5: 技術與 API 資安防禦 -->
-      <div id="tv5" class="togaf-view">
+      <div id="tv5" class="ea-view">
         <div class="tier-panel">
           <div class="tier-header"><span class="badge-layer">Security Defense</span> Apache APISIX ＋ Keycloak ＋ Noname API 資安大腦</div>
           <div class="grid-3" style="margin-bottom:16px;">
@@ -1542,7 +1542,7 @@
       </div>
 
       <!-- View 6: 上市櫃資安與金管會合規 -->
-      <div id="tv6" class="togaf-view">
+      <div id="tv6" class="ea-view">
         <div class="tier-panel" style="border-left:5px solid var(--danger-main);">
           <div class="tier-header"><span class="badge-layer">Governance</span> 上市櫃資通安全管控指引 ＆ 金管會生成式 AI 規範落實</div>
           <div class="grid-3" style="margin-bottom:16px;">
@@ -1804,9 +1804,9 @@
       <div class="download-grid">
         <div class="dl-card">
           <div class="dl-icon">📐</div>
-          <div class="dl-title">TOGAF 10 企業架構全量手冊</div>
+          <div class="dl-title">Howard 企業架構全量手冊</div>
           <div class="dl-desc">全套 8 頁高階報告：含總體、業務、數據、應用、技術與上市櫃合規 6 大視圖。</div>
-          <button onclick="openPdfModal('TCI_8436_TOGAF_企業資訊架構_HowardLiao.pdf', 'TOGAF 10 企業資訊架構全量審閱手冊 (8 頁)')" class="btn-dl" style="border:none; cursor:pointer; width:100%;">
+          <button onclick="openPdfModal('TCI_8436_Howard 企業架構_企業資訊架構_HowardLiao.pdf', 'Howard 企業資訊架構全量審閱手冊 (8 頁)')" class="btn-dl" style="border:none; cursor:pointer; width:100%;">
             <span>👁️</span> 線上即時審閱預覽 (Preview Only)
           </button>
         </div>
@@ -1857,7 +1857,7 @@
     </button>
     <button class="dock-btn" onclick="location.href='#togaf'">
       <span class="dock-icon">🏛️</span>
-      <span>TOGAF</span>
+      <span>Howard 企業架構</span>
     </button>
     <button class="dock-btn" onclick="location.href='#rtl-flow'">
       <span class="dock-icon">🔄</span>
@@ -1889,18 +1889,18 @@
       } else {
         document.documentElement.setAttribute('data-theme', themeName);
       }
-      localStorage.setItem('tci_theme', themeName);
+      localStorage.setItem('howard_ea_theme', themeName);
     }
-    const savedTheme = localStorage.getItem('tci_theme');
+    const savedTheme = localStorage.getItem('howard_ea_theme');
     if (savedTheme) {
       document.getElementById('themeSelector').value = savedTheme;
       changeTheme(savedTheme);
     }
 
-    // 2. TOGAF Tab Switcher
-    function setTogafView(viewId, btn) {
-      document.querySelectorAll('.togaf-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.togaf-view').forEach(v => v.classList.remove('active'));
+    // 2. Howard 企業架構 Tab Switcher
+    function setEaView(viewId, btn) {
+      document.querySelectorAll('.ea-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.ea-view').forEach(v => v.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById(viewId).classList.add('active');
     }
