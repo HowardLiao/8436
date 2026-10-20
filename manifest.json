@@ -1,0 +1,16 @@
+{
+  "name": "大江生醫 8436 企業資訊策略與 AI 架構",
+  "short_name": "TCI 8436 EA",
+  "description": "大江生醫 (8436.TW) TOGAF 10 企業級資訊架構與 AI 戰略藍圖",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FBF9F5",
+  "theme_color": "#D97706",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23D97706'/><text x='50%' y='55%' font-size='45' font-weight='bold' fill='white' dominant-baseline='middle' text-anchor='middle'>8436</text></svg>",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}

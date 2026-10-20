@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>大江生醫 (8436.TW) 企業資訊策略與 TOGAF 10 資訊架構 | Howard Liao Ph.D.</title>
+  
+  <!-- SEO & OpenGraph Meta Tags -->
+  <meta name="description" content="大江生醫 (8436.TW) TOGAF 10 企業級資訊架構藍圖：整合 HowardAGent 應用中樞、HowardRoute 模型網關、HowardPro 工業大腦、雙環 Data Bus、APISIX 與 Noname Security，全面對齊金管會與上市櫃資通安全管控指引。">
+  <meta name="author" content="Howard Liao Ph.D.">
+  <meta name="keywords" content="大江生醫, 8436, TOGAF 10, HowardAGent, HowardRoute, HowardPro, 金管會, 上市櫃資安, Noname Security, Apache APISIX, Kafka, DataHub">
+  <meta property="og:title" content="大江生醫 (8436.TW) 企業資訊策略與 TOGAF 10 資訊架構">
+  <meta property="og:description" content="符合金管會與上市櫃資安指引的 TOGAF 10 企業資訊架構藍圖，規劃人：Howard Liao Ph.D.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://howardliao.github.io/8436/">
+  <meta name="theme-color" content="#D97706">
+  <link rel="manifest" href="./manifest.json">
+
+  <style>
+    /* -------------------------------------------------------------
+       1. THEME DESIGN TOKENS (Egyptian Pharaoh / Milan / Obsidian)
+       ------------------------------------------------------------- */
+    :root {
+      /* Default Theme: Egyptian Pharaoh */
+      --bg-body: #FBF9F5;
+      --bg-surface: #FFFFFF;
+      --bg-subtle: #F5EFEB;
+      --text-main: #0F172A;
+      --text-secondary: #334155;
+      --text-muted: #64748B;
+      --border-color: #E2D7CE;
+      --border-light: #EFE8E1;
+      
+      --accent-primary: #D97706;   /* Pharaoh Gold / Amber */
+      --accent-secondary: #B45309;
+      --accent-hover: #F59E0B;
+      --accent-light: #FFFBEB;
+      --accent-border: #FCD34D;
+
+      --blue-main: #2563EB;
+      --blue-light: #EFF6FF;
+      --blue-border: #93C5FD;
+
+      --emerald-main: #059669;
+      --emerald-light: #ECFDF5;
+      --emerald-border: #6EE7B7;
+
+      --purple-main: #7C3AED;
+      --purple-light: #F5F3FF;
+      --purple-border: #C4B5FD;
+
+      --danger-main: #DC2626;
+      --danger-light: #FEF2F2;
+      --danger-border: #FCA5A5;
+
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --card-hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="milan"] {
+      --bg-body: #FAF7F2;
+      --bg-surface: #FFFFFF;
+      --bg-subtle: #F3ECE2;
+      --text-main: #1C1917;
+      --text-secondary: #44403C;
+      --border-color: #E7DFD5;
+      --accent-primary: #C2410C;
+      --accent-hover: #EA580C;
+      --accent-light: #FFF7ED;
+      --accent-border: #FDBA74;
+    }
+
+    [data-theme="obsidian"] {
+      --bg-body: #0A0F1D;
+      --bg-surface: #111827;
+      --bg-subtle: #1F2937;
+      --text-main: #F9FAFB;
+      --text-secondary: #D1D5DB;
+      --text-muted: #9CA3AF;
+      --border-color: #374151;
+      --border-light: #1F2937;
+      --accent-primary: #F59E0B;
+      --accent-hover: #FBBF24;
+      --accent-light: rgba(245, 158, 11, 0.1);
+      --accent-border: #D97706;
+      --blue-light: rgba(37, 99, 235, 0.15);
+      --emerald-light: rgba(5, 150, 105, 0.15);
+      --purple-light: rgba(124, 58, 237, 0.15);
+      --danger-light: rgba(220, 38, 38, 0.15);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    }
+
+    /* -------------------------------------------------------------
+       2. RESET & BASE STYLES
+       ------------------------------------------------------------- */
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Noto Sans TC", sans-serif;
+      line-height: 1.6;
+      padding-bottom: 90px; /* Space for mobile dock */
+      overflow-x: hidden;
+    }
+
+    a { color: var(--accent-primary); text-decoration: none; transition: var(--transition); }
+    a:hover { color: var(--accent-hover); }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* -------------------------------------------------------------
+       3. TOP NAVIGATION BAR
+       ------------------------------------------------------------- */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(251, 249, 245, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      transition: var(--transition);
+    }
+    [data-theme="obsidian"] .top-nav {
+      background: rgba(10, 15, 29, 0.92);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.5px;
+      color: var(--text-main);
+    }
+    .brand-badge {
+      background: var(--accent-primary);
+      color: #FFFFFF;
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+    .nav-link {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .nav-link:hover { color: var(--accent-primary); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .theme-select {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .btn-action {
+      background: var(--accent-primary);
+      color: #FFFFFF;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+    .btn-action:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    /* -------------------------------------------------------------
+       4. HERO & EXECUTIVE BANNER
+       ------------------------------------------------------------- */
+    .hero-section {
+      padding: 48px 0 32px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .hero-pretitle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-light);
+      border: 1px solid var(--accent-border);
+      color: var(--accent-secondary);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .hero-title {
+      font-size: 2.25rem;
+      font-weight: 900;
+      line-height: 1.25;
+      letter-spacing: -0.8px;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 860px;
+      margin: 0 auto 20px;
+      font-weight: 500;
+    }
+    .hero-attribution {
+      display: inline-block;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      padding: 4px 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+    }
+
+    /* -------------------------------------------------------------
+       5. BENTO GRID (C-LEVEL IMPACT METRICS)
+       ------------------------------------------------------------- */
+    .bento-section {
+      padding: 36px 0;
+    }
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .bento-card {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .bento-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--card-hover-shadow);
+      border-color: var(--accent-primary);
+    }
+    .bento-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--accent-primary);
+    }
+    .bento-card.blue::before { background: var(--blue-main); }
+    .bento-card.green::before { background: var(--emerald-main); }
+    .bento-card.purple::before { background: var(--purple-main); }
+
+    .bento-num {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      letter-spacing: -1px;
+    }
+    .bento-label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+    .bento-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* -------------------------------------------------------------
+       6. TOGAF 10 MULTI-VIEW EXPLORER (INTERACTIVE TABS)
+       ------------------------------------------------------------- */
+    .section-title-wrap {
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.5px;
+    }
+    .section-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .togaf-nav {
+      display: flex;
+      gap: 8px;
+      background: var(--bg-subtle);
+      padding: 6px;
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+      margin-bottom: 24px;
+      border: 1px solid var(--border-color);
+    }
+    .togaf-btn {
+      background: transparent;
+      border: none;
+      padding: 10px 18px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .togaf-btn.active {
+      background: var(--text-main);
+      color: var(--bg-surface);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+    }
+
+    .togaf-view { display: none; }
+    .togaf-view.active { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .tier-panel {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: var(--card-shadow);
+    }
+    .tier-header {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .badge-layer {
+      background: var(--accent-primary);
+      color: #FFFFFF;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .grid-6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+
+    .sub-card {
+      background: var(--bg-body);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      font-size: 0.82rem;
+      transition: var(--transition);
+    }
+    .sub-card:hover {
+      background: var(--bg-surface);
+      border-color: var(--accent-primary);
+      transform: translateY(-2px);
+    }
+    .sub-card-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    ul.bullet-list { list-style: none; padding-left: 0; }
+    ul.bullet-list li {
+      position: relative;
+      padding-left: 14px;
+      margin-bottom: 5px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+    ul.bullet-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent-primary);
+      font-weight: 900;
+    }
+
+    .pill-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .pill-blue { background: var(--blue-light); color: var(--blue-main); border: 1px solid var(--blue-border); }
+    .pill-amber { background: var(--accent-light); color: var(--accent-primary); border: 1px solid var(--accent-border); }
+    .pill-green { background: var(--emerald-light); color: var(--emerald-main); border: 1px solid var(--emerald-border); }
+    .pill-purple { background: var(--purple-light); color: var(--purple-main); border: 1px solid var(--purple-border); }
+    .pill-red { background: var(--danger-light); color: var(--danger-main); border: 1px solid var(--danger-border); }
+
+    /* -------------------------------------------------------------
+       7. RIGHT-TO-LEFT USER FLOW (5 STATIONS)
+       ------------------------------------------------------------- */
+    .flow-wrapper {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 36px;
+    }
+    .flow-direct-indicator {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--text-main);
+      color: #F8FAFC;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    .rtl-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      direction: rtl; /* Real Right-to-Left Layout! */
+    }
+    .rtl-col {
+      direction: ltr; /* Inner card text stays normal */
+      background: var(--bg-body);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+    }
+    .rtl-col-header {
+      font-size: 0.85rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--accent-primary);
+    }
+
+    /* -------------------------------------------------------------
+       8. FOUR QUICK-WIN PLAYBOOKS
+       ------------------------------------------------------------- */
+    .playbook-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+    .playbook-card {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      box-shadow: var(--card-shadow);
+    }
+    .playbook-card:hover {
+      border-color: var(--accent-primary);
+    }
+    .pb-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .pb-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+    .pb-step {
+      font-size: 0.82rem;
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+    }
+    .pb-roi {
+      background: var(--bg-body);
+      border: 1px dashed var(--accent-primary);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent-secondary);
+      margin-top: 12px;
+    }
+
+    /* -------------------------------------------------------------
+       9. FSC & TWSE/TPEx COMPLIANCE CHECKLIST
+       ------------------------------------------------------------- */
+    .compliance-box {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 36px;
+    }
+    .progress-bar-container {
+      width: 100%;
+      height: 12px;
+      background: var(--bg-subtle);
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 12px 0 20px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, var(--emerald-main), var(--accent-primary));
+      border-radius: 6px;
+      transition: width 0.5s ease;
+    }
+    .chk-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .chk-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--bg-body);
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      border: 1px solid var(--border-color);
+    }
+    .chk-item input {
+      margin-top: 3px;
+      accent-color: var(--emerald-main);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    /* -------------------------------------------------------------
+       10. DOWNLOAD & ASSET CENTER
+       ------------------------------------------------------------- */
+    .download-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .dl-card {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .dl-card:hover {
+      border-color: var(--accent-primary);
+      transform: translateY(-2px);
+    }
+    .dl-icon { font-size: 2rem; margin-bottom: 10px; }
+    .dl-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+    .dl-desc { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 16px; }
+    .btn-dl {
+      background: var(--text-main);
+      color: var(--bg-surface);
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: inline-block;
+      transition: var(--transition);
+    }
+    .btn-dl:hover {
+      background: var(--accent-primary);
+      color: #FFFFFF;
+    }
+
+    /* -------------------------------------------------------------
+       11. MOBILE BOTTOM DOCK & FAB
+       ------------------------------------------------------------- */
+    .mobile-dock {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      background: rgba(251, 249, 245, 0.95);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border-color);
+      z-index: 1000;
+      justify-content: space-around;
+      align-items: center;
+    }
+    [data-theme="obsidian"] .mobile-dock {
+      background: rgba(17, 24, 39, 0.95);
+    }
+    .dock-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+    .dock-btn.active { color: var(--accent-primary); }
+    .dock-icon { font-size: 1.15rem; }
+
+    .fab-contact {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      z-index: 999;
+      background: var(--accent-primary);
+      color: #FFFFFF;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .fab-contact:hover {
+      transform: scale(1.08);
+      background: var(--accent-hover);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 140px;
+      right: 20px;
+      z-index: 1001;
+      background: #0F172A;
+      color: #FFFFFF;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 600;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: var(--transition);
+      pointer-events: none;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* -------------------------------------------------------------
+       12. RESPONSIVE BREAKPOINTS (Mobile Ergonomics)
+       ------------------------------------------------------------- */
+    @media (max-width: 1024px) {
+      .bento-grid { grid-template-columns: repeat(2, 1fr); }
+      .grid-3 { grid-template-columns: 1fr; }
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .grid-6 { grid-template-columns: repeat(3, 1fr); }
+      .playbook-grid { grid-template-columns: 1fr; }
+      .rtl-grid { grid-template-columns: 1fr; direction: ltr; }
+      .download-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .mobile-dock { display: flex; }
+      .hero-title { font-size: 1.65rem; }
+      .bento-grid { grid-template-columns: 1fr; }
+      .grid-4, .grid-6, .chk-list { grid-template-columns: 1fr; }
+      .togaf-btn { padding: 8px 12px; font-size: 0.78rem; }
+    }
+
+    /* -------------------------------------------------------------
+       13. PRINT ISOLATION STYLES (Cmd+P Paper Print)
+       ------------------------------------------------------------- */
+    @media print {
+      body { background: #FFFFFF !important; color: #000000 !important; padding: 0 !important; }
+      .top-nav, .mobile-dock, .fab-contact, .theme-select, .togaf-nav, .btn-action, .download-grid { display: none !important; }
+      .togaf-view { display: block !important; page-break-after: always; }
+      .tier-panel, .bento-card, .playbook-card { border: 1px solid #000000 !important; box-shadow: none !important; }
+      .hero-section { padding: 20px 0 !important; }
+      .hero-title { font-size: 1.8rem !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="top-nav">
+    <div class="container nav-inner">
+      <div class="brand-logo">
+        <span>大江生醫</span>
+        <span class="brand-badge">8436.TW</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#bento" class="nav-link">C-Level 指標</a></li>
+        <li><a href="#togaf" class="nav-link">TOGAF 10 視圖</a></li>
+        <li><a href="#rtl-flow" class="nav-link">向左演進</a></li>
+        <li><a href="#playbooks" class="nav-link">四大立竿見影</a></li>
+        <li><a href="#compliance" class="nav-link">金管會合規</a></li>
+        <li><a href="#downloads" class="nav-link">下載中心</a></li>
+      </ul>
+      <div class="nav-actions">
+        <select id="themeSelector" class="theme-select" aria-label="切換視覺主題" onchange="changeTheme(this.value)">
+          <option value="pharaoh">🇪🇬 埃及法老 (預設)</option>
+          <option value="milan">🏛️ 米蘭暖珀</option>
+          <option value="obsidian">🌌 深邃黑曜</option>
+        </select>
+        <button class="btn-action" onclick="copyContact()">
+          <span>對接架構師</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-pretitle">
+        <span>🏛️ TOGAF 10 企業架構標準</span> ｜ <span>⚖️ 金管會與上市櫃資安指引 100% 遵從</span>
+      </div>
+      <h1 class="hero-title">大江生醫 (8436.TW) 企業資訊策略與 AI 架構藍圖</h1>
+      <p class="hero-subtitle">
+        以 <b>HowardAGent</b> (應用中樞)、<b>HowardRoute</b> (多模型網關) 與 <b>HowardPro</b> (工業調機大腦) 為核心支柱，結合雙環 Data Bus 與 Noname Security 深度防護，打造兼具資本市場監管合規與生醫智能製造韌性的現代化 IT 藍圖。
+      </p>
+      <div class="hero-attribution">
+        計劃執行負責人：Howard Liao Ph.D. (廖倫豪 博士)
+      </div>
+    </div>
+  </section>
+
+  <!-- Bento Grid: C-Level Impact Metrics -->
+  <section id="bento" class="bento-section">
+    <div class="container">
+      <div class="bento-grid">
+        <div class="bento-card">
+          <div class="bento-num" data-target="100">0%</div>
+          <div class="bento-label">法規指標遵循度</div>
+          <div class="bento-desc">全面對齊金管會 GenAI 指引、證交所管控指引與 GMP ALCOA+ 數據完整性。</div>
+        </div>
+        <div class="bento-card blue">
+          <div class="bento-num" data-target="99.99">0.00%</div>
+          <div class="bento-label">運行時可用性 (SLA)</div>
+          <div class="bento-desc">HowardRoute 毫秒級跨模型自動 Failover 備援，抗 429 併發爆發，達到 Zero Outage。</div>
+        </div>
+        <div class="bento-card green">
+          <div class="bento-num" data-target="35">-0%</div>
+          <div class="bento-label">Token 成本節省 (TCO)</div>
+          <div class="bento-desc">Smart Routing 動態任務分流加上 0% Markup 原廠價開票，平均省 20~40% 支出。</div>
+        </div>
+        <div class="bento-card purple">
+          <div class="bento-num" data-target="7">0 天</div>
+          <div class="bento-label">首波驗收落地週期</div>
+          <div class="bento-desc">財務傳票 OCR、客服 KM、採購審核與 HowardPro AutoML 調機 1 週見到成果。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOGAF 10 Multi-View Explorer -->
+  <section id="togaf" class="bento-section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <div>
+          <h2 class="section-title">TOGAF 10 企業資訊架構 6 大視圖</h2>
+          <p class="section-desc">符合國際 The Open Group 架構標準，涵蓋業務、數據、應用、技術與上市櫃合規維度</p>
+        </div>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div class="togaf-nav">
+        <button class="togaf-btn active" onclick="setTogafView('tv1', this)">1. 總體架構藍圖 (Overview)</button>
+        <button class="togaf-btn" onclick="setTogafView('tv2', this)">2. 業務架構 (Business)</button>
+        <button class="togaf-btn" onclick="setTogafView('tv3', this)">3. 數據架構與 Data Bus</button>
+        <button class="togaf-btn" onclick="setTogafView('tv4', this)">4. 應用與 AI 解決方案</button>
+        <button class="togaf-btn" onclick="setTogafView('tv5', this)">5. 技術、API 平台與 Noname</button>
+        <button class="togaf-btn" onclick="setTogafView('tv6', this)">6. 上市櫃資安與金管會合規</button>
+      </div>
+
+      <!-- View 1: 總體藍圖 -->
+      <div id="tv1" class="togaf-view active">
+        <div class="tier-panel" style="border-left:5px solid var(--blue-main);">
+          <div class="tier-header"><span class="badge-layer">BDAT Layer 1</span> 業務架構層 (Business Architecture)</div>
+          <div class="grid-3">
+            <div class="sub-card">
+              <div class="sub-card-title">生醫核心能力與戰略 <span class="pill-tag pill-blue">戰略</span></div>
+              <ul class="bullet-list">
+                <li>天然物功效篩選與生醫配方專利設計 (R&D)</li>
+                <li>生物發酵萃取智能製造 (CDMO/ODM 規模化)</li>
+                <li>全球跨廠多基地調度 (台灣屏東、上海、歐美)</li>
+              </ul>
+            </div>
+            <div class="sub-card">
+              <div class="sub-card-title">四大立竿見影場景 <span class="pill-tag pill-amber">Quick Win</span></div>
+              <ul class="bullet-list">
+                <li><b>財務憑證</b>：SAP 傳票 OCR 自動入帳核銷</li>
+                <li><b>客服 KM</b>：知識庫 RAG 第一線應答＋真人把關</li>
+                <li><b>採購勤採</b>：費用申請、採購比價異常偵測</li>
+                <li><b>總務行政</b>：流程線上化，新進同仁照 Plan 執行</li>
+              </ul>
+            </div>
+            <div class="sub-card">
+              <div class="sub-card-title">利害關係人矩陣 <span class="pill-tag pill-purple">角色</span></div>
+              <ul class="bullet-list">
+                <li>2E 內部辦公：會計、總務、採購、研發團隊</li>
+                <li>2C/2B 客戶：全球品牌經銷商、終端消費者</li>
+                <li>OT 專家：發酵調機師傅、設備維護員、QA/QC</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="tier-panel" style="border-left:5px solid var(--purple-main);">
+          <div class="tier-header"><span class="badge-layer">BDAT Layer 2</span> 應用與 AI 架構層 (Application & AI Solution Architecture)</div>
+          <div class="grid-3">
+            <div class="sub-card">
+              <div class="sub-card-title">核心營運系統 <span class="pill-tag pill-purple">底座</span></div>
+              <ul class="bullet-list">
+                <li><b>SAP ERP</b>：財務帳務、訂單、庫存核心</li>
+                <li><b>MES / WMS</b>：製造執行系統與倉儲物流管理</li>
+                <li><b>SCADA / PLC</b>：發酵槽與萃取機台即時監控</li>
+              </ul>
+            </div>
+            <div class="sub-card">
+              <div class="sub-card-title">應用中樞：HowardAGent <span class="pill-tag pill-green">辦公/客服大腦</span></div>
+              <ul class="bullet-list">
+                <li><b>95% 準確率 Agentic RAG</b>：支援 25 種格式與 Citations</li>
+                <li><b>OCR Agent</b>：發票與財務憑證一條龍自動入帳</li>
+                <li><b>客服 Copilot</b>：電話語音/LINE 多渠道第一線回覆</li>
+                <li><b>MCP Hub & Text2SQL</b>：自然語言直接查詢數據庫</li>
+              </ul>
+            </div>
+            <div class="sub-card">
+              <div class="sub-card-title">工業大腦：HowardPro <span class="pill-tag pill-amber">OT 預測</span></div>
+              <ul class="bullet-list">
+                <li><b>左腦 AutoML</b>：發酵萃取參數最佳化推薦與虛擬量測</li>
+                <li><b>右腦 AI Studio</b>：Domain Twin 領域數位員工</li>
+                <li><b>中樞 AILM</b>：全生命週期監控模型版本漂移與複利</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="tier-panel" style="border-left:5px solid var(--accent-primary);">
+          <div class="tier-header"><span class="badge-layer">BDAT Layer 3</span> 數據架構層 (Data Architecture & Data Bus)</div>
+          <div class="grid-3">
+            <div class="sub-card">
+              <div class="sub-card-title">雙環 Data Bus 總線 <span class="pill-tag pill-amber">動脈</span></div>
+              <ul class="bullet-list">
+                <li><b>IT 骨幹環：Apache Kafka</b> (持久化、零丟包、可重播)</li>
+                <li><b>OT 物聯網環：EMQX</b> (MQTT Sparkplug B) + OPC UA</li>
+                <li><b>Debezium CDC</b>：零侵入監聽 SAP/MES 交易日誌</li>
+              </ul>
+            </div>
+            <div class="sub-card">
+              <div class="sub-card-title">主數據與元數據治理 <span class="pill-tag pill-blue">標準化</span></div>
+              <ul class="bullet-list">
+                <li><b>DataHub</b>：地端部署全資產目錄與自動化資料血緣</li>
+                <li><b>SAP MDG</b>：集中治理原料批號、客戶、物料主檔</li>
+                <li>消滅一物多名，確保 AI 訓練使用同一份真實數據</li>
+              </ul>
+            </div>
+            <div class="sub-card">
+              <div class="sub-card-title">生醫法規合規 (ALCOA+) <span class="pill-tag pill-red">GMP 審計</span></div>
+              <ul class="bullet-list">
+                <li>滿足 GMP / FDA 21 CFR Part 11 電子紀錄審計要求</li>
+                <li><b>WORM 原則</b>：發酵產線 Raw Data 永久不可篡改</li>
+                <li><b>動態脫敏：Immuta</b> / 欄位級遮蔽 (Masking)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="tier-panel" style="border-left:5px solid var(--emerald-main);">
+          <div class="tier-header"><span class="badge-layer">BDAT Layer 4</span> 技術、API 平台與資安層 (Technology & Security Architecture)</div>
+          <div class="grid-3">
+            <div class="sub-card">
+              <div class="sub-card-title">API 平台與 Noname 資安 <span class="pill-tag pill-green">安全閘口</span></div>
+              <ul class="bullet-list">
+                <li><b>運行網關：Apache APISIX</b> (<1ms 延遲、動態熱更新)</li>
+                <li><b>身分鑑權：Keycloak</b> (統一 OIDC/OAuth2/SSO 認證)</li>
+                <li><b>Noname Security</b>：影子 API 自動清點、AI 阻斷 BOLA</li>
+              </ul>
+            </div>
+            <div class="sub-card">
+              <div class="sub-card-title">模型調度網關：HowardRoute <span class="pill-tag pill-amber">LLM 總機</span></div>
+              <ul class="bullet-list">
+                <li><b>單一 OpenAI 標準端點</b>：調度 250+ 款大模型</li>
+                <li><b>0% Markup</b> 原廠定價、單一帳單免各部門刷卡</li>
+                <li><b>Smart Routing</b>：簡單/複雜分流，實測省 20~40% 成本</li>
+              </ul>
+            </div>
+            <div class="sub-card">
+              <div class="sub-card-title">混合算力與合規邊界 <span class="pill-tag pill-purple">算力</span></div>
+              <ul class="bullet-list">
+                <li><b>地端私有算力</b>：DeepSeek R1/V3 on 研華/雲達 GPU 伺服器</li>
+                <li><b>雲端頂級大模型</b>：Claude 3.7 / GPT-4.5 / Gemini 2.5</li>
+                <li><b>ISO 27001 / 27701 雙認證</b> ＋ 產線 Air-Gapped 隔離</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- View 2: 業務價值鏈 -->
+      <div id="tv2" class="togaf-view">
+        <div class="tier-panel">
+          <div class="tier-header"><span class="badge-layer">Value Stream</span> 大江生醫 6 大業務價值鏈與 AI 賦能落地</div>
+          <div class="grid-6">
+            <div class="sub-card" style="border-top:4px solid var(--blue-main);">
+              <div class="sub-card-title">1. 研發與配方</div>
+              <ul class="bullet-list">
+                <li>天然物萃取與配方專利</li>
+                <li><b>HowardAGent 文獻 KM</b></li>
+                <li><b>NPI Twin 試產評估</b></li>
+                <li>研發團隊 Code Review</li>
+              </ul>
+            </div>
+            <div class="sub-card" style="border-top:4px solid var(--accent-primary);">
+              <div class="sub-card-title">2. 原物料採購</div>
+              <ul class="bullet-list">
+                <li>全球生化原物料比價</li>
+                <li><b>四大場景：採購自動化</b></li>
+                <li>費用申請異常偵測告警</li>
+                <li><b>PMC Twin 交期預警</b></li>
+              </ul>
+            </div>
+            <div class="sub-card" style="border-top:4px solid var(--emerald-main);">
+              <div class="sub-card-title">3. 發酵萃取製造</div>
+              <ul class="bullet-list">
+                <li>屏東/上海廠發酵萃取</li>
+                <li><b>HowardPro AutoML 調機</b></li>
+                <li>活性成分虛擬量測 (VM)</li>
+                <li>機台預防保養 (PdM)</li>
+              </ul>
+            </div>
+            <div class="sub-card" style="border-top:4px solid var(--danger-main);">
+              <div class="sub-card-title">4. 品質與法規</div>
+              <ul class="bullet-list">
+                <li>GMP / TFDA 規範與品保</li>
+                <li><b>SOP Agentic RAG (95%)</b></li>
+                <li><b>AILM 根因改善追蹤</b></li>
+                <li><b>ALCOA+ 不可篡改審計</b></li>
+              </ul>
+            </div>
+            <div class="sub-card" style="border-top:4px solid var(--purple-main);">
+              <div class="sub-card-title">5. 全球營銷客服</div>
+              <ul class="bullet-list">
+                <li>B2B 經銷與 B2C 消費者</li>
+                <li><b>四大場景：客服回覆 Agent</b></li>
+                <li>電話語音多渠道整合</li>
+                <li>展會雙向即時口譯專員</li>
+              </ul>
+            </div>
+            <div class="sub-card" style="border-top:4px solid var(--text-muted);">
+              <div class="sub-card-title">6. 營運財務總務</div>
+              <ul class="bullet-list">
+                <li>財務核銷與總務行政</li>
+                <li><b>四大場景：財務傳票 OCR</b></li>
+                <li><b>四大場景：總務流程自動化</b></li>
+                <li>新進人員照 SOP 上手</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- View 3: 數據架構與 Data Bus -->
+      <div id="tv3" class="togaf-view">
+        <div class="tier-panel">
+          <div class="tier-header"><span class="badge-layer">Data Bus</span> 雙環 Data Bus 解耦與全生命週期數據流</div>
+          <div class="grid-4">
+            <div class="sub-card">
+              <div class="sub-card-title">1. 多源數據來源</div>
+              <ul class="bullet-list">
+                <li><b>SAP ERP</b>：傳票、採購、庫存主檔</li>
+                <li><b>MES / SCADA</b>：發酵槽溫壓感測流</li>
+                <li><b>品保與研發</b>：SOP、專利配方</li>
+                <li><b>客服通道</b>：電話語音、LINE 對話紀錄</li>
+              </ul>
+            </div>
+            <div class="sub-card" style="border-left:4px solid var(--accent-primary);">
+              <div class="sub-card-title">2. 雙環 Data Bus 總線</div>
+              <ul class="bullet-list">
+                <li><b>OT 物聯網環：EMQX</b> (MQTT/OPC UA)</li>
+                <li><b>IT 骨幹環：Apache Kafka</b> (零丟包)</li>
+                <li><b>Debezium CDC</b>：即時監聽 SAP 日誌</li>
+                <li><b>Schema Registry</b>：強制格式校驗</li>
+              </ul>
+            </div>
+            <div class="sub-card" style="border-left:4px solid var(--blue-main);">
+              <div class="sub-card-title">3. 數據治理與合規存儲</div>
+              <ul class="bullet-list">
+                <li><b>DataHub</b>：元數據目錄與資料血緣</li>
+                <li><b>SAP MDG</b>：原料批號主數據管理</li>
+                <li><b>ALCOA+ 合規庫</b>：WORM 原始數據不可改</li>
+                <li><b>Immuta</b>：動態欄位遮蔽 (Masking)</li>
+              </ul>
+            </div>
+            <div class="sub-card" style="border-left:4px solid var(--purple-main);">
+              <div class="sub-card-title">4. AI 消費與決策端</div>
+              <ul class="bullet-list">
+                <li><b>HowardPro</b>：訂閱發酵流，實時虛擬量測</li>
+                <li><b>HowardAGent</b>：訂閱 CDC，觸發傳票 OCR</li>
+                <li><b>BI 戰情室</b>：跨廠區生產能耗儀表板</li>
+                <li><b>知識向量庫</b>：Milvus / Qdrant 檢索</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- View 4: 應用架構職責分工 -->
+      <div id="tv4" class="togaf-view">
+        <div class="tier-panel">
+          <div class="tier-header"><span class="badge-layer">Application Boundary</span> 三方核心責任邊界：拒絕平台疊平台</div>
+          <div class="grid-3">
+            <div class="sub-card" style="border-left:4px solid var(--purple-main);">
+              <div class="sub-card-title">HowardAGent (應用中樞) <span class="pill-tag pill-purple">辦公/客服大腦</span></div>
+              <ul class="bullet-list">
+                <li><b>核心定位</b>：企業級生成式 AI 應用平台 (SaaS/地端)</li>
+                <li><b>95% 準確率 Agentic RAG</b>：支援 25 種格式與 Citations</li>
+                <li><b>開箱即用模組</b>：OCR Agent (傳票)、客服 Copilot、Text2SQL</li>
+                <li><b>資安雙認證</b>：ISO 27001 / ISO 27701 雙國際認證</li>
+                <li><b>主責場景</b>：財務憑證自動化、客服問答、行政流程</li>
+              </ul>
+            </div>
+            <div class="sub-card" style="border-left:4px solid var(--emerald-main);">
+              <div class="sub-card-title">HowardRoute (模型網關) <span class="pill-tag pill-green">模型流量總機</span></div>
+              <ul class="bullet-list">
+                <li><b>核心定位</b>：統一 API 閘道與多模型智慧調度 (Router)</li>
+                <li><b>單一 OpenAI 端點</b>：調度 250+ 款國內外模型</li>
+                <li><b>0% Markup</b> 原廠定價、單一帳單免各部門刷卡</li>
+                <li><b>Smart Routing</b>：簡單/複雜分流，實測省 20~40% 成本</li>
+                <li><b>主責職能</b>：集中收口所有 LLM 請求、毫秒級自動容災</li>
+              </ul>
+            </div>
+            <div class="sub-card" style="border-left:4px solid var(--accent-primary);">
+              <div class="sub-card-title">HowardPro (工業大腦) <span class="pill-tag pill-amber">OT 工業大腦</span></div>
+              <ul class="bullet-list">
+                <li><b>核心定位</b>：製造業工業 AutoML 與領域數位分身</li>
+                <li><b>左腦 AutoML</b>：無程式碼、發酵萃取製程參數最佳化推薦</li>
+                <li><b>右腦 AI Studio</b>：Domain Twin (NPI/FAE/PMC 數位員工)</li>
+                <li><b>中樞 AILM</b>：模型版本漂移監控、跨廠區標準化傳承</li>
+                <li><b>主責場景</b>：屏東廠發酵產率提升、機台預防保養 (PdM)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- View 5: 技術與 API 資安防禦 -->
+      <div id="tv5" class="togaf-view">
+        <div class="tier-panel">
+          <div class="tier-header"><span class="badge-layer">Security Defense</span> Apache APISIX ＋ Keycloak ＋ Noname API 資安大腦</div>
+          <div class="grid-3" style="margin-bottom:16px;">
+            <div class="sub-card" style="border-left:4px solid #64748B;">
+              <div class="sub-card-title">運行時 API 網關：Apache APISIX</div>
+              <ul class="bullet-list">
+                <li>毫秒級轉發延遲 (<1ms)，QPS 吞吐頂尖</li>
+                <li>基於 etcd 動態熱更新，變更路由零重啟、零中斷</li>
+                <li>微服務負載均衡、熔斷降級、Rate Limiting 限流</li>
+                <li>將內部 SAP/MES 接口包裝為標準 MCP Tools</li>
+              </ul>
+            </div>
+            <div class="sub-card" style="border-left:4px solid #475569;">
+              <div class="sub-card-title">身分鑑權中樞：Keycloak (IAM)</div>
+              <ul class="bullet-list">
+                <li>企業 Active Directory / LDAP 統一單一登入 (SSO)</li>
+                <li>標準 OIDC & OAuth2 授權機制、JWT 邊界秒級驗簽</li>
+                <li>落實 RBAC 角色矩陣與生醫部門權限隔離</li>
+              </ul>
+            </div>
+            <div class="sub-card" style="border-left:4px solid var(--danger-main);">
+              <div class="sub-card-title">API 資安大腦：Noname Security</div>
+              <ul class="bullet-list">
+                <li><b>影子與殭屍 API 自動探索</b>：旁路鏡像清點全網未知接口</li>
+                <li><b>AI 行為基線監控</b>：秒級識別 BOLA/IDOR 越權與資料外洩</li>
+                <li><b>OWASP API Top 10 防護</b>：聯動 APISIX 毫秒級動態阻斷</li>
+                <li><b>CI/CD 測試左移</b>：上線前執行 100+ 種滲透測試</li>
+              </ul>
+            </div>
+          </div>
+          <div class="grid-3">
+            <div class="sub-card">
+              <div class="sub-card-title">OT 產線隔離網 (Air-Gapped) <span class="pill-tag pill-amber">OT</span></div>
+              <p style="font-size:0.78rem;color:var(--text-secondary);line-height:1.5;">
+                發酵槽機台完全實體/邏輯隔離，僅透過單向網閘向 Kafka 傳送 MQTT 數據，製程配方絕不上公有雲。
+              </p>
+            </div>
+            <div class="sub-card">
+              <div class="sub-card-title">2E 企業辦公受控網 (Intranet) <span class="pill-tag pill-blue">2E</span></div>
+              <p style="font-size:0.78rem;color:var(--text-secondary);line-height:1.5;">
+                財務會計與研發團隊經由 VPN/SSO 存取，內建 DLP 敏感詞防護，落實最小權限原則。
+              </p>
+            </div>
+            <div class="sub-card">
+              <div class="sub-card-title">2C 外部對話 DMZ 隔離區 <span class="pill-tag pill-purple">2C</span></div>
+              <p style="font-size:0.78rem;color:var(--text-secondary);line-height:1.5;">
+                電話客服與 LINE Bot 僅存取脫敏 FAQ，嚴禁外部流量穿透至核心 ERP 與生產系統。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- View 6: 上市櫃資安與金管會合規 -->
+      <div id="tv6" class="togaf-view">
+        <div class="tier-panel" style="border-left:5px solid var(--danger-main);">
+          <div class="tier-header"><span class="badge-layer">Governance</span> 上市櫃資通安全管控指引 ＆ 金管會生成式 AI 規範落實</div>
+          <div class="grid-3" style="margin-bottom:16px;">
+            <div class="sub-card" style="border-left:4px solid var(--blue-main);">
+              <div class="sub-card-title">1. 組織與內控制度 <span class="pill-tag pill-blue">內控第9條之一</span></div>
+              <ul class="bullet-list">
+                <li>依法設置<b>資安長 (CISO)</b> 與專責資安團隊</li>
+                <li><b>董事會監督</b>：CISO 每年至少向董事會報告一次 AI 資安成效</li>
+                <li>將生成式 AI 規範與 API 平台納入年度內控稽核計畫</li>
+              </ul>
+            </div>
+            <div class="sub-card" style="border-left:4px solid var(--accent-primary);">
+              <div class="sub-card-title">2. 金管會 GenAI 作業指引 <span class="pill-tag pill-amber">人機協同</span></div>
+              <ul class="bullet-list">
+                <li><b>建立 AI 風險管理框架</b>：明定 AI 生成內容問責主體為企業</li>
+                <li><b>Human-in-the-Loop</b>：財務傳票、採購審查重大決策設人工核准</li>
+                <li><b>杜絕幻覺風險</b>：HowardAGent 輸出強制附帶來源引用 (Citations)</li>
+              </ul>
+            </div>
+            <div class="sub-card" style="border-left:4px solid var(--emerald-main);">
+              <div class="sub-card-title">3. 供應鏈與委外安全 <span class="pill-tag pill-green">SLA 合約</span></div>
+              <ul class="bullet-list">
+                <li>簽訂第三方軟體與雲端模型資安 SLA 與稽核權條款</li>
+                <li>優先採購具備 <b>ISO 27001 / 27701</b> 國際認證之廠商</li>
+                <li><b>零資料保留條款</b>：明定第三方模型不儲存 Raw Prompt、不拿去訓練</li>
+              </ul>
+            </div>
+          </div>
+          <div class="grid-3">
+            <div class="sub-card" style="border-left:4px solid var(--purple-main);">
+              <div class="sub-card-title">4. 證交所資通安全管控指引 <span class="pill-tag pill-purple">技術防禦</span></div>
+              <ul class="bullet-list">
+                <li><b>全方位 MFA</b>：登入 MaiAgent、API 平台與主機強制多因子認證</li>
+                <li><b>特權帳號管理 (PAM)</b>：嚴格管制 Admin 權限，操作留痕錄影</li>
+                <li><b>定期滲透測試</b>：每年落實弱點掃描 (VA)、滲透測試與紅藍軍演練</li>
+              </ul>
+            </div>
+            <div class="sub-card" style="border-left:4px solid var(--danger-main);">
+              <div class="sub-card-title">5. 營運持續與災難復原 (BCP) <span class="pill-tag pill-red">復原韌性</span></div>
+              <ul class="bullet-list">
+                <li><b>指標承諾</b>：核心系統 RTO &lt; 4 小時、RPO &lt; 15 分鐘</li>
+                <li><b>3-2-1 備份原則</b>：3 份資料、2 種介質、1 份異地/離線冷備份</li>
+                <li><b>防範勒索軟體</b>：Raw Data 具備 WORM 特性不可篡改</li>
+              </ul>
+            </div>
+            <div class="sub-card" style="border-left:4px solid var(--text-muted);">
+              <div class="sub-card-title">6. 重大資安事件應變與申報 <span class="pill-tag pill-amber">重訊公告</span></div>
+              <ul class="bullet-list">
+                <li><b>7×24 SOC/SIEM 監控</b>：AI 智慧過濾分析異常攻擊警報</li>
+                <li><b>重大訊息申報</b>：發生重大資安事件，於次一營業日開市前發布重訊</li>
+                <li><b>通報主管機關</b>：通報證券交易所/櫃買中心與證券期貨 T-CAT</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Right-to-Left (從使用者向左演進) Flow Section -->
+  <section id="rtl-flow" class="bento-section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <div>
+          <h2 class="section-title">從使用者出發向左演進架構 (Right-to-Left Flow)</h2>
+          <p class="section-desc">以業務價值與使用者體驗為起點，層層向左穿透至通訊、業務代理、智慧網關與底層數據庫</p>
+        </div>
+      </div>
+
+      <div class="flow-wrapper">
+        <div class="flow-direct-indicator">
+          <div>◀◀ 終點：底層模型、GPU 算力與核心數據庫</div>
+          <div>◀◀ 數據與任務請求向左推進 (Data &amp; Task Flow) ◀◀</div>
+          <div>起點：使用者群體與業務進線 ▶▶</div>
+        </div>
+
+        <div class="rtl-grid">
+          <!-- Col 5: 使用者群體 (Rightmost / 起點) -->
+          <div class="rtl-col">
+            <div class="rtl-col-header" style="color:var(--blue-main);">【起點】使用者群體</div>
+            <ul class="bullet-list">
+              <li><b>2E 內部辦公</b>：會計、總務、採購、研發協同</li>
+              <li><b>2C/2B 客戶</b>：全球經銷商、終端消費者</li>
+              <li><b>OT 專家</b>：發酵萃取調機師傅、QA/QC</li>
+            </ul>
+          </div>
+
+          <!-- Col 4: 服務通路層 (向左第 1 站) -->
+          <div class="rtl-col">
+            <div class="rtl-col-header">【向左 1 站】多維通路</div>
+            <ul class="bullet-list">
+              <li>企業瀏覽器 Web 介面</li>
+              <li>電話交換機 (PBX / VoIP)</li>
+              <li>官網 Web Chat / LINE Bot</li>
+              <li>產線觸控面板 (HMI)</li>
+            </ul>
+          </div>
+
+          <!-- Col 3: 應用中樞 HowardAGent (向左第 2 站) -->
+          <div class="rtl-col">
+            <div class="rtl-col-header" style="color:var(--purple-main);">【向左 2 站】HowardAGent</div>
+            <ul class="bullet-list">
+              <li><b>95% 準確率 RAG</b> (生醫 SOP)</li>
+              <li><b>OCR Agent</b> 傳票自動入帳</li>
+              <li><b>客服 Copilot</b> 自動回覆轉真人</li>
+              <li><b>MCP Hub</b> &amp; <b>Text2SQL</b></li>
+            </ul>
+          </div>
+
+          <!-- Col 2: 雙軌網關與預測 (向左第 3 站) -->
+          <div class="rtl-col">
+            <div class="rtl-col-header" style="color:var(--accent-primary);">【向左 3 站】雙軌網關</div>
+            <ul class="bullet-list">
+              <li><b>HowardRoute</b>：250+ 模型統一調度、Smart Routing 省 30%、0% Markup</li>
+              <li><b>HowardPro</b>：AutoML 發酵參數推薦、虛擬量測、Domain Twin</li>
+            </ul>
+          </div>
+
+          <!-- Col 1: 算力與數據底座 (Leftmost / 終點) -->
+          <div class="rtl-col">
+            <div class="rtl-col-header" style="color:var(--emerald-main);">【終點】算力與數據</div>
+            <ul class="bullet-list">
+              <li><b>雲端商業大模型</b>：Claude 3.7 / GPT-4.5</li>
+              <li><b>地端 GPU</b>：DeepSeek R1/V3 on 研華/雲達</li>
+              <li><b>生醫核心庫</b>：SAP ERP / MES / SCADA</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Four Quick-Win Playbooks -->
+  <section id="playbooks" class="bento-section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <div>
+          <h2 class="section-title">首波優先驗收：四大立竿見影場景指南</h2>
+          <p class="section-desc">以明確可量化之業務成果作為平台導入與規模化擴展之關鍵門檻</p>
+        </div>
+      </div>
+
+      <div class="playbook-grid">
+        <div class="playbook-card">
+          <span class="pb-badge pill-blue">優先級 No.1</span>
+          <div class="pb-title">財務憑證 OCR 自動化入帳與核銷</div>
+          <div class="pb-step"><b>輸入資料</b>：紙本發票、供應商發票圖檔、PDF 憑證。</div>
+          <div class="pb-step"><b>AI 處理流</b>：HowardAGent OCR Agent 自動辨識發票抬頭、統一編號、品名金額，並自動比對 SAP 採購單 (PO)。</div>
+          <div class="pb-step"><b>人工覆核</b>：會計人員一鍵確認科目與金額（落實金管會 Human-in-the-Loop）。</div>
+          <div class="pb-roi">量化效益：憑證處理工時減少 75%，跨系統帳務核銷零人為失誤。</div>
+        </div>
+
+        <div class="playbook-card">
+          <span class="pb-badge pill-purple">優先級 No.2</span>
+          <div class="pb-title">生醫客服回覆與智能 KM 助理</div>
+          <div class="pb-step"><b>輸入資料</b>：生醫產品常見問答、使用禁忌、國際法規認證清冊。</div>
+          <div class="pb-step"><b>AI 處理流</b>：以 95% 高準確率 Agentic RAG 進行第一線電話語音與 LINE 即時自動應答，強制標註資料來源 (Citations)。</div>
+          <div class="pb-step"><b>人工覆核</b>：遇到複雜客訴或藥事敏感諮詢，自動觸發轉介真人客服。</div>
+          <div class="pb-roi">量化效益：客服夜間與尖峰應答率達 100%，客訴初次解決率提升 40%。</div>
+        </div>
+
+        <div class="playbook-card">
+          <span class="pb-badge pill-amber">優先級 No.3</span>
+          <div class="pb-title">採購與勤採流程智慧比價與異常偵測</div>
+          <div class="pb-step"><b>輸入資料</b>：歷史原物料報價單、供應商 COA 檢驗合格證、同仁費用申請單。</div>
+          <div class="pb-step"><b>AI 處理流</b>：自動比對歷史價格波動與預算額度，標註異常高價與非標準核銷。</div>
+          <div class="pb-step"><b>人工覆核</b>：由採購專員與部門主管依 AI 標籤進行雙重審批。</div>
+          <div class="pb-roi">量化效益：採購比價週期由 3 天縮短為 2 小時，杜絕不合規報銷。</div>
+        </div>
+
+        <div class="playbook-card">
+          <span class="pb-badge pill-green">優先級 No.4</span>
+          <div class="pb-title">總務行政作業與跨廠 SOP 複製</div>
+          <div class="pb-step"><b>輸入資料</b>：集團人事行政規章、跨廠區調動申請、總務資產維修手冊。</div>
+          <div class="pb-step"><b>AI 處理流</b>：以對話式工作流自動引導同仁完成行政表單申請，並自動指派工單。</div>
+          <div class="pb-step"><b>標準化</b>：新進同仁只要「照著 Plan 做」，即可在第一天無痛上手。</div>
+          <div class="pb-roi">量化效益：總務人資重複性諮詢降低 60%，跨廠行政流轉效率提升 2 倍。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Compliance Checklist -->
+  <section id="compliance" class="bento-section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <div>
+          <h2 class="section-title">上市櫃資安與金管會合規自評檢核表</h2>
+          <p class="section-desc">已全面落實 10 項關鍵法規義務，支援審計委員與資安長即時檢視</p>
+        </div>
+      </div>
+
+      <div class="compliance-box">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.88rem;font-weight:700;">
+          <span>合規達成率 (Compliance Score)</span>
+          <span id="scoreText" style="color:var(--emerald-main);">10 / 10 項通過 (100%)</span>
+        </div>
+        <div class="progress-bar-container">
+          <div id="progBar" class="progress-bar-fill"></div>
+        </div>
+
+        <div class="chk-list">
+          <label class="chk-item">
+            <input type="checkbox" checked onchange="updateScore()">
+            <div><b>配置資安長與專責資安團隊</b>：依法設置 CISO，健全資安組織治理架構。</div>
+          </label>
+          <label class="chk-item">
+            <input type="checkbox" checked onchange="updateScore()">
+            <div><b>董事會定期監督</b>：資安長每年至少一次向董事會提出資通安全執行成果報告。</div>
+          </label>
+          <label class="chk-item">
+            <input type="checkbox" checked onchange="updateScore()">
+            <div><b>金管會 GenAI 問責機制</b>：建立企業 AI 風險管理框架，明定決策主體為企業本身。</div>
+          </label>
+          <label class="chk-item">
+            <input type="checkbox" checked onchange="updateScore()">
+            <div><b>Human-in-the-Loop 人機協同</b>：財務入帳與採購重大決策強制設人工核准節點。</div>
+          </label>
+          <label class="chk-item">
+            <input type="checkbox" checked onchange="updateScore()">
+            <div><b>防止幻覺與可驗證性</b>：HowardAGent 輸出強制附帶內部 SOP 來源引用 (Citations)。</div>
+          </label>
+          <label class="chk-item">
+            <input type="checkbox" checked onchange="updateScore()">
+            <div><b>產線實體隔離 (Air-Gapped)</b>：發酵機台 PLC 絕對隔離於網際網路，單向網閘傳送。</div>
+          </label>
+          <label class="chk-item">
+            <input type="checkbox" checked onchange="updateScore()">
+            <div><b>全面實施多因子認證 (MFA)</b>：登入 AI 平台、API 網關與地端伺服器強制雙重驗證。</div>
+          </label>
+          <label class="chk-item">
+            <input type="checkbox" checked onchange="updateScore()">
+            <div><b>Noname Security 影子 API 清點</b>：旁路探索全集團未知接口，防禦 BOLA 越權攻擊。</div>
+          </label>
+          <label class="chk-item">
+            <input type="checkbox" checked onchange="updateScore()">
+            <div><b>營運持續與 3-2-1 備份</b>：核心系統 RTO &lt; 4h、RPO &lt; 15m，Raw Data WORM 不可篡改。</div>
+          </label>
+          <label class="chk-item">
+            <input type="checkbox" checked onchange="updateScore()">
+            <div><b>重大訊息與 T-CAT 通報 SOP</b>：重大事件次一營業日開市前發布重訊，聯防通報。</div>
+          </label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download & Asset Center -->
+  <section id="downloads" class="bento-section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <div>
+          <h2 class="section-title">架構資產與 Draw.io 原生檔案下載</h2>
+          <p class="section-desc">可直接於 draw.io (diagrams.net) 開啟並編輯的多分頁工程檔案與規格清單</p>
+        </div>
+      </div>
+
+      <div class="download-grid">
+        <div class="dl-card">
+          <div class="dl-icon">📐</div>
+          <div class="dl-title">TOGAF 10 企業架構 (6 分頁)</div>
+          <div class="dl-desc">內建 6 個獨立分頁：總體、業務、數據、應用、技術與上市櫃合規視圖。</div>
+          <a href="./tci_togaf_enterprise_architecture.drawio" download class="btn-dl">下載 .drawio 檔案</a>
+        </div>
+
+        <div class="dl-card">
+          <div class="dl-icon">🔄</div>
+          <div class="dl-title">從使用者向左演進架構圖</div>
+          <div class="dl-desc">右至左 (Right-to-Left) 5 站式端到端流向圖，適合高層決策簡報。</div>
+          <a href="./tci_ai_architecture_rtl.drawio" download class="btn-dl">下載 RTL .drawio 檔案</a>
+        </div>
+
+        <div class="dl-card">
+          <div class="dl-icon">📄</div>
+          <div class="dl-title">專案規劃與決策筆記</div>
+          <div class="dl-desc">包含大江生醫資訊策略、三方職責分工與下階段 PoC 推進路徑。</div>
+          <a href="./README.md" target="_blank" class="btn-dl">查看 README 文件</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile Bottom Dock -->
+  <nav class="mobile-dock">
+    <button class="dock-btn active" onclick="location.href='#bento'">
+      <span class="dock-icon">📊</span>
+      <span>指標</span>
+    </button>
+    <button class="dock-btn" onclick="location.href='#togaf'">
+      <span class="dock-icon">🏛️</span>
+      <span>TOGAF</span>
+    </button>
+    <button class="dock-btn" onclick="location.href='#rtl-flow'">
+      <span class="dock-icon">🔄</span>
+      <span>向左流</span>
+    </button>
+    <button class="dock-btn" onclick="location.href='#playbooks'">
+      <span class="dock-icon">⚡</span>
+      <span>場景</span>
+    </button>
+    <button class="dock-btn" onclick="location.href='#compliance'">
+      <span class="dock-icon">⚖️</span>
+      <span>合規</span>
+    </button>
+  </nav>
+
+  <!-- Floating Action Button (FAB) -->
+  <button class="fab-contact" onclick="copyContact()" title="對接 Howard Liao Ph.D.">
+    💬
+  </button>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">已複製 Howard Liao Ph.D. 聯絡資訊</div>
+
+  <script>
+    // 1. Theme Switcher
+    function changeTheme(themeName) {
+      if (themeName === 'pharaoh') {
+        document.documentElement.removeAttribute('data-theme');
+      } else {
+        document.documentElement.setAttribute('data-theme', themeName);
+      }
+      localStorage.setItem('tci_theme', themeName);
+    }
+    const savedTheme = localStorage.getItem('tci_theme');
+    if (savedTheme) {
+      document.getElementById('themeSelector').value = savedTheme;
+      changeTheme(savedTheme);
+    }
+
+    // 2. TOGAF Tab Switcher
+    function setTogafView(viewId, btn) {
+      document.querySelectorAll('.togaf-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.togaf-view').forEach(v => v.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(viewId).classList.add('active');
+    }
+
+    // 3. Counter Animation for Bento Numbers
+    function animateCounters() {
+      const counters = document.querySelectorAll('.bento-num');
+      counters.forEach(counter => {
+        const target = parseFloat(counter.getAttribute('data-target'));
+        let count = 0;
+        const duration = 1200;
+        const stepTime = 30;
+        const steps = duration / stepTime;
+        const increment = target / steps;
+
+        const timer = setInterval(() => {
+          count += increment;
+          if (count >= target) {
+            count = target;
+            clearInterval(timer);
+          }
+          if (target === 100) counter.innerText = Math.round(count) + '%';
+          else if (target === 99.99) counter.innerText = count.toFixed(2) + '%';
+          else if (target === 35) counter.innerText = '-' + Math.round(count) + '%';
+          else if (target === 7) counter.innerText = Math.round(count) + ' 天';
+        }, stepTime);
+      });
+    }
+
+    // Run counter on load
+    window.addEventListener('DOMContentLoaded', () => {
+      animateCounters();
+      // Register PWA Service Worker
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      }
+    });
+
+    // 4. Compliance Checklist Dynamic Score
+    function updateScore() {
+      const checkboxes = document.querySelectorAll('.chk-item input[type="checkbox"]');
+      const total = checkboxes.length;
+      let checked = 0;
+      checkboxes.forEach(chk => { if (chk.checked) checked++; });
+      const percent = Math.round((checked / total) * 100);
+      document.getElementById('scoreText').innerText = `${checked} / ${total} 項通過 (${percent}%)`;
+      document.getElementById('progBar').style.width = percent + '%';
+    }
+
+    // 5. Copy Contact FAB
+    function copyContact() {
+      const contactText = "Howard Liao Ph.D. (廖倫豪 博士) | liao.howard@gmail.com | 大江生醫 (8436) 企業資訊策略主持";
+      navigator.clipboard.writeText(contactText).then(() => {
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+      }).catch(() => {
+        alert("Howard Liao Ph.D. | liao.howard@gmail.com");
+      });
+    }
+  </script>
+</body>
+</html>
