@@ -24,3 +24,13 @@
   - `TCI_8436_Howard_企業資訊架構_HowardLiao.pdf` (8 頁全量 Howard 企業架構規格手冊)
   - `TCI_8436_右至左架構演進_HowardLiao.pdf` (3 頁五站式 RTL 使用者流向規範)
   - `TCI_8436_四大立竿見影場景與合規手冊_HowardLiao.pdf` (4 頁首波驗收指南與上市櫃合規手冊)
+
+### Howard 企業架構 32 全架構視圖清冊 (32 Views Catalog)
+* `TCI_8436_Howard_Architecture_32.drawio` (32 分頁原生 Draw.io 工程原始檔)
+* `TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf` (34 頁全量官方規格審閱手冊，每頁烙印 Howard Liao Ph.D. 浮水印)
+  - **Phase A 願景與概念 (00-03)**: ADM 總覽、Stakeholder Map、Value Chain、Solution Concept
+  - **Phase B 業務架構 (04-11)**: 能力地圖、組織角色、業務足跡、服務資訊圖、功能分解、目標指標、業務案例、財務憑證流程
+  - **Phase C 數據架構 (12-16)**: 概念數據、邏輯數據 Schema、數據分發流、數據分級安全、數據生命週期與 ALCOA+
+  - **Phase C 應用架構 (17-21)**: 應用通訊、應用與使用者位置、應用案例、客服回覆流程、企業可管理性
+  - **Phase D 技術架構 (22-27)**: 安全軟體工程、環境與廠區、平台分解、高可用與災難復原、網絡運算硬體、網絡分區工程
+  - **Phase E-H 實施與治理 (28-31)**: 架構路線圖、專案情境、效益實現、架構合規與變更管理
