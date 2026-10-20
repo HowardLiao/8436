@@ -1650,6 +1650,50 @@
       </div>
 
       <!-- Grid of 32 Cards -->
+      
+      <!-- Live In-Page Architecture Diagram Viewport Player -->
+      <div id="livePlayerBox" style="background:var(--bg-surface); border:2px solid var(--accent-primary); border-radius:var(--radius-md); padding:18px; margin-bottom:24px; box-shadow:var(--card-hover-shadow);">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:14px; border-bottom:1.5px solid var(--border-color); padding-bottom:12px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="background:var(--accent-primary); color:#FFF; font-size:0.72rem; font-weight:800; padding:2px 8px; border-radius:4px;">即時畫布</span>
+              <h3 id="playerCurrentTitle" style="font-size:1.05rem; font-weight:800; color:var(--text-main); margin:0;">
+                當前檢視：[00] 00 ADM 總覽
+              </h3>
+            </div>
+            <div id="playerCurrentSubtitle" style="font-size:0.8rem; color:var(--text-muted); margin-top:3px;">
+              Phase A ｜ TOGAF/Howard ADM 生命週期 · 大江生醫 (8436.TW) 總體對照
+            </div>
+          </div>
+          
+          <!-- Player Controls -->
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <button onclick="navDiagram(-1)" class="btn-action" style="padding:6px 12px; font-size:0.78rem; background:var(--bg-body); color:var(--text-main); border:1px solid var(--border-color);" title="前一張圖">
+              ◀ 上一張
+            </button>
+            <select id="diagramSelectDropdown" onchange="jumpToDiagram(parseInt(this.value))" class="theme-select" style="font-size:0.82rem; padding:6px 10px; max-width:260px;" aria-label="選擇視圖">
+              <option value="0">[00] 00 ADM 總覽 (Phase A)</option><option value="1">[01] 01 Stakeholder Map (Preliminary)</option><option value="2">[02] 02 Value Chain (Phase A)</option><option value="3">[03] 03 Solution Concept (Phase A)</option><option value="4">[04] 04 Business Capability Map (Phase B)</option><option value="5">[05] 05 Organization & Actor (Phase B)</option><option value="6">[06] 06 Business Footprint (Phase B)</option><option value="7">[07] 07 Business Service-Information (Phase B)</option><option value="8">[08] 08 Functional Decomposition (Phase B)</option><option value="9">[09] 09 Goal-Objective-Service (Phase B)</option><option value="10">[10] 10 Business Use-Case (Phase B)</option><option value="11">[11] 11 Process Flow (Phase B)</option><option value="12">[12] 12 Conceptual Data (Phase C)</option><option value="13">[13] 13 Logical Data (Phase C)</option><option value="14">[14] 14 Data Dissemination (Phase C)</option><option value="15">[15] 15 Data Security (Phase C)</option><option value="16">[16] 16 Data Lifecycle (Phase C)</option><option value="17">[17] 17 Application Communication (Phase C)</option><option value="18">[18] 18 Application & User Location (Phase C)</option><option value="19">[19] 19 Application Use-Case (Phase C)</option><option value="20">[20] 20 Process-Application Realization (Phase C)</option><option value="21">[21] 21 Enterprise Manageability (Phase C)</option><option value="22">[22] 22 Software Engineering (Phase C)</option><option value="23">[23] 23 Environments & Locations (Phase D)</option><option value="24">[24] 24 Platform Decomposition (Phase D)</option><option value="25">[25] 25 Processing Diagram (Phase D)</option><option value="26">[26] 26 Networked Computing (Phase D)</option><option value="27">[27] 27 Communications Engineering (Phase D)</option><option value="28">[28] 28 Architecture Roadmap (Phase E)</option><option value="29">[29] 29 Project Context (Phase E)</option><option value="30">[30] 30 Benefits Diagram (Phase E)</option><option value="31">[31] 31 Compliance & Governance (Phase G)</option>
+            </select>
+            <button onclick="navDiagram(1)" class="btn-action" style="padding:6px 12px; font-size:0.78rem; background:var(--bg-body); color:var(--text-main); border:1px solid var(--border-color);" title="下一張圖">
+              下一張 ▶
+            </button>
+            <button onclick="expandCurrentDiagram()" class="btn-action" style="padding:6px 14px; font-size:0.78rem;" title="全螢幕放大審閱">
+              <span>⛶ 全螢幕審閱</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Embedded Frame Container with Watermark Protection -->
+        <div style="width:100%; height:620px; background:#525659; border-radius:var(--radius-sm); overflow:hidden; position:relative; box-shadow:inset 0 2px 4px rgba(0,0,0,0.2);">
+          <iframe id="livePlayerIframe" src="./TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf#page=2&toolbar=0&navpanes=0&scrollbar=1" style="width:100%; height:100%; border:none;" title="Live Architecture Diagram Viewer"></iframe>
+        </div>
+
+        <div style="margin-top:10px; display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:var(--text-muted);">
+          <span>💡 提示：可直接在上方畫布內滾動捲軸查看圖表細節，或點選下方 32 張視圖卡片即時切換。</span>
+          <span style="color:var(--accent-secondary); font-weight:700;">🔒 全頁內嵌 Howard Liao Ph.D. 浮水印 · 僅供線上即時審閱</span>
+        </div>
+      </div>
+
       <div class="grid-4" id="cardsGrid32">
         
       <div class="view-card phase-all phase-a" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -1663,7 +1707,7 @@
             <li>Preliminary 架構原則與治理框架 (Howard 架構標準 BDAT · 頁 01)</li><li>A 架構願景 Stakeholder · Value Chain · Solution Concept (頁 01-03)</li><li>B 業務架構 Capability · Footprint · Process (頁 04-11)</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [00] 00 ADM 總覽 (手冊第 2 頁)', 2)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [00] 00 ADM 總覽 (手冊第 2 頁)', 2)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 2 頁)
         </button>
       </div>
@@ -1679,7 +1723,7 @@
             <li>保持滿意 Keep Satisfied (高權力·低利益)</li><li>緊密管理 Manage Closely (高權力·高利益)</li><li>監控 Monitor (低權力·低利益)</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [01] 01 Stakeholder Map (手冊第 3 頁)', 3)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [01] 01 Stakeholder Map (手冊第 3 頁)', 3)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 3 頁)
         </button>
       </div>
@@ -1695,7 +1739,7 @@
             <li>研發與配方</li><li>天然物萃取與配方專利 HowardAGent 文獻 KM NPI Twin 試產評估 研發 Code Review</li><li>原物料採購</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [02] 02 Value Chain (手冊第 4 頁)', 4)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [02] 02 Value Chain (手冊第 4 頁)', 4)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 4 頁)
         </button>
       </div>
@@ -1711,7 +1755,7 @@
             <li>2E 內部辦公 會計/總務/採購/研發</li><li>2C / 2B 客戶 經銷商/消費者</li><li>OT 專家 調機師傅/QA/QC</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [03] 03 Solution Concept (手冊第 5 頁)', 5)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [03] 03 Solution Concept (手冊第 5 頁)', 5)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 5 頁)
         </button>
       </div>
@@ -1727,7 +1771,7 @@
             <li>戰略能力 Strategic</li><li>核心營運能力 Core</li><li>賦能與治理能力 Enabling</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [04] 04 Business Capability Map (手冊第 6 頁)', 6)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [04] 04 Business Capability Map (手冊第 6 頁)', 6)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 6 頁)
         </button>
       </div>
@@ -1743,7 +1787,7 @@
             <li>董事會</li><li>審計委員會</li><li>CEO / 總經理</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [05] 05 Organization & Actor (手冊第 7 頁)', 7)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [05] 05 Organization & Actor (手冊第 7 頁)', 7)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 7 頁)
         </button>
       </div>
@@ -1759,7 +1803,7 @@
             <li>目標 Goal</li><li>組織 Organization</li><li>功能 Function</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [06] 06 Business Footprint (手冊第 8 頁)', 8)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [06] 06 Business Footprint (手冊第 8 頁)', 8)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 8 頁)
         </button>
       </div>
@@ -1775,7 +1819,7 @@
             <li>Actor</li><li>業務服務</li><li>資訊實體</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [07] 07 Business Service-Information (手冊第 9 頁)', 9)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [07] 07 Business Service-Information (手冊第 9 頁)', 9)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 9 頁)
         </button>
       </div>
@@ -1791,7 +1835,7 @@
             <li>大江生醫營運</li><li>研發與配方</li><li>天然物萃取與配方專利</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [08] 08 Functional Decomposition (手冊第 10 頁)', 10)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [08] 08 Functional Decomposition (手冊第 10 頁)', 10)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 10 頁)
         </button>
       </div>
@@ -1807,7 +1851,7 @@
             <li>G1 營運韌性 (Zero Outage)</li><li>SLA 99.99% · 毫秒級 Failover</li><li>模型網關服務 (HowardRoute)</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [09] 09 Goal-Objective-Service (手冊第 11 頁)', 11)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [09] 09 Goal-Objective-Service (手冊第 11 頁)', 11)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 11 頁)
         </button>
       </div>
@@ -1823,7 +1867,7 @@
             <li>大江生醫 AI 賦能業務系統邊界</li><li>上傳發票 OCR 入帳</li><li>覆核簽核 (HITL)</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [10] 10 Business Use-Case (手冊第 12 頁)', 12)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [10] 10 Business Use-Case (手冊第 12 頁)', 12)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 12 頁)
         </button>
       </div>
@@ -1839,7 +1883,7 @@
             <li>財務會計</li><li>HowardAGent</li><li>HowardRoute 模型網關</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [11] 11 Process Flow (手冊第 13 頁)', 13)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [11] 11 Process Flow (手冊第 13 頁)', 13)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 13 頁)
         </button>
       </div>
@@ -1855,7 +1899,7 @@
             <li>供應商</li><li>原料批號</li><li>配方 / 產品</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [12] 12 Conceptual Data (手冊第 14 頁)', 14)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [12] 12 Conceptual Data (手冊第 14 頁)', 14)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 14 頁)
         </button>
       </div>
@@ -1871,7 +1915,7 @@
             <li>MATERIAL_LOT PK lot_id material_code (MDG) supplier_id FK coa_ref received_at</li><li>PURCHASE_ORDER PK po_no supplier_id FK lot_id FK amount budget_ref</li><li>INVOICE PK inv_no po_no FK tax_id amount ocr_confidence status</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [13] 13 Logical Data (手冊第 15 頁)', 15)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [13] 13 Logical Data (手冊第 15 頁)', 15)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 15 頁)
         </button>
       </div>
@@ -1887,7 +1931,7 @@
             <li>SAP ERP</li><li>MES / WMS</li><li>SCADA / PLC (OT)</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [14] 14 Data Dissemination (手冊第 16 頁)', 16)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [14] 14 Data Dissemination (手冊第 16 頁)', 16)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 16 頁)
         </button>
       </div>
@@ -1903,7 +1947,7 @@
             <li>L1 公開</li><li>L2 內部</li><li>L3 機密</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [15] 15 Data Security (手冊第 17 頁)', 17)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [15] 15 Data Security (手冊第 17 頁)', 17)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 17 頁)
         </button>
       </div>
@@ -1919,7 +1963,7 @@
             <li>產生 Create</li><li>SAP · MES · 感測器 · 客服</li><li>擷取 Ingest</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [16] 16 Data Lifecycle (手冊第 18 頁)', 18)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [16] 16 Data Lifecycle (手冊第 18 頁)', 18)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 18 頁)
         </button>
       </div>
@@ -1935,7 +1979,7 @@
             <li>使用者通路 Web · LINE · PBX · HMI</li><li>Apache APISIX <1ms · etcd 熱更新</li><li>Keycloak OIDC / OAuth2 / SSO</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [17] 17 Application Communication (手冊第 19 頁)', 19)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [17] 17 Application Communication (手冊第 19 頁)', 19)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 19 頁)
         </button>
       </div>
@@ -1951,7 +1995,7 @@
             <li>屏東廠 (OT)</li><li>上海廠</li><li>總部 / 2E 受控網</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [18] 18 Application & User Location (手冊第 20 頁)', 20)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [18] 18 Application & User Location (手冊第 20 頁)', 20)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 20 頁)
         </button>
       </div>
@@ -1967,7 +2011,7 @@
             <li>財務 / 採購 / 總務</li><li>客服與營銷</li><li>研發 / QA</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [19] 19 Application Use-Case (手冊第 21 頁)', 21)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [19] 19 Application Use-Case (手冊第 21 頁)', 21)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 21 頁)
         </button>
       </div>
@@ -1983,7 +2027,7 @@
             <li>消費者 / LINE / PBX</li><li>HowardAGent</li><li>Milvus / Qdrant</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [20] 20 Process-Application Realization (手冊第 22 頁)', 22)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [20] 20 Process-Application Realization (手冊第 22 頁)', 22)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 22 頁)
         </button>
       </div>
@@ -1999,7 +2043,7 @@
             <li>7×24 SOC / SIEM AI 智慧過濾告警</li><li>日誌 / 指標 / 追蹤 可觀測性</li><li>AILM 模型漂移與根因 RCA</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [21] 21 Enterprise Manageability (手冊第 23 頁)', 23)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [21] 21 Enterprise Manageability (手冊第 23 頁)', 23)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 23 頁)
         </button>
       </div>
@@ -2015,7 +2059,7 @@
             <li>研發 Code</li><li>Build</li><li>靜態掃描 SAST / SCA</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [22] 22 Software Engineering (手冊第 24 頁)', 24)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [22] 22 Software Engineering (手冊第 24 頁)', 24)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 24 頁)
         </button>
       </div>
@@ -2031,7 +2075,7 @@
             <li>屏東廠 OT (Air-Gapped)</li><li>上海廠 (OT/辦公)</li><li>總部 資料中心 / 2E 受控網</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [23] 23 Environments & Locations (手冊第 25 頁)', 25)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [23] 23 Environments & Locations (手冊第 25 頁)', 25)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 25 頁)
         </button>
       </div>
@@ -2047,7 +2091,7 @@
             <li>應用服務</li><li>HowardAGent</li><li>HowardPro</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [24] 24 Platform Decomposition (手冊第 26 頁)', 26)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [24] 24 Platform Decomposition (手冊第 26 頁)', 26)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 26 頁)
         </button>
       </div>
@@ -2063,7 +2107,7 @@
             <li>主站 Active (總部)</li><li>備援站 DR / 異地</li><li>APISIX 叢集 (≥2 節點) + etcd</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [25] 25 Processing Diagram (手冊第 27 頁)', 27)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [25] 25 Processing Diagram (手冊第 27 頁)', 27)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 27 頁)
         </button>
       </div>
@@ -2079,7 +2123,7 @@
             <li>PLC / SCADA (發酵槽 · 萃取機台)</li><li>邊緣閘道 / 工業電腦 EMQX · OPC UA</li><li>單向網閘 (Data Diode)</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [26] 26 Networked Computing (手冊第 28 頁)', 28)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [26] 26 Networked Computing (手冊第 28 頁)', 28)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 28 頁)
         </button>
       </div>
@@ -2095,7 +2139,7 @@
             <li>外部 Internet 消費者 · 經銷商 · LINE</li><li>2C DMZ APISIX · Bot 閘道</li><li>2E 受控網 + AI/資料區 AGent · Route · Kafka</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [27] 27 Communications Engineering (手冊第 29 頁)', 29)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [27] 27 Communications Engineering (手冊第 29 頁)', 29)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 29 頁)
         </button>
       </div>
@@ -2111,7 +2155,7 @@
             <li>Wave 0: 四大 Quick Win (1 週首波驗收)</li><li>平台底座: AGent · Route · APISIX · Keycloak</li><li>Noname + CI/CD 測試左移 + SBOM</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [28] 28 Architecture Roadmap (手冊第 30 頁)', 30)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [28] 28 Architecture Roadmap (手冊第 30 頁)', 30)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 30 頁)
         </button>
       </div>
@@ -2127,7 +2171,7 @@
             <li>大江生醫 AI 賦能計畫 (HowardAGent · HowardRoute · HowardPro)</li><li>發起 / 負責: CISO Howard Liao Ph.D.</li><li>範圍: 4 場景 + 網關 + 工業大腦 + Data Bus + 資安</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [29] 29 Project Context (手冊第 31 頁)', 31)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [29] 29 Project Context (手冊第 31 頁)', 31)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 31 頁)
         </button>
       </div>
@@ -2143,7 +2187,7 @@
             <li>WP1 財務憑證 OCR Agent</li><li>憑證處理工時 -75% 跨系統核銷零人為失誤</li><li>產出效益</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [30] 30 Benefits Diagram (手冊第 32 頁)', 32)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [30] 30 Benefits Diagram (手冊第 32 頁)', 32)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 32 頁)
         </button>
       </div>
@@ -2159,7 +2203,7 @@
             <li>法規 / 框架</li><li>控制措施</li><li>架構元件 (ABB)</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [31] 31 Compliance & Governance (手冊第 33 頁)', 33)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;">
+        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [31] 31 Compliance & Governance (手冊第 33 頁)', 33)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
           <span>👁️</span> 審閱此視圖 (第 33 頁)
         </button>
       </div>
@@ -2597,6 +2641,44 @@
         isDiagramZoomed = false;
       }
     }
+
+  
+    // 7. Live In-Page Architecture Player Controller
+    let currentDiagramIdx = 0;
+    const totalDiagramsCount = 32;
+    const diagramCatalog = [{"index": 0, "id": "p0", "name": "00 ADM 總覽", "title": "Howard 企業架構 ADM 總覽 · 大江生醫 (8436.TW) 企業架構對照", "subtitle": "ADM Cycle · Requirements Management 居中 · 每階段標示對應交付物 (本檔頁碼)", "phase": "Phase A", "items": ["Preliminary 架構原則與治理框架 (Howard 架構標準 BDAT · 頁 01)", "A 架構願景 Stakeholder · Value Chain · Solution Concept (頁 01-03)", "B 業務架構 Capability · Footprint · Process (頁 04-11)", "C 資訊系統架構 資料 (頁 12-16) · 應用 (頁 17-22)"]}, {"index": 1, "id": "p1", "name": "01 Stakeholder Map", "title": "Stakeholder Map Matrix (權力/利益)", "subtitle": "Phase Preliminary/A · Matrix → Diagram", "phase": "Preliminary", "items": ["保持滿意 Keep Satisfied (高權力·低利益)", "緊密管理 Manage Closely (高權力·高利益)", "監控 Monitor (低權力·低利益)", "保持知會 Keep Informed (低權力·高利益)"]}, {"index": 2, "id": "p2", "name": "02 Value Chain", "title": "Value Chain Diagram · 6 大業務價值鏈與 AI 賦能", "subtitle": "Phase A · Diagram", "phase": "Phase A", "items": ["研發與配方", "天然物萃取與配方專利 HowardAGent 文獻 KM NPI Twin 試產評估 研發 Code Review", "原物料採購", "全球生化原料比價 採購自動化 費用申請異常偵測 PMC Twin 交期預警"]}, {"index": 3, "id": "p3", "name": "03 Solution Concept", "title": "Solution Concept Diagram · 高階解決方案概念", "subtitle": "Phase A · Diagram · 拒絕平台疊平台: AGent / Route / Pro 三方責任邊界", "phase": "Phase A", "items": ["2E 內部辦公 會計/總務/採購/研發", "2C / 2B 客戶 經銷商/消費者", "OT 專家 調機師傅/QA/QC", "Web 介面 / SSO"]}, {"index": 4, "id": "p4", "name": "04 Business Capability Map", "title": "Business Capability Map · 業務能力地圖與 AI 賦能熱圖", "subtitle": "Phase B · Diagram (Howard 企業架構 Series Guide: Business Capabilities)", "phase": "Phase B", "items": ["戰略能力 Strategic", "核心營運能力 Core", "賦能與治理能力 Enabling", "配方與功效研發"]}, {"index": 5, "id": "p5", "name": "05 Organization & Actor", "title": "Organization Decomposition & Actor Catalog", "subtitle": "Phase B · 組織依來源角色推導 (示意),請以實際組織圖校正", "phase": "Phase B", "items": ["董事會", "審計委員會", "CEO / 總經理", "資安長 CISO (Howard Liao Ph.D.)"]}, {"index": 6, "id": "p6", "name": "06 Business Footprint", "title": "Business Footprint Diagram · 目標→組織→功能→服務→系統", "subtitle": "Phase B · Diagram", "phase": "Phase B", "items": ["目標 Goal", "組織 Organization", "功能 Function", "業務服務 Service"]}, {"index": 7, "id": "p7", "name": "07 Business Service-Information", "title": "Business Service / Information Diagram · 四大立竿見影場景", "subtitle": "Phase B · Diagram · 虛線 = 資訊存取; 右欄 = 人工/合規控制", "phase": "Phase B", "items": ["Actor", "業務服務", "資訊實體", "控制 / 覆核"]}, {"index": 8, "id": "p8", "name": "08 Functional Decomposition", "title": "Functional Decomposition Diagram", "subtitle": "Phase B · Diagram", "phase": "Phase B", "items": ["大江生醫營運", "研發與配方", "天然物萃取與配方專利", "文獻 KM"]}, {"index": 9, "id": "p9", "name": "09 Goal-Objective-Service", "title": "Goal / Objective / Service Diagram", "subtitle": "Phase B · Diagram · 目標值來源: 首頁 C-Level 指標; 製造類目標值須待基線盤點", "phase": "Phase B", "items": ["G1 營運韌性 (Zero Outage)", "SLA 99.99% · 毫秒級 Failover", "模型網關服務 (HowardRoute)", "G2 AI 成本效率 (TCO)"]}, {"index": 10, "id": "p10", "name": "10 Business Use-Case", "title": "Business Use-Case Diagram", "subtitle": "Phase B · Diagram", "phase": "Phase B", "items": ["大江生醫 AI 賦能業務系統邊界", "上傳發票 OCR 入帳", "覆核簽核 (HITL)", "採購比價異常偵測"]}, {"index": 11, "id": "p11", "name": "11 Process Flow", "title": "Process Flow Diagram · 財務憑證 OCR 自動入帳 (Priority No.1)", "subtitle": "Phase B/C · 泳道: 財務會計 / HowardAGent / HowardRoute / SAP & 數據治理", "phase": "Phase B", "items": ["財務會計", "HowardAGent", "HowardRoute 模型網關", "SAP ERP / 數據治理"]}, {"index": 12, "id": "p12", "name": "12 Conceptual Data", "title": "Conceptual Data Diagram", "subtitle": "Phase C-Data · 顏色: 主數據(紫) / 交易(橘) / OT(綠) / 知識(黃) / AI(藍)", "phase": "Phase C", "items": ["供應商", "原料批號", "配方 / 產品", "客戶 / 經銷商"]}, {"index": 13, "id": "p13", "name": "13 Logical Data", "title": "Logical Data Diagram (示意 schema)", "subtitle": "Phase C-Data · 欄位為概念示意,以 SAP MDG 主數據為單一真實來源", "phase": "Phase C", "items": ["MATERIAL_LOT PK lot_id material_code (MDG) supplier_id FK coa_ref received_at", "PURCHASE_ORDER PK po_no supplier_id FK lot_id FK amount budget_ref", "INVOICE PK inv_no po_no FK tax_id amount ocr_confidence status", "VOUCHER PK voucher_no inv_no FK account_code approver_id (HITL) approved_at"]}, {"index": 14, "id": "p14", "name": "14 Data Dissemination", "title": "Data Dissemination Diagram · 資料來源 → 雙環 Data Bus → 消費端", "subtitle": "Phase C-Data · Diagram", "phase": "Phase C", "items": ["SAP ERP", "MES / WMS", "SCADA / PLC (OT)", "客服通道 LINE / PBX"]}, {"index": 15, "id": "p15", "name": "15 Data Security", "title": "Data Security Diagram · 資料分級與控制 (分級為依來源安全區推導之建議)", "subtitle": "Phase C-Data · Matrix/Diagram", "phase": "Phase C", "items": ["L1 公開", "L2 內部", "L3 機密", "L4 極機密"]}, {"index": 16, "id": "p16", "name": "16 Data Lifecycle", "title": "Data Lifecycle Diagram + ALCOA+ 對照", "subtitle": "Phase C-Data · GMP / FDA 21 CFR Part 11 電子紀錄審計", "phase": "Phase C", "items": ["產生 Create", "SAP · MES · 感測器 · 客服", "擷取 Ingest", "CDC / MQTT Schema Registry 校驗"]}, {"index": 17, "id": "p17", "name": "17 Application Communication", "title": "Application Communication Diagram", "subtitle": "Phase C-Application · 邊標示協議", "phase": "Phase C", "items": ["使用者通路 Web · LINE · PBX · HMI", "Apache APISIX <1ms · etcd 熱更新", "Keycloak OIDC / OAuth2 / SSO", "Noname Security Shadow API · BOLA 阻斷"]}, {"index": 18, "id": "p18", "name": "18 Application & User Location", "title": "Application and User Location Diagram (部署位置為建議,待與研華/雲達確認)", "subtitle": "Phase C-Application · D=部署 · U=使用者存取 · X=外呼", "phase": "Phase C", "items": ["屏東廠 (OT)", "上海廠", "總部 / 2E 受控網", "2C DMZ"]}, {"index": 19, "id": "p19", "name": "19 Application Use-Case", "title": "Application Use-Case Diagram", "subtitle": "Phase C-Application · 角色 → 應用", "phase": "Phase C", "items": ["財務 / 採購 / 總務", "客服與營銷", "研發 / QA", "調機師傅 / 設備維護"]}, {"index": 20, "id": "p20", "name": "20 Process-Application Realization", "title": "Process / Application Realization Diagram · 客服回覆流程 (Priority No.2)", "subtitle": "Phase C-Application · 垂直泳道", "phase": "Phase C", "items": ["消費者 / LINE / PBX", "HowardAGent", "Milvus / Qdrant", "HowardRoute + LLM"]}, {"index": 21, "id": "p21", "name": "21 Enterprise Manageability", "title": "Enterprise Manageability Diagram", "subtitle": "Phase C-Application · 營運管理域", "phase": "Phase C", "items": ["7×24 SOC / SIEM AI 智慧過濾告警", "日誌 / 指標 / 追蹤 可觀測性", "AILM 模型漂移與根因 RCA", "FinOps Token 用量 · 單一帳單"]}, {"index": 22, "id": "p22", "name": "22 Software Engineering", "title": "Software Engineering Diagram · 安全 SDLC 與 AI 模型生命週期", "subtitle": "Phase C-Application · 「SBOM / 簽章」為建議強化項", "phase": "Phase C", "items": ["研發 Code", "Build", "靜態掃描 SAST / SCA", "動態掃描 DAST"]}, {"index": 23, "id": "p23", "name": "23 Environments & Locations", "title": "Environments and Locations Diagram", "subtitle": "Phase D · Diagram", "phase": "Phase D", "items": ["屏東廠 OT (Air-Gapped)", "上海廠 (OT/辦公)", "總部 資料中心 / 2E 受控網", "2C DMZ"]}, {"index": 24, "id": "p24", "name": "24 Platform Decomposition", "title": "Platform Decomposition Diagram (TRM 對應)", "subtitle": "Phase D · Diagram", "phase": "Phase D", "items": ["應用服務", "HowardAGent", "HowardPro", "BI 戰情室"]}, {"index": 25, "id": "p25", "name": "25 Processing Diagram", "title": "Processing Diagram · 高可用與災難復原", "subtitle": "Phase D · 目標 RTO < 4h · RPO < 15m · 複寫工具為建議", "phase": "Phase D", "items": ["主站 Active (總部)", "備援站 DR / 異地", "APISIX 叢集 (≥2 節點) + etcd", "HowardAGent HA"]}, {"index": 26, "id": "p26", "name": "26 Networked Computing", "title": "Networked Computing / Hardware Diagram", "subtitle": "Phase D · 硬體規格以研華 / 雲達 實際 BOM 為準", "phase": "Phase D", "items": ["PLC / SCADA (發酵槽 · 萃取機台)", "邊緣閘道 / 工業電腦 EMQX · OPC UA", "單向網閘 (Data Diode)", "Internet / VPN"]}, {"index": 27, "id": "p27", "name": "27 Communications Engineering", "title": "Communications Engineering Diagram · 網路分區", "subtitle": "Phase D · 上海廠經專線/VPN 併入 2E", "phase": "Phase D", "items": ["外部 Internet 消費者 · 經銷商 · LINE", "2C DMZ APISIX · Bot 閘道", "2E 受控網 + AI/資料區 AGent · Route · Kafka", "OT 單向網閘"]}, {"index": 28, "id": "p28", "name": "28 Architecture Roadmap", "title": "Architecture Roadmap · Transition Architectures (建議時程,需依資源盤點調整)", "subtitle": "Phase E/F", "phase": "Phase E", "items": ["Wave 0: 四大 Quick Win (1 週首波驗收)", "平台底座: AGent · Route · APISIX · Keycloak", "Noname + CI/CD 測試左移 + SBOM", "Data Bus + DataHub · MDG · Immuta"]}, {"index": 29, "id": "p29", "name": "29 Project Context", "title": "Project Context Diagram · AI 平台導入計畫", "subtitle": "Phase E/F · Diagram", "phase": "Phase E", "items": ["大江生醫 AI 賦能計畫 (HowardAGent · HowardRoute · HowardPro)", "發起 / 負責: CISO Howard Liao Ph.D.", "範圍: 4 場景 + 網關 + 工業大腦 + Data Bus + 資安", "驗收: 1 週首波 工時 -75% · FCR +40%"]}, {"index": 30, "id": "p30", "name": "30 Benefits Diagram", "title": "Benefits Diagram · 工作包 → 效益", "subtitle": "Phase E/F · 目標值取自來源頁面 C-Level 指標與場景指南", "phase": "Phase E", "items": ["WP1 財務憑證 OCR Agent", "憑證處理工時 -75% 跨系統核銷零人為失誤", "產出效益", "WP2 客服 Copilot + KM"]}, {"index": 31, "id": "p31", "name": "31 Compliance & Governance", "title": "Architecture Compliance (Phase G) & Change Management (Phase H)", "subtitle": "控制項來源: 首頁 6 大治理區塊; 底部為建議延伸對標", "phase": "Phase G", "items": ["法規 / 框架", "控制措施", "架構元件 (ABB)", "Phase G 檢核點"]}];
+
+    function updateLivePlayer(idx) {
+      if (idx < 0) idx = 0;
+      if (idx >= totalDiagramsCount) idx = totalDiagramsCount - 1;
+      currentDiagramIdx = idx;
+
+      const item = diagramCatalog[idx];
+      const pageNum = idx + 2; // Page 1 is cover
+
+      document.getElementById('playerCurrentTitle').innerText = `當前檢視：[${String(idx).padStart(2, '0')}] ${item.name}`;
+      document.getElementById('playerCurrentSubtitle').innerText = `${item.phase} ｜ ${item.title}`;
+      document.getElementById('diagramSelectDropdown').value = idx;
+      
+      const iframe = document.getElementById('livePlayerIframe');
+      iframe.src = `./TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf#page=${pageNum}&toolbar=0&navpanes=0&scrollbar=1`;
+    }
+
+    function navDiagram(delta) {
+      updateLivePlayer(currentDiagramIdx + delta);
+    }
+
+    function jumpToDiagram(idx) {
+      updateLivePlayer(idx);
+    }
+
+    function expandCurrentDiagram() {
+      const item = diagramCatalog[currentDiagramIdx];
+      const pageNum = currentDiagramIdx + 2;
+      openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', `Howard 企業架構 [${String(currentDiagramIdx).padStart(2, '0')}] ${item.name}`, pageNum);
+    }
+
+    // Update view-card onclick to also sync live player
 
   </script>
 </body>
