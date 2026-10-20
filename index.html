@@ -927,6 +927,273 @@
     </div>
   </section>
 
+  <!-- ============================================================= -->
+  <!-- FLAGSHIP VISUAL: 整個企業的架構圖 (ENTERPRISE ARCHITECTURE DIAGRAM) -->
+  <!-- ============================================================= -->
+  <section id="full-architecture-diagram" class="bento-section" style="padding: 20px 0 40px;">
+    <div class="container">
+      <div class="section-title-wrap">
+        <div>
+          <div style="display:inline-flex; align-items:center; gap:8px; background:var(--accent-light); border:1px solid var(--accent-border); color:var(--accent-secondary); padding:4px 12px; border-radius:20px; font-size:0.75rem; font-weight:800; margin-bottom:8px;">
+            <span>📐</span> 官方總體架構總圖 · 橫向全域視圖
+          </div>
+          <h2 class="section-title">大江生醫 (8436.TW) 企業資訊策略與 AI 總體架構圖</h2>
+          <p class="section-desc">涵蓋業務價值鏈、HowardAGent 應用中樞、HowardRoute 模型網關、HowardPro 工業大腦、雙環 Data Bus、APISIX 與 Noname Security 資安防禦</p>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <button onclick="toggleDiagramZoom()" class="btn-action" style="background:var(--bg-surface); color:var(--text-main); border:1.5px solid var(--border-color); font-size:0.8rem;">
+            <span id="zoomIcon">🔍</span> <span id="zoomText">放大檢視</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Architecture Diagram Visual Container -->
+      <div id="diagramContainer" style="background:var(--bg-surface); border:2px solid var(--border-color); border-radius:var(--radius-md); padding:20px; box-shadow:var(--card-shadow); overflow-x:auto; transition:var(--transition); position:relative;">
+        
+        <!-- Top Metadata Ribbon -->
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1.5px solid var(--border-color); padding-bottom:12px; margin-bottom:18px; font-size:0.8rem; flex-wrap:wrap; gap:8px;">
+          <div>
+            <span style="font-weight:900; color:var(--text-main); font-size:0.95rem;">大江生醫股份有限公司 (8436.TW)</span>
+            <span style="margin:0 8px; color:var(--border-color);">|</span>
+            <span style="color:var(--accent-primary); font-weight:700;">TOGAF 10 BDAT 企業資訊架構標準</span>
+          </div>
+          <div style="color:var(--text-muted); font-size:0.78rem;">
+            規劃主持：<b style="color:var(--text-main);">Howard Liao Ph.D. (廖倫豪 博士)</b> ｜ 資安長 (CISO) 視角
+          </div>
+        </div>
+
+        <!-- Real SVG Architecture Diagram -->
+        <div style="min-width:1080px; width:100%;">
+          <svg viewBox="0 0 1140 840" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; user-select:none;">
+            <defs>
+              <!-- Arrowhead Marker -->
+              <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 8 5 L 0 9 z" fill="#D97706" />
+              </marker>
+              <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 8 5 L 0 9 z" fill="#2563EB" />
+              </marker>
+              <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 8 5 L 0 9 z" fill="#DC2626" />
+              </marker>
+              <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 8 5 L 0 9 z" fill="#7C3AED" />
+              </marker>
+
+              <!-- Subtle Linear Gradients -->
+              <linearGradient id="grad-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#EFF6FF" />
+                <stop offset="100%" stop-color="#DBEAFE" />
+              </linearGradient>
+              <linearGradient id="grad-amber" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFFBEB" />
+                <stop offset="100%" stop-color="#FEF3C7" />
+              </linearGradient>
+              <linearGradient id="grad-green" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ECFDF5" />
+                <stop offset="100%" stop-color="#D1FAE5" />
+              </linearGradient>
+              <linearGradient id="grad-purple" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#F5F3FF" />
+                <stop offset="100%" stop-color="#EDE9FE" />
+              </linearGradient>
+            </defs>
+
+            <!-- ============================================== -->
+            <!-- LAYER 1: 業務互動與通路層 (User Touchpoints)     -->
+            <!-- ============================================== -->
+            <rect x="20" y="10" width="1100" height="110" rx="10" fill="#F8FAFC" stroke="#93C5FD" stroke-width="1.8" />
+            <rect x="20" y="10" width="220" height="26" rx="6" fill="#2563EB" />
+            <text x="30" y="27" fill="#FFFFFF" font-size="11" font-weight="bold">Layer 1: 業務價值鏈與服務通路</text>
+
+            <!-- Card 1.1: 2E 內部辦公 -->
+            <rect x="40" y="45" width="330" height="65" rx="6" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1.2" />
+            <text x="52" y="64" fill="#0F172A" font-size="12" font-weight="bold">【2E 內部辦公同仁】</text>
+            <text x="52" y="80" fill="#475569" font-size="10.5">• 財務會計 (傳票報銷) ｜ 總務人資 (行政流程)</text>
+            <text x="52" y="96" fill="#475569" font-size="10.5">• 採購同仁 (勤採比價) ｜ 生醫研發 (Code Review)</text>
+
+            <!-- Card 1.2: 2C / 2B 客戶 -->
+            <rect x="405" y="45" width="330" height="65" rx="6" fill="#FFFFFF" stroke="#D97706" stroke-width="1.2" />
+            <text x="417" y="64" fill="#0F172A" font-size="12" font-weight="bold">【2C / 2B 全球客戶與經銷】</text>
+            <text x="417" y="80" fill="#475569" font-size="10.5">• 全球 B2B 經銷夥伴 ｜ B2C 品牌終端消費者</text>
+            <text x="417" y="96" fill="#475569" font-size="10.5">• 通路：電話 PBX / LINE Bot / 展會即時雙向口譯</text>
+
+            <!-- Card 1.3: OT 產線專家 -->
+            <rect x="770" y="45" width="330" height="65" rx="6" fill="#FFFFFF" stroke="#10B981" stroke-width="1.2" />
+            <text x="782" y="64" fill="#0F172A" font-size="12" font-weight="bold">【OT 工廠專家與調機師傅】</text>
+            <text x="782" y="80" fill="#475569" font-size="10.5">• 屏東廠發酵/萃取工程師 ｜ 設備維護保養 (PdM)</text>
+            <text x="782" y="96" fill="#475569" font-size="10.5">• 品保 QA/QC ｜ 機台觸控面板 (HMI) 現場作業</text>
+
+            <!-- Downward Connector Line -->
+            <path d="M 205 110 L 205 135" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)" fill="none" />
+            <path d="M 570 110 L 570 135" stroke="#D97706" stroke-width="2" marker-end="url(#arrow)" fill="none" />
+            <path d="M 935 110 L 935 340 L 935 485" stroke="#10B981" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrow)" fill="none" />
+            <text x="945" y="240" fill="#059669" font-size="9.5" font-weight="bold">OT 現場直通發酵大腦</text>
+
+            <!-- ============================================== -->
+            <!-- LAYER 2: 應用中樞與任務編排 (HowardAGent)         -->
+            <!-- ============================================== -->
+            <rect x="20" y="140" width="720" height="175" rx="10" fill="url(#grad-purple)" stroke="#C4B5FD" stroke-width="1.8" />
+            <rect x="20" y="140" width="280" height="26" rx="6" fill="#7C3AED" />
+            <text x="30" y="157" fill="#FFFFFF" font-size="11" font-weight="bold">Layer 2: 應用與代理中樞 · HowardAGent</text>
+
+            <!-- HowardAGent Sub-Modules -->
+            <rect x="40" y="175" width="215" height="125" rx="6" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="1.2" />
+            <text x="50" y="194" fill="#7C3AED" font-size="11.5" font-weight="bold">【95% Agentic RAG】</text>
+            <text x="50" y="210" fill="#334155" font-size="10">• 支援 25 種檔案格式</text>
+            <text x="50" y="226" fill="#334155" font-size="10">• 標註來源引用 (Citations)</text>
+            <text x="50" y="242" fill="#334155" font-size="10">• 杜絕生醫法規幻覺</text>
+            <text x="50" y="258" fill="#334155" font-size="10">• 整合 GMP / TFDA 規範</text>
+            <text x="50" y="274" fill="#7C3AED" font-size="9.5" font-weight="bold">★ 官方知識庫 KM 核心</text>
+
+            <rect x="270" y="175" width="215" height="125" rx="6" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="1.2" />
+            <text x="280" y="194" fill="#7C3AED" font-size="11.5" font-weight="bold">【四大立竿見影模組】</text>
+            <text x="280" y="210" fill="#334155" font-size="10">• <b>OCR Agent</b>：傳票自動入帳</text>
+            <text x="280" y="226" fill="#334155" font-size="10">• <b>客服 Copilot</b>：自動回覆+轉真人</text>
+            <text x="280" y="242" fill="#334155" font-size="10">• <b>採購比對</b>：異常報銷偵測</text>
+            <text x="280" y="258" fill="#334155" font-size="10">• <b>總務工作流</b>：SOP 快速上手</text>
+            <text x="280" y="274" fill="#D97706" font-size="9.5" font-weight="bold">★ 首波 1 週見到成果</text>
+
+            <rect x="500" y="175" width="220" height="125" rx="6" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="1.2" />
+            <text x="510" y="194" fill="#7C3AED" font-size="11.5" font-weight="bold">【協議與資安雙認證】</text>
+            <text x="510" y="210" fill="#334155" font-size="10">• <b>自有 MCP Hub</b> 工具對接</text>
+            <text x="510" y="226" fill="#334155" font-size="10">• <b>Text2SQL</b>：自然語言查 DB</text>
+            <text x="510" y="242" fill="#334155" font-size="10">• <b>ISO 27001 / 27701 雙認證</b></text>
+            <text x="510" y="258" fill="#334155" font-size="10">• 六大 CI/CD 靜態動態掃描</text>
+            <text x="510" y="274" fill="#059669" font-size="9.5" font-weight="bold">★ 支援研華/雲達地端部署</text>
+
+            <!-- ============================================== -->
+            <!-- LAYER 2.5: API 平台與 Noname 資安 (Gateways)      -->
+            <!-- ============================================== -->
+            <rect x="20" y="330" width="720" height="135" rx="10" fill="#F8FAFC" stroke="#64748B" stroke-width="1.8" />
+            <rect x="20" y="330" width="340" height="26" rx="6" fill="#0F172A" />
+            <text x="30" y="347" fill="#FFFFFF" font-size="11" font-weight="bold">API 總平台 · APISIX ＋ Keycloak ＋ Noname</text>
+
+            <path d="M 370 315 L 370 330" stroke="#7C3AED" stroke-width="2" marker-end="url(#arrow-purple)" fill="none" />
+
+            <!-- Subcard: APISIX -->
+            <rect x="40" y="365" width="220" height="85" rx="6" fill="#FFFFFF" stroke="#64748B" stroke-width="1.2" />
+            <text x="50" y="384" fill="#0F172A" font-size="11.5" font-weight="bold">【Apache APISIX 網關】</text>
+            <text x="50" y="400" fill="#334155" font-size="10">• 微秒級極致延遲 (&lt;1ms)</text>
+            <text x="50" y="416" fill="#334155" font-size="10">• etcd 熱更新，路由零停機</text>
+            <text x="50" y="432" fill="#334155" font-size="10">• 接口包裝為標準 MCP Tools</text>
+
+            <!-- Subcard: Keycloak -->
+            <rect x="275" y="365" width="210" height="85" rx="6" fill="#FFFFFF" stroke="#64748B" stroke-width="1.2" />
+            <text x="285" y="384" fill="#0F172A" font-size="11.5" font-weight="bold">【Keycloak 身分鑑權】</text>
+            <text x="285" y="400" fill="#334155" font-size="10">• 企業 AD / LDAP 統一 SSO</text>
+            <text x="285" y="416" fill="#334155" font-size="10">• 強制 MFA 多因子認證</text>
+            <text x="285" y="432" fill="#334155" font-size="10">• 生醫部門 RBAC 最小權限</text>
+
+            <!-- Subcard: Noname Security -->
+            <rect x="500" y="365" width="220" height="85" rx="6" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.4" />
+            <text x="510" y="384" fill="#DC2626" font-size="11.5" font-weight="bold">【Noname API 資安大腦】</text>
+            <text x="510" y="400" fill="#7F1D1D" font-size="10">• <b>影子 API 自動清點</b>消滅盲點</text>
+            <text x="510" y="416" fill="#7F1D1D" font-size="10">• <b>AI 基線阻斷 BOLA 越權</b></text>
+            <text x="510" y="432" fill="#7F1D1D" font-size="10">• <b>測試左移</b>：CI/CD 滲透測試</text>
+
+            <!-- Connectors to MixRoute and Data Bus -->
+            <path d="M 150 450 L 150 485" stroke="#2563EB" stroke-width="2" marker-end="url(#arrow-blue)" fill="none" />
+            <path d="M 370 450 L 370 485" stroke="#D97706" stroke-width="2" marker-end="url(#arrow)" fill="none" />
+
+            <!-- ============================================== -->
+            <!-- LAYER 3: 雙軌網關與工業預測 (MixRoute + HowardPro) -->
+            <!-- ============================================== -->
+            <!-- HowardRoute (Left Box) -->
+            <rect x="20" y="485" width="450" height="155" rx="10" fill="url(#grad-green)" stroke="#6EE7B7" stroke-width="1.8" />
+            <rect x="20" y="485" width="270" height="26" rx="6" fill="#059669" />
+            <text x="30" y="502" fill="#FFFFFF" font-size="11" font-weight="bold">模型網關總機 · HowardRoute</text>
+
+            <rect x="35" y="520" width="420" height="105" rx="6" fill="#FFFFFF" stroke="#059669" stroke-width="1.2" />
+            <text x="45" y="538" fill="#065F46" font-size="11" font-weight="bold">【單一 OpenAI 標準端點 · 250+ 模型聚合】</text>
+            <text x="45" y="555" fill="#334155" font-size="10">• <b>0% Markup</b>：原廠官方定價直通，單一帳單免各部門刷卡</text>
+            <text x="45" y="571" fill="#334155" font-size="10">• <b>Smart Routing 智慧分流</b>：簡單問題派發 Flash，實測省 20~40% 成本</text>
+            <text x="45" y="587" fill="#334155" font-size="10">• <b>毫秒級自動 Failover</b>：供應商斷線秒切備援，保留容量抗 429 爆發</text>
+            <text x="45" y="603" fill="#059669" font-size="9.5" font-weight="bold">★ 零資料保留 (Zero Data Retention)，提示詞記憶體過路不儲存</text>
+
+            <!-- HowardPro (Right Box) -->
+            <rect x="490" y="485" width="630" height="155" rx="10" fill="url(#grad-amber)" stroke="#FCD34D" stroke-width="1.8" />
+            <rect x="490" y="485" width="290" height="26" rx="6" fill="#D97706" />
+            <text x="500" y="502" fill="#FFFFFF" font-size="11" font-weight="bold">OT 發酵與工業預測 · HowardPro</text>
+
+            <rect x="505" y="520" width="295" height="105" rx="6" fill="#FFFFFF" stroke="#D97706" stroke-width="1.2" />
+            <text x="515" y="538" fill="#92400E" font-size="11" font-weight="bold">【左腦 AutoML 物理預測】</text>
+            <text x="515" y="555" fill="#334155" font-size="10">• 無程式碼、Excel/CSV 1 週落地</text>
+            <text x="515" y="571" fill="#334155" font-size="10">• <b>發酵/萃取參數最佳化推薦</b></text>
+            <text x="515" y="587" fill="#334155" font-size="10">• <b>活性成分虛擬量測 (VM)</b></text>
+            <text x="515" y="603" fill="#D97706" font-size="9.5" font-weight="bold">★ 機台設備預防保養 (PdM)</text>
+
+            <rect x="815" y="520" width="290" height="105" rx="6" fill="#FFFFFF" stroke="#D97706" stroke-width="1.2" />
+            <text x="825" y="538" fill="#92400E" font-size="11" font-weight="bold">【右腦 AI Studio &amp; 中樞 AILM】</text>
+            <text x="825" y="555" fill="#334155" font-size="10">• <b>Domain Twin™</b> 數位員工 (NPI/FAE/PMC)</text>
+            <text x="825" y="571" fill="#334155" font-size="10">• 老師傅隱性經驗數位化傳承</text>
+            <text x="825" y="587" fill="#334155" font-size="10">• AILM 監控模型漂移與偏差根因 (RCA)</text>
+            <text x="825" y="603" fill="#DC2626" font-size="9.5" font-weight="bold">🔒 Air-Gapped 隔離，配方絕不上公有雲</text>
+
+            <!-- Downward to Data Bus & Compute -->
+            <path d="M 245 640 L 245 665" stroke="#059669" stroke-width="2" marker-end="url(#arrow)" fill="none" />
+            <path d="M 640 640 L 640 665" stroke="#D97706" stroke-width="2" marker-end="url(#arrow)" fill="none" />
+
+            <!-- ============================================== -->
+            <!-- LAYER 4: 雙環 Data Bus 與底層數據治理             -->
+            <!-- ============================================== -->
+            <rect x="20" y="665" width="1100" height="155" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.8" />
+            <rect x="20" y="665" width="310" height="26" rx="6" fill="#475569" />
+            <text x="30" y="682" fill="#FFFFFF" font-size="11" font-weight="bold">雙環 Data Bus 數據總線 ＋ 核心算力與存儲底座</text>
+
+            <!-- Box 4.1: 混合算力池 -->
+            <rect x="35" y="700" width="255" height="105" rx="6" fill="#FFFFFF" stroke="#059669" stroke-width="1.2" />
+            <text x="45" y="718" fill="#065F46" font-size="11" font-weight="bold">【混合大模型與 GPU 算力】</text>
+            <text x="45" y="734" fill="#334155" font-size="10">• <b>雲端商業大模型</b>：Claude 3.7 / GPT-4.5</text>
+            <text x="45" y="750" fill="#334155" font-size="10">• <b>地端私有模型</b>：DeepSeek R1/V3</text>
+            <text x="45" y="766" fill="#334155" font-size="10">• <b>硬體</b>：研華/雲達 NVIDIA GPU 伺服器</text>
+            <text x="45" y="782" fill="#334155" font-size="10">• <b>引擎</b>：vLLM / Ollama 私有推論叢集</text>
+
+            <!-- Box 4.2: 雙環 Data Bus -->
+            <rect x="305" y="700" width="270" height="105" rx="6" fill="#FFFFFF" stroke="#D97706" stroke-width="1.2" />
+            <text x="315" y="718" fill="#B45309" font-size="11" font-weight="bold">【雙環 Data Bus 數據動脈】</text>
+            <text x="315" y="734" fill="#334155" font-size="10">• <b>IT 環：Apache Kafka</b> (持久化零丟包)</text>
+            <text x="315" y="750" fill="#334155" font-size="10">• <b>OT 環：EMQX (MQTT)</b> + OPC UA 機台感測</text>
+            <text x="315" y="766" fill="#334155" font-size="10">• <b>Debezium CDC</b>：零侵入監聽 SAP 日誌</text>
+            <text x="315" y="782" fill="#334155" font-size="10">• <b>Schema Registry</b>：嚴密數據海關檢驗</text>
+
+            <!-- Box 4.3: 數據治理與 ALCOA+ -->
+            <rect x="590" y="700" width="260" height="105" rx="6" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.2" />
+            <text x="600" y="718" fill="#1D4ED8" font-size="11" font-weight="bold">【數據治理與生醫 ALCOA+】</text>
+            <text x="600" y="734" fill="#334155" font-size="10">• <b>DataHub</b>：元數據目錄與自動化資料血緣</text>
+            <text x="600" y="750" fill="#334155" font-size="10">• <b>SAP MDG</b>：原料批號主數據管理</text>
+            <text x="600" y="766" fill="#334155" font-size="10">• <b>ALCOA+ 合規</b>：WORM 原始數據不可改</text>
+            <text x="600" y="782" fill="#334155" font-size="10">• <b>Immuta</b>：動態欄位遮蔽 (Masking)</text>
+
+            <!-- Box 4.4: 企業核心實體庫 -->
+            <rect x="865" y="700" width="240" height="105" rx="6" fill="#FFFFFF" stroke="#475569" stroke-width="1.2" />
+            <text x="875" y="718" fill="#0F172A" font-size="11" font-weight="bold">【企業核心業務與實體庫】</text>
+            <text x="875" y="734" fill="#334155" font-size="10">• <b>SAP ERP</b>：財務帳務、採購、銷售單據</text>
+            <text x="875" y="750" fill="#334155" font-size="10">• <b>工廠 MES / WMS</b>：製造批次與倉儲庫存</text>
+            <text x="875" y="766" fill="#334155" font-size="10">• <b>SCADA / PLC</b>：發酵槽即時感測數據</text>
+            <text x="875" y="782" fill="#334155" font-size="10">• <b>Milvus / Qdrant</b>：生醫規章向量庫</text>
+          </svg>
+        </div>
+
+        <!-- Diagram Bottom Legend & FSC Note -->
+        <div style="margin-top:16px; padding-top:12px; border-top:1px dashed var(--border-color); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; font-size:0.75rem;">
+          <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+            <span>圖例說明：</span>
+            <span style="display:inline-flex; align-items:center; gap:4px;"><span style="display:inline-block; width:10px; height:10px; background:#7C3AED; border-radius:2px;"></span> HowardAGent 應用</span>
+            <span style="display:inline-flex; align-items:center; gap:4px;"><span style="display:inline-block; width:10px; height:10px; background:#059669; border-radius:2px;"></span> HowardRoute 網關</span>
+            <span style="display:inline-flex; align-items:center; gap:4px;"><span style="display:inline-block; width:10px; height:10px; background:#D97706; border-radius:2px;"></span> HowardPro 工業預測</span>
+            <span style="display:inline-flex; align-items:center; gap:4px;"><span style="display:inline-block; width:10px; height:10px; background:#DC2626; border-radius:2px;"></span> Noname 資安大腦</span>
+            <span style="display:inline-flex; align-items:center; gap:4px;"><span style="display:inline-block; width:10px; height:10px; background:#2563EB; border-radius:2px;"></span> 雙環 Data Bus</span>
+          </div>
+          <div style="color:var(--text-muted); font-weight:600;">
+            ⚖️ 100% 遵循證券交易所資通管控指引 ＆ 金管會生成式 AI 核心原則
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- TOGAF 10 Multi-View Explorer -->
   <section id="togaf" class="bento-section">
     <div class="container">
@@ -1714,6 +1981,30 @@
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closePdfModal();
     });
+
+  
+    // Toggle Full-scale Zoom on Diagram
+    let isDiagramZoomed = false;
+    function toggleDiagramZoom() {
+      const container = document.getElementById('diagramContainer');
+      const text = document.getElementById('zoomText');
+      const icon = document.getElementById('zoomIcon');
+      if (!isDiagramZoomed) {
+        container.style.maxWidth = '100vw';
+        container.style.overflowX = 'scroll';
+        container.style.border = '2px solid var(--accent-primary)';
+        text.innerText = '標準大小';
+        icon.innerText = '🔍';
+        isDiagramZoomed = true;
+      } else {
+        container.style.maxWidth = '100%';
+        container.style.overflowX = 'auto';
+        container.style.border = '2px solid var(--border-color)';
+        text.innerText = '放大檢視';
+        icon.innerText = '🔍';
+        isDiagramZoomed = false;
+      }
+    }
 
   </script>
 </body>
