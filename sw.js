@@ -1,9 +1,10 @@
 // Service Worker for 8436 PWA
-const CACHE_NAME = 'tci-8436-v3';
+const CACHE_NAME = 'tci-8436-v4';
 const ASSETS = [
   './',
   './index.html',
   './manifest.json',
+  './drawio_preview.html',
   './assets/tci_logo.png',
   './assets/tci_logo.svg',
   './assets/viewer-static.min.js',

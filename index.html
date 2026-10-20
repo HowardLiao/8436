@@ -2411,31 +2411,41 @@
         </div>
       </div>
 
-      <div class="download-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="download-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
         <div class="dl-card" style="border: 2px solid var(--accent-primary); background: var(--bg-body);">
           <div class="dl-icon">📚</div>
           <div class="dl-title">Howard 企業架構全量手冊</div>
-          <div class="dl-desc"><b>全套 34 頁官方完整規格</b>：完整涵蓋 00~31 全部 32 視圖真實架構圖與全節點清冊。</div>
+          <div class="dl-desc"><b>全套 34 頁官方完整規格 (PDF)</b>：完整涵蓋 00~31 全部 32 視圖真實架構圖與全節點清冊。</div>
           <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業資訊架構 32 全架構視圖全量審閱手冊 (34 頁)', 1)" class="btn-dl" style="border:none; cursor:pointer; width:100%; background:var(--accent-primary); color:#FFF; font-weight:800;">
             <span>👁️</span> 線上即時審閱 (34 頁全量手冊)
           </button>
         </div>
 
+        <div class="dl-card" style="border: 2px solid #2563eb; background: var(--bg-body);">
+          <div class="dl-icon">📐</div>
+          <div class="dl-title">Draw.io 官方動態交互預覽</div>
+          <div class="dl-desc"><b>官方 Lightbox 互動引擎</b>：全向量渲染、支援 32 視圖分頁快速切換、無級縮放與圖層檢視。</div>
+          <button onclick="openPdfModal('drawio_preview.html', 'Draw.io 官方動態交互預覽 (32 全架構視圖即時燈箱)')" class="btn-dl" style="border:none; cursor:pointer; width:100%; background:#2563eb; color:#FFF; font-weight:800;">
+            <span>🔍</span> 線上動態預覽 (Draw.io 燈箱)
+          </button>
+          <a href="drawio_preview.html" target="_blank" rel="noopener noreferrer" style="display:block; text-align:center; font-size:0.75rem; color:var(--text-muted); margin-top:8px; text-decoration:none;">↗️ 另開全螢幕獨立分頁</a>
+        </div>
+
         <div class="dl-card">
           <div class="dl-icon">🔄</div>
           <div class="dl-title">右至左 (RTL) 使用者流架構圖</div>
-          <div class="dl-desc"><b>全套 3 頁高管穿透視角</b>：從最右側使用者向左推進至核心數據底座之五站式圖解。</div>
+          <div class="dl-desc"><b>全套 3 頁高管穿透視角 (PDF)</b>：從最右側使用者向左推進至核心數據底座之五站式圖解。</div>
           <button onclick="openPdfModal('TCI_8436_右至左架構演進_HowardLiao.pdf', '從使用者向左演進架構規範 (3 頁)')" class="btn-dl" style="border:none; cursor:pointer; width:100%;">
-            <span>👁️</span> 線上即時審閱預覽 (Preview Only)
+            <span>👁️</span> 線上即時審閱預覽 (3 頁)
           </button>
         </div>
 
         <div class="dl-card">
           <div class="dl-icon">⚖️</div>
           <div class="dl-title">四大場景與金管會合規手冊</div>
-          <div class="dl-desc"><b>全套 4 頁實戰稽核指南</b>：財務憑證、客服 KM、採購審核與證交所/金管會 10 大合規項。</div>
+          <div class="dl-desc"><b>全套 4 頁實戰稽核指南 (PDF)</b>：財務憑證、客服 KM、採購審核與證交所/金管會 10 大合規項。</div>
           <button onclick="openPdfModal('TCI_8436_四大立竿見影場景與合規手冊_HowardLiao.pdf', '四大立竿見影場景與上市櫃合規手冊 (4 頁)')" class="btn-dl" style="border:none; cursor:pointer; width:100%;">
-            <span>👁️</span> 線上即時審閱預覽 (Preview Only)
+            <span>👁️</span> 線上即時審閱預覽 (4 頁)
           </button>
         </div>
       </div>
@@ -2572,11 +2582,16 @@
       });
     }
   
-    // 6. PDF Preview Modal Functions (Preview Only, No Download)
-    function openPdfModal(pdfUrl, title, pageNum = 1) {
+    // 6. PDF & Document Preview Modal Functions (Preview Only, No Download)
+    function openPdfModal(targetUrl, title, pageNum = 1) {
       document.getElementById('pdfModalTitle').innerText = title;
-      // toolbar=0 hides the Chrome/Edge default download and print toolbar!
-      document.getElementById('pdfIframe').src = `./${pdfUrl}#page=${pageNum}&toolbar=0&navpanes=0&scrollbar=1`;
+      const iframe = document.getElementById('pdfIframe');
+      if (targetUrl.endsWith('.html') || targetUrl.startsWith('http')) {
+        iframe.src = targetUrl.startsWith('http') ? targetUrl : `./${targetUrl}`;
+      } else {
+        // toolbar=0 hides the Chrome/Edge default download and print toolbar!
+        iframe.src = `./${targetUrl}#page=${pageNum}&toolbar=0&navpanes=0&scrollbar=1`;
+      }
       document.getElementById('pdfModal').classList.add('active');
       document.body.style.overflow = 'hidden';
     }
