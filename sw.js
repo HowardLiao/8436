@@ -1,11 +1,12 @@
 // Service Worker for 8436 PWA
-const CACHE_NAME = 'tci-8436-v1';
+const CACHE_NAME = 'tci-8436-v2';
 const ASSETS = [
   './',
   './index.html',
   './manifest.json',
-  './tci_togaf_enterprise_architecture.drawio',
-  './tci_ai_architecture_rtl.drawio'
+  './TCI_8436_TOGAF_企業資訊架構_HowardLiao.pdf',
+  './TCI_8436_右至左架構演進_HowardLiao.pdf',
+  './TCI_8436_四大立竿見影場景與合規手冊_HowardLiao.pdf'
 ];
 
 self.addEventListener('install', (e) => {

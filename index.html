@@ -740,9 +740,119 @@
       .hero-section { padding: 20px 0 !important; }
       .hero-title { font-size: 1.8rem !important; }
     }
-  </style>
+  
+    /* Dense Micro-Watermark Overlay: Howard Liao Ph.D. */
+    .watermark-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.055;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='100' viewBox='0 0 180 100'%3E%3Ctext x='15' y='40' fill='%2357534E' font-family='sans-serif' font-weight='700' font-size='11' transform='rotate(-22 50 40)' letter-spacing='1'%3EHoward Liao Ph.D.%3C/text%3E%3Ctext x='105' y='90' fill='%2357534E' font-family='sans-serif' font-weight='700' font-size='11' transform='rotate(-22 140 90)' letter-spacing='1'%3EHoward Liao Ph.D.%3C/text%3E%3C/svg%3E");
+      background-repeat: repeat;
+      display: block !important;
+    }
+    @media print {
+      .watermark-overlay {
+        display: block !important;
+        opacity: 0.09 !important;
+      }
+    }
+
+    /* PDF Preview Modal */
+    .pdf-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .pdf-modal.active { display: flex; animation: fadeIn 0.25s ease; }
+    .pdf-modal-container {
+      width: 100%;
+      max-width: 1200px;
+      height: 92vh;
+      background: var(--bg-surface);
+      border-radius: var(--radius-md);
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+      border: 1.5px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+    .pdf-modal-header {
+      height: 56px;
+      padding: 0 20px;
+      background: var(--bg-surface);
+      border-bottom: 1.5px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .pdf-modal-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pdf-security-badge {
+      background: #FFFBEB;
+      border: 1px solid #FDE68A;
+      color: #B45309;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+    .btn-close-modal {
+      background: #F1F5F9;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    .btn-close-modal:hover {
+      background: var(--danger-light);
+      color: var(--danger-main);
+      border-color: var(--danger-border);
+    }
+    .pdf-iframe-wrap {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      background: #525659;
+    }
+    .pdf-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+</style>
 </head>
 <body>
+  <!-- Full-Page Security Watermark: Howard Liao Ph.D. -->
+  <div class="watermark-overlay" aria-hidden="true"></div>
 
   <!-- Top Navigation -->
   <header class="top-nav">
@@ -1418,35 +1528,58 @@
     <div class="container">
       <div class="section-title-wrap">
         <div>
-          <h2 class="section-title">架構資產與 Draw.io 原生檔案下載</h2>
-          <p class="section-desc">可直接於 draw.io (diagrams.net) 開啟並編輯的多分頁工程檔案與規格清單</p>
+          <h2 class="section-title">官方架構與合規文檔審閱中心</h2>
+          <p class="section-desc">🔒 恪守上市公司資訊安全與智財治理規範，所有架構全量 PDF 僅供線上即時審閱預覽 · 嚴禁外流下載</p>
         </div>
       </div>
 
       <div class="download-grid">
         <div class="dl-card">
           <div class="dl-icon">📐</div>
-          <div class="dl-title">TOGAF 10 企業架構 (6 分頁)</div>
-          <div class="dl-desc">內建 6 個獨立分頁：總體、業務、數據、應用、技術與上市櫃合規視圖。</div>
-          <a href="./tci_togaf_enterprise_architecture.drawio" download class="btn-dl">下載 .drawio 檔案</a>
+          <div class="dl-title">TOGAF 10 企業架構全量手冊</div>
+          <div class="dl-desc">全套 8 頁高階報告：含總體、業務、數據、應用、技術與上市櫃合規 6 大視圖。</div>
+          <button onclick="openPdfModal('TCI_8436_TOGAF_企業資訊架構_HowardLiao.pdf', 'TOGAF 10 企業資訊架構全量審閱手冊 (8 頁)')" class="btn-dl" style="border:none; cursor:pointer; width:100%;">
+            <span>👁️</span> 線上即時審閱預覽 (Preview Only)
+          </button>
         </div>
 
         <div class="dl-card">
           <div class="dl-icon">🔄</div>
-          <div class="dl-title">從使用者向左演進架構圖</div>
-          <div class="dl-desc">右至左 (Right-to-Left) 5 站式端到端流向圖，適合高層決策簡報。</div>
-          <a href="./tci_ai_architecture_rtl.drawio" download class="btn-dl">下載 RTL .drawio 檔案</a>
+          <div class="dl-title">右至左 (RTL) 使用者流架構圖</div>
+          <div class="dl-desc">全套 3 頁：從使用者出發向左演進之五站式端到端技術規範圖解。</div>
+          <button onclick="openPdfModal('TCI_8436_右至左架構演進_HowardLiao.pdf', '從使用者向左演進架構規範 (3 頁)')" class="btn-dl" style="border:none; cursor:pointer; width:100%;">
+            <span>👁️</span> 線上即時審閱預覽 (Preview Only)
+          </button>
         </div>
 
         <div class="dl-card">
-          <div class="dl-icon">📄</div>
-          <div class="dl-title">專案規劃與決策筆記</div>
-          <div class="dl-desc">包含大江生醫資訊策略、三方職責分工與下階段 PoC 推進路徑。</div>
-          <a href="./README.md" target="_blank" class="btn-dl">查看 README 文件</a>
+          <div class="dl-icon">⚖️</div>
+          <div class="dl-title">四大場景與金管會合規手冊</div>
+          <div class="dl-desc">全套 4 頁：財務憑證、客服 KM、採購審核與證交所/金管會 10 大合規控制項。</div>
+          <button onclick="openPdfModal('TCI_8436_四大立竿見影場景與合規手冊_HowardLiao.pdf', '四大立竿見影場景與上市櫃合規手冊 (4 頁)')" class="btn-dl" style="border:none; cursor:pointer; width:100%;">
+            <span>👁️</span> 線上即時審閱預覽 (Preview Only)
+          </button>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- PDF Preview Modal (Preview Only · No Downloads) -->
+  <div id="pdfModal" class="pdf-modal" oncontextmenu="return false;">
+    <div class="pdf-modal-container">
+      <div class="pdf-modal-header">
+        <div class="pdf-modal-title">
+          <span id="pdfModalTitle">文檔審閱</span>
+          <span class="pdf-security-badge">🔒 機密審批件 · 僅供線上即時審閱 (Preview Only · Do Not Download)</span>
+        </div>
+        <button class="btn-close-modal" onclick="closePdfModal()" title="關閉預覽">✕</button>
+      </div>
+      <div class="pdf-iframe-wrap">
+        <iframe id="pdfIframe" class="pdf-iframe" src="" title="PDF Preview"></iframe>
+      </div>
+    </div>
+  </div>
+
 
   <!-- Mobile Bottom Dock -->
   <nav class="mobile-dock">
@@ -1560,6 +1693,27 @@
         alert("Howard Liao Ph.D. | liao.howard@gmail.com");
       });
     }
+  
+    // 6. PDF Preview Modal Functions (Preview Only, No Download)
+    function openPdfModal(pdfUrl, title) {
+      document.getElementById('pdfModalTitle').innerText = title;
+      // toolbar=0 hides the Chrome/Edge default download and print toolbar!
+      document.getElementById('pdfIframe').src = `./${pdfUrl}#toolbar=0&navpanes=0&scrollbar=1`;
+      document.getElementById('pdfModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePdfModal() {
+      document.getElementById('pdfModal').classList.remove('active');
+      document.getElementById('pdfIframe').src = '';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close on Escape
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closePdfModal();
+    });
+
   </script>
 </body>
 </html>

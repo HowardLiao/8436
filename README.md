@@ -4,6 +4,7 @@
 * 計劃執行負責人：**Howard Liao Ph.D. (廖倫豪 博士)**
 * 核心框架：**TOGAF 10 (The Open Group Architecture Framework)**
 * 遵循規範：**金管會生成式 AI 核心指引**、**證券交易所上市上櫃公司資通安全管控指引**、**公開發行公司內控準則第 9 條之 1**、**GMP / FDA 21 CFR Part 11 ALCOA+**
+* 資安與智財治理：**全量檔案均轉換為官方高解析 PDF，具備 Howard Liao Ph.D. 全頁浮水印，僅供線上即時審閱，嚴禁外流下載。**
 
 ---
 
@@ -17,7 +18,9 @@
 
 ---
 
-## 線上訪問 (Live Deployment)
-* **GitHub Pages**: [https://howardliao.github.io/8436/](https://howardliao.github.io/8436/)
-* **原生 Draw.io 架構圖 (內建 6 分頁)**: `tci_togaf_enterprise_architecture.drawio`
-* **橫向右至左架構圖**: `tci_ai_architecture_rtl.drawio`
+## 官方線上審閱中心 (Live Online Preview - No Downloads)
+* **GitHub Pages 線上入口**: [https://howardliao.github.io/8436/](https://howardliao.github.io/8436/)
+* **官方文檔清單 (均內嵌 Howard Liao Ph.D. 浮水印，僅供線上預覽)**:
+  - `TCI_8436_TOGAF_企業資訊架構_HowardLiao.pdf` (8 頁全量 TOGAF 10 規格手冊)
+  - `TCI_8436_右至左架構演進_HowardLiao.pdf` (3 頁五站式 RTL 使用者流向規範)
+  - `TCI_8436_四大立竿見影場景與合規手冊_HowardLiao.pdf` (4 頁首波驗收指南與上市櫃合規手冊)
