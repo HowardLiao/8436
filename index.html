@@ -152,11 +152,16 @@
     .brand-logo {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       font-weight: 800;
-      font-size: 1.15rem;
+      font-size: 1.12rem;
       letter-spacing: -0.5px;
       color: var(--text-main);
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .brand-name-text {
+      white-space: nowrap;
     }
     .brand-badge {
       background: var(--accent-primary);
@@ -166,37 +171,30 @@
       border-radius: var(--radius-sm);
       font-weight: 700;
       letter-spacing: 0.5px;
+      white-space: nowrap;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 16px;
       list-style: none;
+      margin: 0;
+      padding: 0;
     }
     .nav-link {
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       font-weight: 600;
       color: var(--text-secondary);
+      white-space: nowrap;
     }
     .nav-link:hover { color: var(--accent-primary); }
 
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
-    }
-
-    .theme-select {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-      padding: 6px 10px;
-      border-radius: var(--radius-sm);
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      outline: none;
+      gap: 10px;
+      flex-shrink: 0;
     }
 
     .btn-action {
@@ -204,7 +202,7 @@
       color: #FFFFFF;
       padding: 8px 16px;
       border-radius: var(--radius-sm);
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 700;
       border: none;
       cursor: pointer;
@@ -212,6 +210,8 @@
       align-items: center;
       gap: 6px;
       transition: var(--transition);
+      white-space: nowrap;
+      flex-shrink: 0;
     }
     .btn-action:hover {
       background: var(--accent-hover);
@@ -658,13 +658,17 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3px;
+      justify-content: center;
+      gap: 2px;
       font-size: 0.68rem;
       font-weight: 700;
       color: var(--text-muted);
       border: none;
       background: none;
       cursor: pointer;
+      flex: 1;
+      padding: 4px 0;
+      max-width: 20%;
     }
     .dock-btn.active { color: var(--accent-primary); }
     .dock-icon { font-size: 1.15rem; }
@@ -1187,6 +1191,189 @@
       border-color: var(--text-main);
     }
 
+  
+    /* ============================================================= */
+    /* IN-PAGE FULL-TEXT SEARCH STYLING */
+    /* ============================================================= */
+    .search-box-wrapper {
+      position: relative;
+    }
+    .search-input-group {
+      display: flex;
+      align-items: center;
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-color);
+      border-radius: 20px;
+      padding: 5px 12px;
+      gap: 8px;
+      transition: var(--transition);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .search-input-group:focus-within {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+    }
+    .search-input-group input {
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 0.82rem;
+      color: var(--text-main);
+      width: 170px;
+      transition: width 0.2s ease;
+    }
+    .search-input-group input:focus {
+      width: 220px;
+    }
+    .search-input-group input::placeholder {
+      color: var(--text-muted);
+    }
+    .search-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 440px;
+      max-width: 92vw;
+      max-height: 480px;
+      overflow-y: auto;
+      background: var(--bg-surface);
+      border: 1.5px solid var(--accent-primary);
+      border-radius: var(--radius-sm);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.22);
+      z-index: 1200;
+      padding: 8px;
+      display: none;
+    }
+    .search-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding: 9px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+      border-bottom: 1px solid var(--border-color);
+      text-decoration: none;
+      text-align: left;
+    }
+    .search-item:last-child {
+      border-bottom: none;
+    }
+    .search-item:hover, .search-item.selected {
+      background: var(--accent-light);
+    }
+    .search-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .search-item-cat {
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--bg-body);
+      color: var(--accent-secondary);
+      border: 1px solid var(--accent-border);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .search-item-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+    .search-item-desc {
+      font-size: 0.74rem;
+      color: var(--text-secondary);
+      line-height: 1.35;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .search-highlight {
+      background: #FEF08A;
+      color: #854D0E;
+      font-weight: 800;
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+    [data-theme="obsidian"] .search-highlight {
+      background: #78350F;
+      color: #FEF08A;
+    }
+    @keyframes flashHighlight {
+      0% { outline: 3px solid var(--accent-primary); box-shadow: 0 0 24px rgba(212,175,55,0.5); }
+      50% { outline: 3px solid var(--accent-primary); box-shadow: 0 0 24px rgba(212,175,55,0.5); }
+      100% { outline: transparent; box-shadow: none; }
+    }
+    .search-target-flash {
+      animation: flashHighlight 2.4s ease-out;
+    }
+    @media (max-width: 768px) {
+      .search-input-group {
+        padding: 4px 8px !important;
+        gap: 5px !important;
+      }
+      .search-input-group input {
+        width: 105px !important;
+        font-size: 0.75rem !important;
+      }
+      .search-input-group input:focus {
+        width: 130px !important;
+      }
+      .search-shortcut-badge {
+        display: none !important;
+      }
+      .search-dropdown {
+        width: 310px !important;
+        right: -10px !important;
+      }
+    }
+
+  
+    @media (max-width: 768px) {
+      #btnArchTab1, #btnArchTab2 {
+        white-space: normal !important;
+        text-align: center !important;
+        width: 100% !important;
+        font-size: 0.8rem !important;
+        padding: 8px 10px !important;
+        word-break: break-word !important;
+      }
+      .hero-pretitle {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        white-space: normal !important;
+        text-align: center !important;
+        font-size: 0.72rem !important;
+      }
+      .mobile-dock {
+        width: 100% !important;
+        max-width: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        box-sizing: border-box !important;
+        padding: 0 2px !important;
+      }
+      .dock-btn {
+        flex: 1 1 0 !important;
+        width: 20% !important;
+        max-width: 20% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        padding: 4px 1px !important;
+        font-size: 0.65rem !important;
+      }
+      .dock-btn span {
+        white-space: nowrap !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1211,11 +1398,25 @@
         <li><a href="#downloads" class="nav-link">下載中心</a></li>
       </ul>
       <div class="nav-actions">
-        <select id="themeSelector" class="theme-select" aria-label="切換視覺主題" onchange="changeTheme(this.value)">
-          <option value="pharaoh">🇪🇬 埃及法老 (預設)</option>
-          <option value="milan">🏛️ 米蘭暖珀</option>
-          <option value="obsidian">🌌 深邃黑曜</option>
-        </select>
+        <!-- In-Page Full-Text Search Box -->
+        <div class="search-box-wrapper" style="position:relative;">
+          <div class="search-input-group">
+            <span style="font-size:0.85rem; color:var(--text-muted); line-height:1;">🔍</span>
+            <input type="text" id="siteSearchInput" placeholder="搜尋內文 / 視圖 / 關鍵詞..." autocomplete="off" oninput="handleSiteSearch(this.value)" onfocus="handleSiteSearchFocus()" onkeydown="handleSearchKeyDown(event)" aria-label="內文即時搜尋">
+            <button id="clearSearchBtn" onclick="clearSiteSearch()" style="display:none; border:none; background:transparent; cursor:pointer; font-size:0.8rem; color:var(--text-muted); padding:0 2px;" title="清除搜尋">✕</button>
+            <span class="search-shortcut-badge" style="font-size:0.68rem; color:var(--text-muted); background:var(--bg-body); padding:1px 6px; border-radius:4px; border:1px solid var(--border-color); font-family:monospace;" title="按 / 鍵快速搜尋">/</span>
+          </div>
+
+          <!-- Live Search Results Dropdown -->
+          <div id="searchResultsDropdown" class="search-dropdown">
+            <div id="searchMetaHeader" style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px solid var(--border-color); font-size:0.75rem; color:var(--text-muted);">
+              <span id="searchResultCount" style="font-weight:700; color:var(--text-main);">輸入關鍵詞即時搜尋</span>
+              <span style="font-size:0.7rem;">按 Esc 關閉</span>
+            </div>
+            <div id="searchResultsList" style="padding:6px 0;"></div>
+          </div>
+        </div>
+
         <button class="btn-action" onclick="copyContact()">
           <span>對接架構師</span>
         </button>
@@ -1266,21 +1467,7 @@
           <div class="bento-desc">財務傳票 OCR、客服 KM、採購審核與 HowardPro AutoML 調機 1 週見到成果。</div>
         </div>
         
-        <!-- Official Howard ADM Overview Diagram View -->
-        <div id="mainArchAdmWrap" style="display:none; width:100%; position:relative; background:#FFFFFF; border-radius:var(--radius-sm); overflow:hidden; padding:12px; text-align:center;">
-          <div style="margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-            <div style="text-align:left;">
-              <span class="pill-tag pill-blue" style="font-size:0.75rem;">視圖 [00] · Phase A</span>
-              <span style="font-weight:800; color:#1E293B; margin-left:8px; font-size:0.95rem;">Howard 企業架構 ADM 總覽 · 大江生醫 (8436.TW) 企業架構對照</span>
-            </div>
-            <button onclick="openDiagramImageModal(0)" class="btn-action" style="padding:5px 12px; font-size:0.78rem; background:#F8FAFC; border:1px solid #CBD5E1;">🔍 放大檢視</button>
-          </div>
-          <div style="position:relative; overflow:hidden; border-radius:4px; border:1px solid #E2E8F0;">
-            <img src="assets/diagrams/diagram_00.png" alt="Howard ADM 總覽架構圖" style="max-width:100%; height:auto; display:block; margin:0 auto; cursor:pointer;" onclick="openDiagramImageModal(0)">
-            <div class="watermark-overlay" style="position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(-35deg, rgba(212,175,55,0.06) 0, rgba(212,175,55,0.06) 1px, transparent 1px, transparent 140px); display:flex; align-items:center; justify-content:center;">
-              <span style="transform:rotate(-25deg); font-size:2rem; font-weight:900; color:rgba(212,175,55,0.12); letter-spacing:6px;">Howard Liao Ph.D. · Preview Only</span>
-            </div>
-          </div>
+        
         </div>
       </div>
     </div>
@@ -1547,6 +1734,22 @@
             <text x="875" y="782" fill="#334155" font-size="10">• <b>Milvus / Qdrant</b>：生醫規章向量庫</text>
           </svg>
         </div>
+
+        <!-- Official Howard ADM Overview Diagram View -->
+        <div id="mainArchAdmWrap" style="display:none; width:100%; position:relative; background:#FFFFFF; border-radius:var(--radius-sm); overflow:hidden; padding:12px; text-align:center;">
+          <div style="margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div style="text-align:left;">
+              <span class="pill-tag pill-blue" style="font-size:0.75rem;">視圖 [00] · Phase A</span>
+              <span style="font-weight:800; color:#1E293B; margin-left:8px; font-size:0.95rem;">Howard 企業架構 ADM 總覽 · 大江生醫 (8436.TW) 企業架構對照</span>
+            </div>
+            <button onclick="openDiagramImageModal(0)" class="btn-action" style="padding:5px 12px; font-size:0.78rem; background:#F8FAFC; border:1px solid #CBD5E1;">🔍 放大檢視</button>
+          </div>
+          <div style="position:relative; overflow:hidden; border-radius:4px; border:1px solid #E2E8F0;">
+            <img src="assets/diagrams/diagram_00.png" alt="Howard ADM 總覽架構圖" style="max-width:100%; height:auto; display:block; margin:0 auto; cursor:pointer;" onclick="openDiagramImageModal(0)">
+            <div class="watermark-overlay" style="position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(-35deg, rgba(212,175,55,0.06) 0, rgba(212,175,55,0.06) 1px, transparent 1px, transparent 140px); display:flex; align-items:center; justify-content:center;">
+              <span style="transform:rotate(-25deg); font-size:2rem; font-weight:900; color:rgba(212,175,55,0.12); letter-spacing:6px;">Howard Liao Ph.D. · Preview Only</span>
+            </div>
+          </div>
 
         <!-- Diagram Bottom Legend & FSC Note -->
         <div style="margin-top:16px; padding-top:12px; border-top:1px dashed var(--border-color); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; font-size:0.75rem;">
@@ -3135,17 +3338,17 @@
       <span class="dock-icon">🏛️</span>
       <span>Howard</span>
     </button>
-    <button class="dock-btn" onclick="location.href='#rtl-flow'">
-      <span class="dock-icon">🔄</span>
-      <span>向左流</span>
+    <button class="dock-btn" onclick="location.href='#views-32'">
+      <span class="dock-icon">📚</span>
+      <span>視圖</span>
     </button>
     <button class="dock-btn" onclick="location.href='#playbooks'">
       <span class="dock-icon">⚡</span>
       <span>場景</span>
     </button>
-    <button class="dock-btn" onclick="location.href='#compliance'">
-      <span class="dock-icon">⚖️</span>
-      <span>合規</span>
+    <button class="dock-btn" onclick="triggerMobileSearch()">
+      <span class="dock-icon">🔍</span>
+      <span>搜尋</span>
     </button>
   </nav>
 
@@ -3169,7 +3372,8 @@
     }
     const savedTheme = localStorage.getItem('howard_ea_theme');
     if (savedTheme) {
-      document.getElementById('themeSelector').value = savedTheme;
+      const ts = document.getElementById('themeSelector');
+      if (ts) ts.value = savedTheme;
       changeTheme(savedTheme);
     }
 
@@ -3387,5 +3591,406 @@
     // Update view-card onclick to also sync live player
 
   </script>
+<script>
+    // =============================================================
+    // IN-PAGE FULL-TEXT SEARCH ENGINE
+    // =============================================================
+    let currentSelectedSearchIdx = -1;
+    let filteredSearchResults = [];
+
+    // Base Search Corpus
+    const staticSearchCorpus = [
+      {
+        type: 'howard_view',
+        viewId: 'tv1',
+        tabIdx: 0,
+        cat: '6 大架構視圖',
+        title: '總體架構藍圖 (Overview) · 戰略與 BDAT 全域視圖',
+        desc: '天然物功效研發、生醫智能製造、全球跨廠多基地調度、四大立竿見影場景與利害關係人矩陣。',
+        keywords: '總體架構 藍圖 BDAT 業務 應用 數據 技術 戰略 天然物 屏東廠 上海廠 研發 配方 利害關係人 2E 2C 2B OT'
+      },
+      {
+        type: 'howard_view',
+        viewId: 'tv2',
+        tabIdx: 1,
+        cat: '6 大架構視圖',
+        title: '業務架構層 (Business Architecture) · 業務能力地圖與價值鏈',
+        desc: '核心營運能力、配方專利設計、CDMO/ODM 智造規模化、SAP 傳票 OCR、客服 KM 與調機師傅。',
+        keywords: '業務架構 業務能力 價值鏈 Business Capability CDMO ODM 原物料 採購 客戶服務 供應鏈 倉儲 MES WMS'
+      },
+      {
+        type: 'howard_view',
+        viewId: 'tv3',
+        tabIdx: 2,
+        cat: '6 大架構視圖',
+        title: '數據架構層 (Data Bus) · Kafka ＋ EMQX ＋ DataHub ＋ ALCOA+',
+        desc: 'IT 骨幹環 Apache Kafka 零丟包、OT 物聯網環 EMQX MQTT、Debezium CDC 監聽與 GMP 審計 WORM 動態脫敏。',
+        keywords: '數據架構 Data Bus Kafka EMQX MQTT Sparkplug OPC UA Debezium CDC DataHub SAP MDG ALCOA+ GMP WORM Immuta'
+      },
+      {
+        type: 'howard_view',
+        viewId: 'tv4',
+        tabIdx: 3,
+        cat: '6 大架構視圖',
+        title: '應用與 AI 架構層 · HowardAGent ＋ HowardPro ＋ SAP MES SCADA',
+        desc: 'Agentic RAG 95% 準確率、OCR Agent 傳票入帳、客服 Copilot、左腦 AutoML 調機與右腦 Domain Twin 領域數位員工。',
+        keywords: '應用架構 AI 解決方案 HowardAGent HowardPro SAP ERP MES SCADA Agentic RAG Citations OCR 客服 Copilot MCP Text2SQL AutoML Domain Twin AILM'
+      },
+      {
+        type: 'howard_view',
+        viewId: 'tv5',
+        tabIdx: 4,
+        cat: '6 大架構視圖',
+        title: '技術與資安層 (Tech & Security) · APISIX ＋ Keycloak ＋ Noname ＋ DR',
+        desc: '微秒級延遲網關 APISIX、Keycloak 身分鑑權、Noname 影子 API 清點與 BOLA 防護、異地災難復原 RTO < 4h。',
+        keywords: '技術架構 資安 防護 Apache APISIX Keycloak Noname Security BOLA PAM SIEM 影子 API 災備 DR RTO RPO vLLM GPU'
+      },
+      {
+        type: 'howard_view',
+        viewId: 'tv6',
+        tabIdx: 5,
+        cat: '6 大架構視圖',
+        title: '上市櫃資安與合規層 (Governance) · 金管會 GenAI 指引 ＋ 證交所 10 控制項',
+        desc: '資安長 CISO 專責架構、HITL 人工覆核、ZDR 零資料保留、PAM 特權存取管理、紅藍軍滲透與次營業日前重訊。',
+        keywords: '上市櫃 資安 合規 金管會 GenAI 證交所 10 控制項 CISO HITL ZDR Zero Data Retention PAM MFA 滲透測試 WORM SOC 重訊'
+      },
+      {
+        type: 'section',
+        targetId: 'playbooks',
+        cat: '落地場景',
+        title: '四大立竿見影場景 No.1 · 財務會計憑證 OCR 自動入帳核銷',
+        desc: '發票、進項單據、報銷憑證自動 OCR 辨識，校驗 SAP 稅籍並自動借貸拋轉傳票，工時降低 75%。',
+        keywords: '財務 傳票 憑證 OCR 發票 核銷 報銷 SAP 借貸 稅籍 入帳'
+      },
+      {
+        type: 'section',
+        targetId: 'playbooks',
+        cat: '落地場景',
+        title: '四大立竿見影場景 No.2 · 智能客服 Copilot 與知識庫 RAG',
+        desc: 'LINE / PBX 語音渠道即時對答，25+ 生醫文件向量化檢索，嚴格 Citations 附來源註釋與人工審批。',
+        keywords: '客服 Copilot KM 知識庫 RAG LINE PBX 電話 經銷商 消費者 溯源 答覆'
+      },
+      {
+        type: 'section',
+        targetId: 'playbooks',
+        cat: '落地場景',
+        title: '四大立竿見影場景 No.3 · 採購勤採與費用申請異常自動比對',
+        desc: '歷史原料物料報價大數據比對，採購請購防貪腐、跨廠比價與即時發送異常風險警示。',
+        keywords: '採購 比價 勤採 費用 申請 異常 報價 稽核 風險 供應商 防貪'
+      },
+      {
+        type: 'section',
+        targetId: 'playbooks',
+        cat: '落地場景',
+        title: '四大立竿見影場景 No.4 · 總務行政與生醫 NPI 標準化作業流程',
+        desc: '行政流程審批線上化，新進同仁照 SOP 快速執行，生醫研發與工廠交接標準化推進。',
+        keywords: '總務 行政 SOP NPI 新進同仁 流程 審批 規格 標準化'
+      },
+      {
+        type: 'section',
+        targetId: 'compliance',
+        cat: '資安合規',
+        title: '金管會 GenAI 指引核心原則 · 人工覆核 (HITL) 與資料隱私保護',
+        desc: '重大決策由生醫專家把關，模型互動日誌永久保存，杜絕模型幻覺與法規違規。',
+        keywords: '金管會 GenAI 指引 人工覆核 HITL 隱私 審計 違規 幻覺'
+      },
+      {
+        type: 'section',
+        targetId: 'compliance',
+        cat: '資安合規',
+        title: '證交所上市櫃資安指引 10 項控制措施全量對應',
+        desc: 'CISO 專責組織、供應鏈外包安全、PAM 特權存取、紅藍軍滲透測試、3-2-1 WORM 備份、SOC 通報。',
+        keywords: '證交所 上市櫃 10 控制項 控制措施 CISO 組織 供應鏈 外包 PAM MFA 滲透測試 備份 WORM BCP SOC'
+      },
+      {
+        type: 'section',
+        targetId: 'downloads',
+        cat: '文檔中心',
+        title: '大江生醫 (8436.TW) 企業資訊策略與 AI 架構手冊 (34 頁完整版)',
+        desc: '包含架構總覽、業務能力地圖、雙環 Data Bus、APISIX 與 Noname 防護之完整手冊。',
+        keywords: '下載 預覽 手冊 PDF 完整版 34頁 大江生醫 策略 藍圖'
+      },
+      {
+        type: 'section',
+        targetId: 'downloads',
+        cat: '文檔中心',
+        title: '企業級 AI 橫向右至左架構演進手冊 (18 頁)',
+        desc: 'User to Backend 五層通訊演進架構與各層組件防禦規格。',
+        keywords: '下載 右至左 橫向演進 18頁 手冊 PDF 通訊 拓撲'
+      },
+      {
+        type: 'section',
+        targetId: 'downloads',
+        cat: '文檔中心',
+        title: 'Howard 企業架構 32 全視圖官方規格手冊 (32 頁)',
+        desc: '涵蓋 ADM 全生命週期之 32 張向量架構圖與組件分解說明。',
+        keywords: '下載 32視圖 32頁 向量 圖集 PDF 交付手冊 ADM'
+      },
+      {
+        type: 'section',
+        targetId: 'downloads',
+        cat: '文檔中心',
+        title: 'Draw.io 官方動態交互預覽 (14 視圖官方 Lightbox)',
+        desc: '線上交互畫布，支援多頁籤動態縮放、圖層切換與圖元點選檢視。',
+        keywords: 'Draw.io Lightbox 交互 預覽 動態 圖層 縮放 線上畫布'
+      },
+      {
+        type: 'section',
+        targetId: 'bento',
+        cat: '商業指標',
+        title: 'C-Level 4 大商業衝擊指標 · 100% 合規 / 99.99% SLA / -30% TCO / 1 週驗收',
+        desc: '金管會 GenAI 指引 100% 遵從、跨模型毫秒級 Failover 達 Zero Outage、動態任務分流節省成本。',
+        keywords: 'Bento 指標 C-Level 合規 SLA 可用性 TCO 成本 週期 1週'
+      },
+      {
+        type: 'section',
+        targetId: 'rtl-flow',
+        cat: '拓撲架構',
+        title: '大江生醫 企業級 AI 橫向右至左架構演進 (User to Backend)',
+        desc: '通路層 → 代理層 (HowardAGent) → 網關層 (APISIX/Noname) → 模型層 (HowardRoute/HowardPro) → 數據底座。',
+        keywords: 'RTL 向左 拓撲 通路 代理 網關 模型 數據底座 五層'
+      }
+    ];
+
+    function getFullSearchCorpus() {
+      const list = [...staticSearchCorpus];
+      if (typeof diagramCatalog !== 'undefined') {
+        diagramCatalog.forEach(d => {
+          list.push({
+            type: 'view32',
+            idx: d.index,
+            cat: `視圖庫 · ${d.phase}`,
+            title: `[${String(d.index).padStart(2, '0')}] ${d.name} · ${d.title}`,
+            desc: d.subtitle + ' ' + (d.items ? d.items.join(' · ') : ''),
+            keywords: `${d.name} ${d.title} ${d.subtitle} ${d.phase} ${d.items ? d.items.join(' ') : ''}`
+          });
+        });
+      }
+      return list;
+    }
+
+    function handleSiteSearch(query) {
+      const q = (query || '').trim().toLowerCase();
+      const dropdown = document.getElementById('searchResultsDropdown');
+      const resultsList = document.getElementById('searchResultsList');
+      const countEl = document.getElementById('searchResultCount');
+      const clearBtn = document.getElementById('clearSearchBtn');
+
+      if (!dropdown || !resultsList) return;
+      dropdown.style.display = 'block';
+
+      if (!q) {
+        clearBtn.style.display = 'none';
+        countEl.innerText = '輸入關鍵詞即時搜尋';
+        resultsList.innerHTML = '<div style="padding:16px; text-align:center; font-size:0.8rem; color:var(--text-muted);">💡 支援搜尋 32 全視圖、雙環 Data Bus、APISIX、Kafka、Noname、金管會合規、財務憑證等關鍵詞</div>';
+        filteredSearchResults = [];
+        currentSelectedSearchIdx = -1;
+        return;
+      }
+
+      clearBtn.style.display = 'inline-block';
+      const corpus = getFullSearchCorpus();
+      const terms = q.split(/\s+/).filter(Boolean);
+
+      filteredSearchResults = corpus.filter(item => {
+        const text = `${item.title} ${item.desc} ${item.keywords || ''}`.toLowerCase();
+        return terms.every(term => text.includes(term));
+      });
+
+      countEl.innerText = `找到 ${filteredSearchResults.length} 個相符結果`;
+
+      if (filteredSearchResults.length === 0) {
+        resultsList.innerHTML = `<div style="padding:20px; text-align:center; font-size:0.82rem; color:var(--text-muted);">
+          <span>🔍 未找到符合「<b style="color:var(--text-main);">${escapeHtml(query)}</b>」的內容</span>
+          <div style="margin-top:6px; font-size:0.75rem;">建議嘗試：HowardAGent, Kafka, APISIX, ALCOA+, 財務憑證, 合規</div>
+        </div>`;
+        currentSelectedSearchIdx = -1;
+        return;
+      }
+
+      let html = '';
+      filteredSearchResults.slice(0, 15).forEach((item, index) => {
+        const highlightedTitle = highlightSearchTerms(item.title, terms);
+        const highlightedDesc = highlightSearchTerms(item.desc, terms);
+        html += `
+          <div class="search-item ${index === 0 ? 'selected' : ''}" onclick="selectSearchResult(${index})" data-index="${index}">
+            <div class="search-item-header">
+              <span class="search-item-title">${highlightedTitle}</span>
+              <span class="search-item-cat">${escapeHtml(item.cat)}</span>
+            </div>
+            <div class="search-item-desc">${highlightedDesc}</div>
+          </div>
+        `;
+      });
+
+      if (filteredSearchResults.length > 15) {
+        html += `<div style="padding:6px; text-align:center; font-size:0.72rem; color:var(--text-muted);">已顯示前 15 筆，請輸入更精確關鍵字</div>`;
+      }
+
+      resultsList.innerHTML = html;
+      currentSelectedSearchIdx = 0;
+    }
+
+    function highlightSearchTerms(text, terms) {
+      if (!text) return '';
+      let escaped = escapeHtml(text);
+      terms.forEach(term => {
+        if (!term) return;
+        const re = new RegExp(`(${term.replace(/[-[\]{}()*+?.,\^$|#\s]/g, '\\$&')})`, 'gi');
+        escaped = escaped.replace(re, '<mark class="search-highlight">$1</mark>');
+      });
+      return escaped;
+    }
+
+    function escapeHtml(str) {
+      return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function handleSiteSearchFocus() {
+      const dropdown = document.getElementById('searchResultsDropdown');
+      if (dropdown) {
+        dropdown.style.display = 'block';
+        const input = document.getElementById('siteSearchInput');
+        if (input && input.value) {
+          handleSiteSearch(input.value);
+        } else {
+          handleSiteSearch('');
+        }
+      }
+    }
+
+    function clearSiteSearch() {
+      const input = document.getElementById('siteSearchInput');
+      if (input) {
+        input.value = '';
+        input.focus();
+        handleSiteSearch('');
+      }
+    }
+
+    function closeSiteSearch() {
+      const dropdown = document.getElementById('searchResultsDropdown');
+      if (dropdown) dropdown.style.display = 'none';
+      currentSelectedSearchIdx = -1;
+    }
+
+    function selectSearchResult(idx) {
+      if (idx < 0 || idx >= filteredSearchResults.length) return;
+      const item = filteredSearchResults[idx];
+      executeSearchResult(item);
+    }
+
+    function executeSearchResult(item) {
+      closeSiteSearch();
+      const input = document.getElementById('siteSearchInput');
+      if (input) input.blur();
+
+      if (item.type === 'view32') {
+        jumpToDiagram(item.idx);
+        showToast(`已跳轉至架構視圖：[${String(item.idx).padStart(2, '0')}]`);
+      } else if (item.type === 'howard_view') {
+        const btns = document.querySelectorAll('.ea-btn');
+        if (btns[item.tabIdx]) {
+          setEaView(item.viewId, btns[item.tabIdx]);
+        }
+        const sec = document.getElementById('howard-ea');
+        if (sec) {
+          sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          flashHighlightElement(sec);
+        }
+        showToast(`已切換至 Howard 視圖：${item.title.split('·')[0]}`);
+      } else if (item.type === 'section') {
+        const sec = document.getElementById(item.targetId);
+        if (sec) {
+          sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          flashHighlightElement(sec);
+        }
+        showToast(`已定位至：${item.title.split('·')[0]}`);
+      }
+    }
+
+    function flashHighlightElement(el) {
+      el.classList.remove('search-target-flash');
+      void el.offsetWidth;
+      el.classList.add('search-target-flash');
+      setTimeout(() => el.classList.remove('search-target-flash'), 2500);
+    }
+
+    function handleSearchKeyDown(e) {
+      const dropdown = document.getElementById('searchResultsDropdown');
+      if (!dropdown || dropdown.style.display === 'none') return;
+
+      const items = dropdown.querySelectorAll('.search-item');
+      if (items.length === 0) return;
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        currentSelectedSearchIdx = (currentSelectedSearchIdx + 1) % items.length;
+        updateSelectedSearchItem(items);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        currentSelectedSearchIdx = (currentSelectedSearchIdx - 1 + items.length) % items.length;
+        updateSelectedSearchItem(items);
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (currentSelectedSearchIdx >= 0 && currentSelectedSearchIdx < filteredSearchResults.length) {
+          executeSearchResult(filteredSearchResults[currentSelectedSearchIdx]);
+        }
+      } else if (e.key === 'Escape') {
+        closeSiteSearch();
+      }
+    }
+
+    function updateSelectedSearchItem(items) {
+      items.forEach((it, i) => {
+        if (i === currentSelectedSearchIdx) {
+          it.classList.add('selected');
+          it.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          it.classList.remove('selected');
+        }
+      });
+    }
+
+    function triggerMobileSearch() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => {
+        const input = document.getElementById('siteSearchInput');
+        if (input) {
+          input.focus();
+          handleSiteSearchFocus();
+        }
+      }, 350);
+    }
+
+    // Global keyboard listener: '/' or 'Cmd+K' / 'Ctrl+K' focuses search input, Esc closes
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        const input = document.getElementById('siteSearchInput');
+        if (input) {
+          input.focus();
+          handleSiteSearchFocus();
+        }
+      } else if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        const input = document.getElementById('siteSearchInput');
+        if (input) {
+          input.focus();
+          handleSiteSearchFocus();
+        }
+      } else if (e.key === 'Escape') {
+        closeSiteSearch();
+      }
+    });
+
+    // Close search dropdown on click outside
+    document.addEventListener('click', (e) => {
+      const wrapper = document.querySelector('.search-box-wrapper');
+      if (wrapper && !wrapper.contains(e.target)) {
+        closeSiteSearch();
+      }
+    });
+</script>
 </body>
 </html>
