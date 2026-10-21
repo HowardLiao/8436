@@ -1,5 +1,5 @@
 // Service Worker for 8436 PWA
-const CACHE_NAME = 'tci-8436-v4';
+const CACHE_NAME = 'tci-8436-v5';
 const ASSETS = [
   './',
   './index.html',
@@ -11,7 +11,8 @@ const ASSETS = [
   './TCI_8436_Howard_企業資訊架構_HowardLiao.pdf',
   './TCI_8436_右至左架構演進_HowardLiao.pdf',
   './TCI_8436_四大立竿見影場景與合規手冊_HowardLiao.pdf',
-  './TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf'
+  './TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf',
+  ...Array.from({ length: 32 }, (_, i) => `./assets/diagrams/diagram_${String(i).padStart(2, '0')}.png`)
 ];
 
 self.addEventListener('install', (e) => {

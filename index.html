@@ -1265,6 +1265,23 @@
           <div class="bento-label">首波驗收落地週期</div>
           <div class="bento-desc">財務傳票 OCR、客服 KM、採購審核與 HowardPro AutoML 調機 1 週見到成果。</div>
         </div>
+        
+        <!-- Official Howard ADM Overview Diagram View -->
+        <div id="mainArchAdmWrap" style="display:none; width:100%; position:relative; background:#FFFFFF; border-radius:var(--radius-sm); overflow:hidden; padding:12px; text-align:center;">
+          <div style="margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div style="text-align:left;">
+              <span class="pill-tag pill-blue" style="font-size:0.75rem;">視圖 [00] · Phase A</span>
+              <span style="font-weight:800; color:#1E293B; margin-left:8px; font-size:0.95rem;">Howard 企業架構 ADM 總覽 · 大江生醫 (8436.TW) 企業架構對照</span>
+            </div>
+            <button onclick="openDiagramImageModal(0)" class="btn-action" style="padding:5px 12px; font-size:0.78rem; background:#F8FAFC; border:1px solid #CBD5E1;">🔍 放大檢視</button>
+          </div>
+          <div style="position:relative; overflow:hidden; border-radius:4px; border:1px solid #E2E8F0;">
+            <img src="assets/diagrams/diagram_00.png" alt="Howard ADM 總覽架構圖" style="max-width:100%; height:auto; display:block; margin:0 auto; cursor:pointer;" onclick="openDiagramImageModal(0)">
+            <div class="watermark-overlay" style="position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(-35deg, rgba(212,175,55,0.06) 0, rgba(212,175,55,0.06) 1px, transparent 1px, transparent 140px); display:flex; align-items:center; justify-content:center;">
+              <span style="transform:rotate(-25deg); font-size:2rem; font-weight:900; color:rgba(212,175,55,0.12); letter-spacing:6px;">Howard Liao Ph.D. · Preview Only</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1289,6 +1306,16 @@
         </div>
       </div>
 
+      <!-- Main Architecture Dual-View Switcher -->
+      <div style="display:flex; gap:10px; margin-top:16px; margin-bottom:14px; flex-wrap:wrap;">
+        <button id="btnArchTab1" onclick="switchMainArchView('svg', this)" class="filter-btn active" style="font-size:0.85rem; padding:8px 16px; border-radius:8px;">
+          📐 4 層企業資訊策略與 AI 總體架構圖 (端到端全景藍圖)
+        </button>
+        <button id="btnArchTab2" onclick="switchMainArchView('adm', this)" class="filter-btn" style="font-size:0.85rem; padding:8px 16px; border-radius:8px;">
+          🏛️ Howard 企業架構 ADM 總覽架構圖 (官方標準視圖 [00])
+        </button>
+      </div>
+
       <!-- Architecture Diagram Visual Container -->
       <div id="diagramContainer" style="background:var(--bg-surface); border:2px solid var(--border-color); border-radius:var(--radius-md); padding:20px; box-shadow:var(--card-shadow); overflow-x:auto; transition:var(--transition); position:relative;">
         
@@ -1309,7 +1336,7 @@
         </div>
 
         <!-- Real SVG Architecture Diagram -->
-        <div style="min-width:1080px; width:100%;">
+        <div id="mainArchSvgWrap" style="min-width:1080px; width:100%;">
           <svg viewBox="0 0 1140 840" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; user-select:none;">
             <defs>
               <!-- Arrowhead Marker -->
@@ -1562,6 +1589,26 @@
 
       <!-- View 1: 總體藍圖 -->
       <div id="tv1" class="ea-view active">
+        <!-- Synced Architecture Diagram Card -->
+        <div class="diagram-preview-card" style="background:var(--bg-surface); border:2px solid var(--blue-main); border-radius:var(--radius-md); padding:16px; margin-bottom:20px; box-shadow:var(--card-shadow); position:relative;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="pill-tag pill-blue" style="font-size:0.75rem;">視圖 [00] · Phase A</span>
+              <h3 style="font-size:1rem; font-weight:800; color:var(--text-main); margin:0;">Howard 企業架構 ADM 總覽 · 大江生醫 (8436.TW) 企業架構對照</h3>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button onclick="openDiagramImageModal(0)" class="btn-action" style="padding:5px 12px; font-size:0.78rem;">🔍 放大檢視</button>
+              <button onclick="jumpToDiagram(0)" class="btn-dl" style="padding:5px 12px; font-size:0.78rem; border:none; cursor:pointer;">▶ 畫布定位</button>
+            </div>
+          </div>
+          <div style="position:relative; overflow:hidden; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:#FFFFFF; text-align:center; padding:6px;">
+            <img src="assets/diagrams/diagram_00.png" alt="Howard 企業架構 ADM 總覽 · 大江生醫 (8436.TW) 企業架構對照" style="max-width:100%; height:auto; display:block; margin:0 auto; cursor:pointer;" onclick="openDiagramImageModal(0)">
+            <div class="watermark-overlay" style="position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(-35deg, rgba(212,175,55,0.06) 0, rgba(212,175,55,0.06) 1px, transparent 1px, transparent 140px); display:flex; align-items:center; justify-content:center;">
+              <span style="transform:rotate(-25deg); font-size:1.6rem; font-weight:900; color:rgba(212,175,55,0.12); letter-spacing:6px;">Howard Liao Ph.D. · Preview Only</span>
+            </div>
+          </div>
+        </div>
+
         <div class="tier-panel" style="border-left:5px solid var(--blue-main);">
           <div class="tier-header"><span class="badge-layer">BDAT Layer 1</span> 業務架構層 (Business Architecture)</div>
           <div class="grid-3">
@@ -1687,6 +1734,26 @@
 
       <!-- View 2: 業務價值鏈 -->
       <div id="tv2" class="ea-view">
+        <!-- Synced Architecture Diagram Card -->
+        <div class="diagram-preview-card" style="background:var(--bg-surface); border:2px solid var(--blue-main); border-radius:var(--radius-md); padding:16px; margin-bottom:20px; box-shadow:var(--card-shadow); position:relative;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="pill-tag pill-blue" style="font-size:0.75rem;">視圖 [04] · Phase B</span>
+              <h3 style="font-size:1rem; font-weight:800; color:var(--text-main); margin:0;">Business Capability Map · 業務能力地圖與 AI 賦能熱圖</h3>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button onclick="openDiagramImageModal(4)" class="btn-action" style="padding:5px 12px; font-size:0.78rem;">🔍 放大檢視</button>
+              <button onclick="jumpToDiagram(4)" class="btn-dl" style="padding:5px 12px; font-size:0.78rem; border:none; cursor:pointer;">▶ 畫布定位</button>
+            </div>
+          </div>
+          <div style="position:relative; overflow:hidden; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:#FFFFFF; text-align:center; padding:6px;">
+            <img src="assets/diagrams/diagram_04.png" alt="Business Capability Map · 業務能力地圖與 AI 賦能熱圖" style="max-width:100%; height:auto; display:block; margin:0 auto; cursor:pointer;" onclick="openDiagramImageModal(4)">
+            <div class="watermark-overlay" style="position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(-35deg, rgba(212,175,55,0.06) 0, rgba(212,175,55,0.06) 1px, transparent 1px, transparent 140px); display:flex; align-items:center; justify-content:center;">
+              <span style="transform:rotate(-25deg); font-size:1.6rem; font-weight:900; color:rgba(212,175,55,0.12); letter-spacing:6px;">Howard Liao Ph.D. · Preview Only</span>
+            </div>
+          </div>
+        </div>
+
         <div class="tier-panel">
           <div class="tier-header"><span class="badge-layer">Value Stream</span> 大江生醫 6 大業務價值鏈與 AI 賦能落地</div>
           <div class="grid-6">
@@ -1750,6 +1817,26 @@
 
       <!-- View 3: 數據架構與 Data Bus -->
       <div id="tv3" class="ea-view">
+        <!-- Synced Architecture Diagram Card -->
+        <div class="diagram-preview-card" style="background:var(--bg-surface); border:2px solid var(--accent-primary); border-radius:var(--radius-md); padding:16px; margin-bottom:20px; box-shadow:var(--card-shadow); position:relative;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="pill-tag pill-amber" style="font-size:0.75rem;">視圖 [14] · Phase C</span>
+              <h3 style="font-size:1rem; font-weight:800; color:var(--text-main); margin:0;">Data Dissemination Diagram · 雙環 Data Bus (Kafka + EMQX) 數據分發拓撲</h3>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button onclick="openDiagramImageModal(14)" class="btn-action" style="padding:5px 12px; font-size:0.78rem;">🔍 放大檢視</button>
+              <button onclick="jumpToDiagram(14)" class="btn-dl" style="padding:5px 12px; font-size:0.78rem; border:none; cursor:pointer;">▶ 畫布定位</button>
+            </div>
+          </div>
+          <div style="position:relative; overflow:hidden; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:#FFFFFF; text-align:center; padding:6px;">
+            <img src="assets/diagrams/diagram_14.png" alt="Data Dissemination Diagram · 雙環 Data Bus (Kafka + EMQX) 數據分發拓撲" style="max-width:100%; height:auto; display:block; margin:0 auto; cursor:pointer;" onclick="openDiagramImageModal(14)">
+            <div class="watermark-overlay" style="position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(-35deg, rgba(212,175,55,0.06) 0, rgba(212,175,55,0.06) 1px, transparent 1px, transparent 140px); display:flex; align-items:center; justify-content:center;">
+              <span style="transform:rotate(-25deg); font-size:1.6rem; font-weight:900; color:rgba(212,175,55,0.12); letter-spacing:6px;">Howard Liao Ph.D. · Preview Only</span>
+            </div>
+          </div>
+        </div>
+
         <div class="tier-panel">
           <div class="tier-header"><span class="badge-layer">Data Bus</span> 雙環 Data Bus 解耦與全生命週期數據流</div>
           <div class="grid-4">
@@ -1795,6 +1882,26 @@
 
       <!-- View 4: 應用架構職責分工 -->
       <div id="tv4" class="ea-view">
+        <!-- Synced Architecture Diagram Card -->
+        <div class="diagram-preview-card" style="background:var(--bg-surface); border:2px solid var(--purple-main); border-radius:var(--radius-md); padding:16px; margin-bottom:20px; box-shadow:var(--card-shadow); position:relative;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="pill-tag pill-purple" style="font-size:0.75rem;">視圖 [17] · Phase C</span>
+              <h3 style="font-size:1rem; font-weight:800; color:var(--text-main); margin:0;">Application Communication Diagram · 應用通訊拓撲與 3 大平台邊界</h3>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button onclick="openDiagramImageModal(17)" class="btn-action" style="padding:5px 12px; font-size:0.78rem;">🔍 放大檢視</button>
+              <button onclick="jumpToDiagram(17)" class="btn-dl" style="padding:5px 12px; font-size:0.78rem; border:none; cursor:pointer;">▶ 畫布定位</button>
+            </div>
+          </div>
+          <div style="position:relative; overflow:hidden; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:#FFFFFF; text-align:center; padding:6px;">
+            <img src="assets/diagrams/diagram_17.png" alt="Application Communication Diagram · 應用通訊拓撲與 3 大平台邊界" style="max-width:100%; height:auto; display:block; margin:0 auto; cursor:pointer;" onclick="openDiagramImageModal(17)">
+            <div class="watermark-overlay" style="position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(-35deg, rgba(212,175,55,0.06) 0, rgba(212,175,55,0.06) 1px, transparent 1px, transparent 140px); display:flex; align-items:center; justify-content:center;">
+              <span style="transform:rotate(-25deg); font-size:1.6rem; font-weight:900; color:rgba(212,175,55,0.12); letter-spacing:6px;">Howard Liao Ph.D. · Preview Only</span>
+            </div>
+          </div>
+        </div>
+
         <div class="tier-panel">
           <div class="tier-header"><span class="badge-layer">Application Boundary</span> 三方核心責任邊界：拒絕平台疊平台</div>
           <div class="grid-3">
@@ -1834,6 +1941,26 @@
 
       <!-- View 5: 技術與 API 資安防禦 -->
       <div id="tv5" class="ea-view">
+        <!-- Synced Architecture Diagram Card -->
+        <div class="diagram-preview-card" style="background:var(--bg-surface); border:2px solid var(--emerald-main); border-radius:var(--radius-md); padding:16px; margin-bottom:20px; box-shadow:var(--card-shadow); position:relative;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="pill-tag pill-green" style="font-size:0.75rem;">視圖 [24] · Phase D</span>
+              <h3 style="font-size:1rem; font-weight:800; color:var(--text-main); margin:0;">Platform Decomposition Diagram · 平台分解與 APISIX / Noname 資安防禦拓撲</h3>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button onclick="openDiagramImageModal(24)" class="btn-action" style="padding:5px 12px; font-size:0.78rem;">🔍 放大檢視</button>
+              <button onclick="jumpToDiagram(24)" class="btn-dl" style="padding:5px 12px; font-size:0.78rem; border:none; cursor:pointer;">▶ 畫布定位</button>
+            </div>
+          </div>
+          <div style="position:relative; overflow:hidden; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:#FFFFFF; text-align:center; padding:6px;">
+            <img src="assets/diagrams/diagram_24.png" alt="Platform Decomposition Diagram · 平台分解與 APISIX / Noname 資安防禦拓撲" style="max-width:100%; height:auto; display:block; margin:0 auto; cursor:pointer;" onclick="openDiagramImageModal(24)">
+            <div class="watermark-overlay" style="position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(-35deg, rgba(212,175,55,0.06) 0, rgba(212,175,55,0.06) 1px, transparent 1px, transparent 140px); display:flex; align-items:center; justify-content:center;">
+              <span style="transform:rotate(-25deg); font-size:1.6rem; font-weight:900; color:rgba(212,175,55,0.12); letter-spacing:6px;">Howard Liao Ph.D. · Preview Only</span>
+            </div>
+          </div>
+        </div>
+
         <div class="tier-panel">
           <div class="tier-header"><span class="badge-layer">Security Defense</span> Apache APISIX ＋ Keycloak ＋ Noname API 資安大腦</div>
           <div class="grid-3" style="margin-bottom:16px;">
@@ -1889,6 +2016,26 @@
 
       <!-- View 6: 上市櫃資安與金管會合規 -->
       <div id="tv6" class="ea-view">
+        <!-- Synced Architecture Diagram Card -->
+        <div class="diagram-preview-card" style="background:var(--bg-surface); border:2px solid var(--accent-primary); border-radius:var(--radius-md); padding:16px; margin-bottom:20px; box-shadow:var(--card-shadow); position:relative;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="pill-tag pill-red" style="font-size:0.75rem;">視圖 [31] · Phase G/H</span>
+              <h3 style="font-size:1rem; font-weight:800; color:var(--text-main); margin:0;">Architecture Compliance & Governance · 上市櫃資安管制與金管會 GenAI 合規審計</h3>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button onclick="openDiagramImageModal(31)" class="btn-action" style="padding:5px 12px; font-size:0.78rem;">🔍 放大檢視</button>
+              <button onclick="jumpToDiagram(31)" class="btn-dl" style="padding:5px 12px; font-size:0.78rem; border:none; cursor:pointer;">▶ 畫布定位</button>
+            </div>
+          </div>
+          <div style="position:relative; overflow:hidden; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:#FFFFFF; text-align:center; padding:6px;">
+            <img src="assets/diagrams/diagram_31.png" alt="Architecture Compliance & Governance · 上市櫃資安管制與金管會 GenAI 合規審計" style="max-width:100%; height:auto; display:block; margin:0 auto; cursor:pointer;" onclick="openDiagramImageModal(31)">
+            <div class="watermark-overlay" style="position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(-35deg, rgba(212,175,55,0.06) 0, rgba(212,175,55,0.06) 1px, transparent 1px, transparent 140px); display:flex; align-items:center; justify-content:center;">
+              <span style="transform:rotate(-25deg); font-size:1.6rem; font-weight:900; color:rgba(212,175,55,0.12); letter-spacing:6px;">Howard Liao Ph.D. · Preview Only</span>
+            </div>
+          </div>
+        </div>
+
         <div class="tier-panel" style="border-left:5px solid var(--danger-main);">
           <div class="tier-header"><span class="badge-layer">Governance</span> 上市櫃資通安全管控指引 ＆ 金管會生成式 AI 規範落實</div>
           <div class="grid-3" style="margin-bottom:16px;">
@@ -2009,9 +2156,12 @@
           </div>
         </div>
 
-        <!-- Embedded Frame Container with Watermark Protection -->
-        <div class="player-viewport" style="width:100%; height:620px; background:#525659; border-radius:var(--radius-sm); overflow:hidden; position:relative; box-shadow:inset 0 2px 4px rgba(0,0,0,0.2);">
-          <iframe id="livePlayerIframe" src="./TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf#page=1&toolbar=0&navpanes=0&scrollbar=1" style="width:100%; height:100%; border:none;" title="Live Architecture Diagram Viewer"></iframe>
+        <!-- Embedded Visual Canvas with Watermark Protection -->
+        <div class="player-viewport" style="width:100%; min-height:480px; background:#FFFFFF; border-radius:var(--radius-sm); overflow:auto; position:relative; display:flex; align-items:center; justify-content:center; box-shadow:inset 0 2px 4px rgba(0,0,0,0.06); padding:12px;">
+          <img id="livePlayerImage" src="assets/diagrams/diagram_00.png" alt="Howard 企業架構視圖" style="max-width:100%; height:auto; display:block; border-radius:4px; box-shadow:0 4px 16px rgba(0,0,0,0.08); transition: opacity 0.2s ease; cursor:pointer;" onclick="openDiagramImageModal(currentDiagramIdx)">
+          <div class="watermark-overlay" style="position:absolute; inset:0; pointer-events:none; z-index:10; background:repeating-linear-gradient(-35deg, rgba(212,175,55,0.06) 0, rgba(212,175,55,0.06) 1px, transparent 1px, transparent 140px); display:flex; align-items:center; justify-content:center;">
+            <span style="transform:rotate(-25deg); font-size:1.8rem; font-weight:900; color:rgba(212,175,55,0.12); letter-spacing:6px; text-transform:uppercase;">Howard Liao Ph.D. · Preview Only</span>
+          </div>
         </div>
 
         <div class="player-bottom-hint" style="margin-top:10px; display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:var(--text-muted); flex-wrap:wrap; gap:6px;">
@@ -2033,9 +2183,14 @@
             <li>Preliminary 架構原則與治理框架 (Howard 架構標準 BDAT · 頁 01)</li><li>A 架構願景 Stakeholder · Value Chain · Solution Concept (頁 01-03)</li><li>B 業務架構 Capability · Footprint · Process (頁 04-11)</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [00] 00 ADM 總覽 (第 1 頁)', 1)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 2 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(0)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(0)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-a" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2049,9 +2204,14 @@
             <li>保持滿意 Keep Satisfied (高權力·低利益)</li><li>緊密管理 Manage Closely (高權力·高利益)</li><li>監控 Monitor (低權力·低利益)</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [01] 01 Stakeholder Map (第 2 頁)', 2)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 3 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(1)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(1)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-a" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2065,9 +2225,14 @@
             <li>研發與配方</li><li>天然物萃取與配方專利 HowardAGent 文獻 KM NPI Twin 試產評估 研發 Code Review</li><li>原物料採購</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [02] 02 Value Chain (第 3 頁)', 3)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 4 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(2)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(2)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-a" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2081,9 +2246,14 @@
             <li>2E 內部辦公 會計/總務/採購/研發</li><li>2C / 2B 客戶 經銷商/消費者</li><li>OT 專家 調機師傅/QA/QC</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [03] 03 Solution Concept (第 4 頁)', 4)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 5 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(3)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(3)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-b" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2097,9 +2267,14 @@
             <li>戰略能力 Strategic</li><li>核心營運能力 Core</li><li>賦能與治理能力 Enabling</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [04] 04 Business Capability Map (第 5 頁)', 5)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 6 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(4)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(4)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-b" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2113,9 +2288,14 @@
             <li>董事會</li><li>審計委員會</li><li>CEO / 總經理</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [05] 05 Organization & Actor (第 6 頁)', 6)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 7 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(5)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(5)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-b" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2129,9 +2309,14 @@
             <li>目標 Goal</li><li>組織 Organization</li><li>功能 Function</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [06] 06 Business Footprint (第 7 頁)', 7)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 8 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(6)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(6)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-b" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2145,9 +2330,14 @@
             <li>Actor</li><li>業務服務</li><li>資訊實體</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [07] 07 Business Service-Information (第 8 頁)', 8)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 9 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(7)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(7)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-b" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2161,9 +2351,14 @@
             <li>大江生醫營運</li><li>研發與配方</li><li>天然物萃取與配方專利</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [08] 08 Functional Decomposition (第 9 頁)', 9)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 10 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(8)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(8)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-b" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2177,9 +2372,14 @@
             <li>G1 營運韌性 (Zero Outage)</li><li>SLA 99.99% · 毫秒級 Failover</li><li>模型網關服務 (HowardRoute)</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [09] 09 Goal-Objective-Service (第 10 頁)', 10)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 11 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(9)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(9)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-b" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2193,9 +2393,14 @@
             <li>大江生醫 AI 賦能業務系統邊界</li><li>上傳發票 OCR 入帳</li><li>覆核簽核 (HITL)</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [10] 10 Business Use-Case (第 11 頁)', 11)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 12 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(10)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(10)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-b" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2209,9 +2414,14 @@
             <li>財務會計</li><li>HowardAGent</li><li>HowardRoute 模型網關</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [11] 11 Process Flow (第 12 頁)', 12)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 13 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(11)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(11)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-c-data" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2225,9 +2435,14 @@
             <li>供應商</li><li>原料批號</li><li>配方 / 產品</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [12] 12 Conceptual Data (第 13 頁)', 13)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 14 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(12)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(12)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-c-data" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2241,9 +2456,14 @@
             <li>MATERIAL_LOT PK lot_id material_code (MDG) supplier_id FK coa_ref received_at</li><li>PURCHASE_ORDER PK po_no supplier_id FK lot_id FK amount budget_ref</li><li>INVOICE PK inv_no po_no FK tax_id amount ocr_confidence status</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [13] 13 Logical Data (第 14 頁)', 14)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 15 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(13)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(13)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-c-data" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2257,9 +2477,14 @@
             <li>SAP ERP</li><li>MES / WMS</li><li>SCADA / PLC (OT)</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [14] 14 Data Dissemination (第 15 頁)', 15)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 16 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(14)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(14)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-c-data" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2273,9 +2498,14 @@
             <li>L1 公開</li><li>L2 內部</li><li>L3 機密</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [15] 15 Data Security (第 16 頁)', 16)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 17 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(15)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(15)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-c-data" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2289,9 +2519,14 @@
             <li>產生 Create</li><li>SAP · MES · 感測器 · 客服</li><li>擷取 Ingest</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [16] 16 Data Lifecycle (第 17 頁)', 17)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 18 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(16)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(16)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-c-app" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2305,9 +2540,14 @@
             <li>使用者通路 Web · LINE · PBX · HMI</li><li>Apache APISIX <1ms · etcd 熱更新</li><li>Keycloak OIDC / OAuth2 / SSO</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [17] 17 Application Communication (第 18 頁)', 18)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 19 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(17)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(17)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-c-app" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2321,9 +2561,14 @@
             <li>屏東廠 (OT)</li><li>上海廠</li><li>總部 / 2E 受控網</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [18] 18 Application & User Location (第 19 頁)', 19)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 20 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(18)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(18)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-c-app" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2337,9 +2582,14 @@
             <li>財務 / 採購 / 總務</li><li>客服與營銷</li><li>研發 / QA</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [19] 19 Application Use-Case (第 20 頁)', 20)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 21 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(19)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(19)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-c-app" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2353,9 +2603,14 @@
             <li>消費者 / LINE / PBX</li><li>HowardAGent</li><li>Milvus / Qdrant</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [20] 20 Process-Application Realization (第 21 頁)', 21)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 22 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(20)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(20)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-c-app" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2369,9 +2624,14 @@
             <li>7×24 SOC / SIEM AI 智慧過濾告警</li><li>日誌 / 指標 / 追蹤 可觀測性</li><li>AILM 模型漂移與根因 RCA</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [21] 21 Enterprise Manageability (第 22 頁)', 22)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 23 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(21)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(21)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-d" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2385,9 +2645,14 @@
             <li>研發 Code</li><li>Build</li><li>靜態掃描 SAST / SCA</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [22] 22 Software Engineering (第 23 頁)', 23)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 24 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(22)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(22)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-d" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2401,9 +2666,14 @@
             <li>屏東廠 OT (Air-Gapped)</li><li>上海廠 (OT/辦公)</li><li>總部 資料中心 / 2E 受控網</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [23] 23 Environments & Locations (第 24 頁)', 24)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 25 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(23)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(23)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-d" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2417,9 +2687,14 @@
             <li>應用服務</li><li>HowardAGent</li><li>HowardPro</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [24] 24 Platform Decomposition (第 25 頁)', 25)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 26 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(24)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(24)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-d" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2433,9 +2708,14 @@
             <li>主站 Active (總部)</li><li>備援站 DR / 異地</li><li>APISIX 叢集 (≥2 節點) + etcd</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [25] 25 Processing Diagram (第 26 頁)', 26)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 27 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(25)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(25)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-d" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2449,9 +2729,14 @@
             <li>PLC / SCADA (發酵槽 · 萃取機台)</li><li>邊緣閘道 / 工業電腦 EMQX · OPC UA</li><li>單向網閘 (Data Diode)</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [26] 26 Networked Computing (第 27 頁)', 27)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 28 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(26)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(26)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-d" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2465,9 +2750,14 @@
             <li>外部 Internet 消費者 · 經銷商 · LINE</li><li>2C DMZ APISIX · Bot 閘道</li><li>2E 受控網 + AI/資料區 AGent · Route · Kafka</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [27] 27 Communications Engineering (第 28 頁)', 28)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 29 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(27)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(27)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-eh" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2481,9 +2771,14 @@
             <li>Wave 0: 四大 Quick Win (1 週首波驗收)</li><li>平台底座: AGent · Route · APISIX · Keycloak</li><li>Noname + CI/CD 測試左移 + SBOM</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [28] 28 Architecture Roadmap (第 29 頁)', 29)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 30 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(28)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(28)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-eh" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2497,9 +2792,14 @@
             <li>大江生醫 AI 賦能計畫 (HowardAGent · HowardRoute · HowardPro)</li><li>發起 / 負責: CISO Howard Liao Ph.D.</li><li>範圍: 4 場景 + 網關 + 工業大腦 + Data Bus + 資安</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [29] 29 Project Context (第 30 頁)', 30)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 31 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(29)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(29)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-eh" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2513,9 +2813,14 @@
             <li>WP1 財務憑證 OCR Agent</li><li>憑證處理工時 -75% 跨系統核銷零人為失誤</li><li>產出效益</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [30] 30 Benefits Diagram (第 31 頁)', 31)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 32 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(30)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(30)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       <div class="view-card phase-all phase-eh" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; box-shadow:var(--card-shadow); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2529,9 +2834,14 @@
             <li>法規 / 框架</li><li>控制措施</li><li>架構元件 (ABB)</li>
           </ul>
         </div>
-        <button onclick="openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', 'Howard 企業架構 [31] 31 Compliance & Governance (第 32 頁)', 32)" class="btn-dl" style="border:none; cursor:pointer; width:100%; padding:7px 12px; font-size:0.78rem;" onclick="jumpToDiagram(parseInt(this.getAttribute('data-idx')))">
-          <span>👁️</span> 審閱此視圖 (第 33 頁)
-        </button>
+        <div style="display:flex; gap:6px; margin-top:12px;">
+          <button onclick="jumpToDiagram(31)" class="btn-dl" style="flex:1; border:none; cursor:pointer; padding:7px 10px; font-size:0.75rem;">
+            <span>▶</span> 即時切換至畫布
+          </button>
+          <button onclick="openDiagramImageModal(31)" class="btn-action" style="padding:7px 10px; font-size:0.75rem; background:var(--bg-body); border:1px solid var(--border-color);" title="全螢幕放大審閱">
+            <span>🔍</span> 放大
+          </button>
+        </div>
       </div>
     
       </div>
@@ -2779,6 +3089,26 @@
   </section>
 
   <!-- PDF Preview Modal (Preview Only · No Downloads) -->
+  
+  <!-- Image Preview Modal (High-Res Vector Preview Only) -->
+  <div id="imageModal" class="pdf-modal" oncontextmenu="return false;" style="display:none;">
+    <div class="pdf-modal-container" style="max-width:1200px; height:90vh; display:flex; flex-direction:column;">
+      <div class="pdf-modal-header">
+        <div class="pdf-modal-title">
+          <span id="imageModalTitle">視圖審閱</span>
+          <span class="pdf-security-badge">🔒 Howard 企業架構官方規格 · 僅供線上即時審閱</span>
+        </div>
+        <button class="btn-close-modal" onclick="closeImageModal()" title="關閉預覽">✕</button>
+      </div>
+      <div style="flex:1; overflow:auto; background:#ffffff; position:relative; display:flex; align-items:center; justify-content:center; padding:15px;">
+        <img id="imageModalImg" src="" alt="架構視圖" style="max-width:100%; height:auto; box-shadow:0 4px 16px rgba(0,0,0,0.1); border-radius:4px;">
+        <div class="watermark-overlay" style="position:absolute; inset:0; pointer-events:none; z-index:10; background:repeating-linear-gradient(-35deg, rgba(212,175,55,0.06) 0, rgba(212,175,55,0.06) 1px, transparent 1px, transparent 140px); display:flex; align-items:center; justify-content:center;">
+          <span style="transform:rotate(-25deg); font-size:2.2rem; font-weight:900; color:rgba(212,175,55,0.12); letter-spacing:8px; text-transform:uppercase;">Howard Liao Ph.D. · Preview Only</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="pdfModal" class="pdf-modal" oncontextmenu="return false;">
     <div class="pdf-modal-container">
       <div class="pdf-modal-header">
@@ -2981,20 +3311,41 @@
     const totalDiagramsCount = 32;
     const diagramCatalog = [{"index": 0, "id": "p0", "name": "00 ADM 總覽", "title": "Howard 企業架構 ADM 總覽 · 大江生醫 (8436.TW) 企業架構對照", "subtitle": "ADM Cycle · Requirements Management 居中 · 每階段標示對應交付物 (本檔頁碼)", "phase": "Phase A", "items": ["Preliminary 架構原則與治理框架 (Howard 架構標準 BDAT · 頁 01)", "A 架構願景 Stakeholder · Value Chain · Solution Concept (頁 01-03)", "B 業務架構 Capability · Footprint · Process (頁 04-11)", "C 資訊系統架構 資料 (頁 12-16) · 應用 (頁 17-22)"]}, {"index": 1, "id": "p1", "name": "01 Stakeholder Map", "title": "Stakeholder Map Matrix (權力/利益)", "subtitle": "Phase Preliminary/A · Matrix → Diagram", "phase": "Preliminary", "items": ["保持滿意 Keep Satisfied (高權力·低利益)", "緊密管理 Manage Closely (高權力·高利益)", "監控 Monitor (低權力·低利益)", "保持知會 Keep Informed (低權力·高利益)"]}, {"index": 2, "id": "p2", "name": "02 Value Chain", "title": "Value Chain Diagram · 6 大業務價值鏈與 AI 賦能", "subtitle": "Phase A · Diagram", "phase": "Phase A", "items": ["研發與配方", "天然物萃取與配方專利 HowardAGent 文獻 KM NPI Twin 試產評估 研發 Code Review", "原物料採購", "全球生化原料比價 採購自動化 費用申請異常偵測 PMC Twin 交期預警"]}, {"index": 3, "id": "p3", "name": "03 Solution Concept", "title": "Solution Concept Diagram · 高階解決方案概念", "subtitle": "Phase A · Diagram · 拒絕平台疊平台: AGent / Route / Pro 三方責任邊界", "phase": "Phase A", "items": ["2E 內部辦公 會計/總務/採購/研發", "2C / 2B 客戶 經銷商/消費者", "OT 專家 調機師傅/QA/QC", "Web 介面 / SSO"]}, {"index": 4, "id": "p4", "name": "04 Business Capability Map", "title": "Business Capability Map · 業務能力地圖與 AI 賦能熱圖", "subtitle": "Phase B · Diagram (Howard 企業架構 Series Guide: Business Capabilities)", "phase": "Phase B", "items": ["戰略能力 Strategic", "核心營運能力 Core", "賦能與治理能力 Enabling", "配方與功效研發"]}, {"index": 5, "id": "p5", "name": "05 Organization & Actor", "title": "Organization Decomposition & Actor Catalog", "subtitle": "Phase B · 組織依來源角色推導 (示意),請以實際組織圖校正", "phase": "Phase B", "items": ["董事會", "審計委員會", "CEO / 總經理", "資安長 CISO (Howard Liao Ph.D.)"]}, {"index": 6, "id": "p6", "name": "06 Business Footprint", "title": "Business Footprint Diagram · 目標→組織→功能→服務→系統", "subtitle": "Phase B · Diagram", "phase": "Phase B", "items": ["目標 Goal", "組織 Organization", "功能 Function", "業務服務 Service"]}, {"index": 7, "id": "p7", "name": "07 Business Service-Information", "title": "Business Service / Information Diagram · 四大立竿見影場景", "subtitle": "Phase B · Diagram · 虛線 = 資訊存取; 右欄 = 人工/合規控制", "phase": "Phase B", "items": ["Actor", "業務服務", "資訊實體", "控制 / 覆核"]}, {"index": 8, "id": "p8", "name": "08 Functional Decomposition", "title": "Functional Decomposition Diagram", "subtitle": "Phase B · Diagram", "phase": "Phase B", "items": ["大江生醫營運", "研發與配方", "天然物萃取與配方專利", "文獻 KM"]}, {"index": 9, "id": "p9", "name": "09 Goal-Objective-Service", "title": "Goal / Objective / Service Diagram", "subtitle": "Phase B · Diagram · 目標值來源: 首頁 C-Level 指標; 製造類目標值須待基線盤點", "phase": "Phase B", "items": ["G1 營運韌性 (Zero Outage)", "SLA 99.99% · 毫秒級 Failover", "模型網關服務 (HowardRoute)", "G2 AI 成本效率 (TCO)"]}, {"index": 10, "id": "p10", "name": "10 Business Use-Case", "title": "Business Use-Case Diagram", "subtitle": "Phase B · Diagram", "phase": "Phase B", "items": ["大江生醫 AI 賦能業務系統邊界", "上傳發票 OCR 入帳", "覆核簽核 (HITL)", "採購比價異常偵測"]}, {"index": 11, "id": "p11", "name": "11 Process Flow", "title": "Process Flow Diagram · 財務憑證 OCR 自動入帳 (Priority No.1)", "subtitle": "Phase B/C · 泳道: 財務會計 / HowardAGent / HowardRoute / SAP & 數據治理", "phase": "Phase B", "items": ["財務會計", "HowardAGent", "HowardRoute 模型網關", "SAP ERP / 數據治理"]}, {"index": 12, "id": "p12", "name": "12 Conceptual Data", "title": "Conceptual Data Diagram", "subtitle": "Phase C-Data · 顏色: 主數據(紫) / 交易(橘) / OT(綠) / 知識(黃) / AI(藍)", "phase": "Phase C", "items": ["供應商", "原料批號", "配方 / 產品", "客戶 / 經銷商"]}, {"index": 13, "id": "p13", "name": "13 Logical Data", "title": "Logical Data Diagram (示意 schema)", "subtitle": "Phase C-Data · 欄位為概念示意,以 SAP MDG 主數據為單一真實來源", "phase": "Phase C", "items": ["MATERIAL_LOT PK lot_id material_code (MDG) supplier_id FK coa_ref received_at", "PURCHASE_ORDER PK po_no supplier_id FK lot_id FK amount budget_ref", "INVOICE PK inv_no po_no FK tax_id amount ocr_confidence status", "VOUCHER PK voucher_no inv_no FK account_code approver_id (HITL) approved_at"]}, {"index": 14, "id": "p14", "name": "14 Data Dissemination", "title": "Data Dissemination Diagram · 資料來源 → 雙環 Data Bus → 消費端", "subtitle": "Phase C-Data · Diagram", "phase": "Phase C", "items": ["SAP ERP", "MES / WMS", "SCADA / PLC (OT)", "客服通道 LINE / PBX"]}, {"index": 15, "id": "p15", "name": "15 Data Security", "title": "Data Security Diagram · 資料分級與控制 (分級為依來源安全區推導之建議)", "subtitle": "Phase C-Data · Matrix/Diagram", "phase": "Phase C", "items": ["L1 公開", "L2 內部", "L3 機密", "L4 極機密"]}, {"index": 16, "id": "p16", "name": "16 Data Lifecycle", "title": "Data Lifecycle Diagram + ALCOA+ 對照", "subtitle": "Phase C-Data · GMP / FDA 21 CFR Part 11 電子紀錄審計", "phase": "Phase C", "items": ["產生 Create", "SAP · MES · 感測器 · 客服", "擷取 Ingest", "CDC / MQTT Schema Registry 校驗"]}, {"index": 17, "id": "p17", "name": "17 Application Communication", "title": "Application Communication Diagram", "subtitle": "Phase C-Application · 邊標示協議", "phase": "Phase C", "items": ["使用者通路 Web · LINE · PBX · HMI", "Apache APISIX <1ms · etcd 熱更新", "Keycloak OIDC / OAuth2 / SSO", "Noname Security Shadow API · BOLA 阻斷"]}, {"index": 18, "id": "p18", "name": "18 Application & User Location", "title": "Application and User Location Diagram (部署位置為建議,待與研華/雲達確認)", "subtitle": "Phase C-Application · D=部署 · U=使用者存取 · X=外呼", "phase": "Phase C", "items": ["屏東廠 (OT)", "上海廠", "總部 / 2E 受控網", "2C DMZ"]}, {"index": 19, "id": "p19", "name": "19 Application Use-Case", "title": "Application Use-Case Diagram", "subtitle": "Phase C-Application · 角色 → 應用", "phase": "Phase C", "items": ["財務 / 採購 / 總務", "客服與營銷", "研發 / QA", "調機師傅 / 設備維護"]}, {"index": 20, "id": "p20", "name": "20 Process-Application Realization", "title": "Process / Application Realization Diagram · 客服回覆流程 (Priority No.2)", "subtitle": "Phase C-Application · 垂直泳道", "phase": "Phase C", "items": ["消費者 / LINE / PBX", "HowardAGent", "Milvus / Qdrant", "HowardRoute + LLM"]}, {"index": 21, "id": "p21", "name": "21 Enterprise Manageability", "title": "Enterprise Manageability Diagram", "subtitle": "Phase C-Application · 營運管理域", "phase": "Phase C", "items": ["7×24 SOC / SIEM AI 智慧過濾告警", "日誌 / 指標 / 追蹤 可觀測性", "AILM 模型漂移與根因 RCA", "FinOps Token 用量 · 單一帳單"]}, {"index": 22, "id": "p22", "name": "22 Software Engineering", "title": "Software Engineering Diagram · 安全 SDLC 與 AI 模型生命週期", "subtitle": "Phase C-Application · 「SBOM / 簽章」為建議強化項", "phase": "Phase C", "items": ["研發 Code", "Build", "靜態掃描 SAST / SCA", "動態掃描 DAST"]}, {"index": 23, "id": "p23", "name": "23 Environments & Locations", "title": "Environments and Locations Diagram", "subtitle": "Phase D · Diagram", "phase": "Phase D", "items": ["屏東廠 OT (Air-Gapped)", "上海廠 (OT/辦公)", "總部 資料中心 / 2E 受控網", "2C DMZ"]}, {"index": 24, "id": "p24", "name": "24 Platform Decomposition", "title": "Platform Decomposition Diagram (TRM 對應)", "subtitle": "Phase D · Diagram", "phase": "Phase D", "items": ["應用服務", "HowardAGent", "HowardPro", "BI 戰情室"]}, {"index": 25, "id": "p25", "name": "25 Processing Diagram", "title": "Processing Diagram · 高可用與災難復原", "subtitle": "Phase D · 目標 RTO < 4h · RPO < 15m · 複寫工具為建議", "phase": "Phase D", "items": ["主站 Active (總部)", "備援站 DR / 異地", "APISIX 叢集 (≥2 節點) + etcd", "HowardAGent HA"]}, {"index": 26, "id": "p26", "name": "26 Networked Computing", "title": "Networked Computing / Hardware Diagram", "subtitle": "Phase D · 硬體規格以研華 / 雲達 實際 BOM 為準", "phase": "Phase D", "items": ["PLC / SCADA (發酵槽 · 萃取機台)", "邊緣閘道 / 工業電腦 EMQX · OPC UA", "單向網閘 (Data Diode)", "Internet / VPN"]}, {"index": 27, "id": "p27", "name": "27 Communications Engineering", "title": "Communications Engineering Diagram · 網路分區", "subtitle": "Phase D · 上海廠經專線/VPN 併入 2E", "phase": "Phase D", "items": ["外部 Internet 消費者 · 經銷商 · LINE", "2C DMZ APISIX · Bot 閘道", "2E 受控網 + AI/資料區 AGent · Route · Kafka", "OT 單向網閘"]}, {"index": 28, "id": "p28", "name": "28 Architecture Roadmap", "title": "Architecture Roadmap · Transition Architectures (建議時程,需依資源盤點調整)", "subtitle": "Phase E/F", "phase": "Phase E", "items": ["Wave 0: 四大 Quick Win (1 週首波驗收)", "平台底座: AGent · Route · APISIX · Keycloak", "Noname + CI/CD 測試左移 + SBOM", "Data Bus + DataHub · MDG · Immuta"]}, {"index": 29, "id": "p29", "name": "29 Project Context", "title": "Project Context Diagram · AI 平台導入計畫", "subtitle": "Phase E/F · Diagram", "phase": "Phase E", "items": ["大江生醫 AI 賦能計畫 (HowardAGent · HowardRoute · HowardPro)", "發起 / 負責: CISO Howard Liao Ph.D.", "範圍: 4 場景 + 網關 + 工業大腦 + Data Bus + 資安", "驗收: 1 週首波 工時 -75% · FCR +40%"]}, {"index": 30, "id": "p30", "name": "30 Benefits Diagram", "title": "Benefits Diagram · 工作包 → 效益", "subtitle": "Phase E/F · 目標值取自來源頁面 C-Level 指標與場景指南", "phase": "Phase E", "items": ["WP1 財務憑證 OCR Agent", "憑證處理工時 -75% 跨系統核銷零人為失誤", "產出效益", "WP2 客服 Copilot + KM"]}, {"index": 31, "id": "p31", "name": "31 Compliance & Governance", "title": "Architecture Compliance (Phase G) & Change Management (Phase H)", "subtitle": "控制項來源: 首頁 6 大治理區塊; 底部為建議延伸對標", "phase": "Phase G", "items": ["法規 / 框架", "控制措施", "架構元件 (ABB)", "Phase G 檢核點"]}];
 
+    function switchMainArchView(mode, btn) {
+      const svgWrap = document.getElementById('mainArchSvgWrap');
+      const admWrap = document.getElementById('mainArchAdmWrap');
+      const btn1 = document.getElementById('btnArchTab1');
+      const btn2 = document.getElementById('btnArchTab2');
+
+      if (mode === 'svg') {
+        svgWrap.style.display = 'block';
+        admWrap.style.display = 'none';
+        btn1.classList.add('active');
+        btn2.classList.remove('active');
+      } else {
+        svgWrap.style.display = 'none';
+        admWrap.style.display = 'block';
+        btn1.classList.remove('active');
+        btn2.classList.add('active');
+      }
+    }
+
     function updateLivePlayer(idx) {
       if (idx < 0) idx = 0;
       if (idx >= totalDiagramsCount) idx = totalDiagramsCount - 1;
       currentDiagramIdx = idx;
 
       const item = diagramCatalog[idx];
-      const pageNum = idx + 1; // Page 1 is cover
 
       document.getElementById('playerCurrentTitle').innerText = `當前檢視：[${String(idx).padStart(2, '0')}] ${item.name}`;
       document.getElementById('playerCurrentSubtitle').innerText = `${item.phase} ｜ ${item.title}`;
       document.getElementById('diagramSelectDropdown').value = idx;
       
-      const iframe = document.getElementById('livePlayerIframe');
-      iframe.src = `./TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf#page=${pageNum}&toolbar=0&navpanes=0&scrollbar=1`;
+      const img = document.getElementById('livePlayerImage');
+      if (img) {
+        img.src = `assets/diagrams/diagram_${String(idx).padStart(2, '0')}.png`;
+        img.alt = item.title;
+      }
     }
 
     function navDiagram(delta) {
@@ -3003,12 +3354,34 @@
 
     function jumpToDiagram(idx) {
       updateLivePlayer(idx);
+      const player = document.getElementById('livePlayerBox');
+      if (player) {
+        player.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     }
 
     function expandCurrentDiagram() {
-      const item = diagramCatalog[currentDiagramIdx];
-      const pageNum = currentDiagramIdx + 1;
-      openPdfModal('TCI_8436_Howard_企業架構_32全架構圖_HowardLiao.pdf', `Howard 企業架構 [${String(currentDiagramIdx).padStart(2, '0')}] ${item.name}`, pageNum);
+      openDiagramImageModal(currentDiagramIdx);
+    }
+
+    function openDiagramImageModal(idx) {
+      if (idx < 0) idx = 0;
+      if (idx >= totalDiagramsCount) idx = totalDiagramsCount - 1;
+      const item = diagramCatalog[idx];
+      const modal = document.getElementById('imageModal');
+      const img = document.getElementById('imageModalImg');
+      const title = document.getElementById('imageModalTitle');
+      
+      title.innerText = `Howard 企業架構 [${String(idx).padStart(2, '0')}] ${item.name} · ${item.title}`;
+      img.src = `assets/diagrams/diagram_${String(idx).padStart(2, '0')}.png`;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeImageModal() {
+      const modal = document.getElementById('imageModal');
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
     }
 
     // Update view-card onclick to also sync live player
